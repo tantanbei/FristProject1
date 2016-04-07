@@ -1,5 +1,6 @@
 package fristproject1.sample.com.fristproject1;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -34,7 +35,7 @@ import com.iflytek.cloud.SpeechError;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +60,26 @@ public class MainActivity extends AppCompatActivity{
         dataSets.add(setComp1);
 
         ArrayList<String> xVals = new ArrayList<String>();
-        xVals.add("1.Q"); xVals.add("2.Q"); xVals.add("3.Q"); xVals.add("4.Q");
+        xVals.add("1.Q");
+        xVals.add("2.Q");
+        xVals.add("3.Q");
+        xVals.add("4.Q");
 
         LineData data = new LineData(xVals, dataSets);
 
         chart.setData(data);
 
         chart.invalidate();
+
+
+        Button btn = (Button) findViewById(R.id.jump);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TestOkhttp.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
