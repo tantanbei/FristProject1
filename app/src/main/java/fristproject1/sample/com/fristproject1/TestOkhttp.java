@@ -51,6 +51,7 @@ public class TestOkhttp extends Activity {
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
                         final String str = response.body().string();
+
                         tvShow.post(new Runnable() {
                             @Override
                             public void run() {
