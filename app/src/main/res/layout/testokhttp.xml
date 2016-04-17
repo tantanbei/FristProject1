@@ -6,7 +6,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etCarId"/>
+        android:id="@+id/etCarId"
+        android:text="888" />
 
     <Button
         android:layout_width="wrap_content"
@@ -14,10 +15,15 @@
         android:id="@+id/btnSend"
         android:text="发送"/>
 
-    <TextView
-        android:id="@+id/tvShow"
+    <!--<TextView-->
+        <!--android:id="@+id/tvShow"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="vertical"/>-->
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chartCar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:layout_height="213dp" />
 
 </LinearLayout>
