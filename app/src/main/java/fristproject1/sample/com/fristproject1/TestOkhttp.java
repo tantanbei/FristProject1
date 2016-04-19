@@ -1,6 +1,7 @@
 package fristproject1.sample.com.fristproject1;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -63,6 +64,9 @@ public class TestOkhttp extends Activity {
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
         chart.setTouchEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        chart.setPinchZoom(true);
 
 //        tvShow.setMovementMethod(ScrollingMovementMethod.getInstance());
 
@@ -143,6 +147,9 @@ public class TestOkhttp extends Activity {
 
         LineDataSet lineDataSet = new LineDataSet(realPrices, carId);
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+        lineDataSet.setDrawCircles(false);
+        lineDataSet.setDrawValues(false);
+        lineDataSet.setColor(Color.RED);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(lineDataSet);
