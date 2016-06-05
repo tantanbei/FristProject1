@@ -2,6 +2,9 @@ package fristproject1.sample.com.fristproject1.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -12,6 +15,7 @@ import com.joanzapata.iconify.fonts.TypiconsModule;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.fragment.HomeTabFragment;
 
 public class ActivityHome extends AppCompatActivity {
 
@@ -49,7 +53,7 @@ public class ActivityHome extends AppCompatActivity {
             public void onClick(View v) {
                 int viewId = v.getId();
 
-                switch (viewId){
+                switch (viewId) {
                     case R.id.tab_home:
                         tabHomeIcon.setText("{typcn-home}");
                         tabFavousableIcon.setText("{typcn-tag}");
@@ -82,5 +86,14 @@ public class ActivityHome extends AppCompatActivity {
         tabFavousable.setOnClickListener(tagClickListener);
         tabDiscover.setOnClickListener(tagClickListener);
         tabMine.setOnClickListener(tagClickListener);
+
+        FragmentManager FM = getSupportFragmentManager();
+        FragmentTransaction transaction = FM.beginTransaction();
+        HomeTabFragment homeTabFragment = new HomeTabFragment();
+        transaction.add(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
+        transaction.commit();
+
     }
+
+
 }
