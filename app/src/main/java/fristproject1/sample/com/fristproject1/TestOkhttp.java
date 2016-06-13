@@ -109,9 +109,6 @@ public class TestOkhttp extends Activity {
                             }
                         });
 
-//                        carPriceOneTime = carPrices.carPrice.get(3);
-//                        Log.d("tan", "carPriceOnceTime: "+carPriceOneTime.toString());
-
                     }
                 });
             }

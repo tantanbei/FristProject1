@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -11,21 +12,21 @@
         <com.joanzapata.iconify.widget.IconTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="{ion-chevron-left}"
-            android:textSize="30sp"
-            android:paddingLeft="15dp"
+            android:layout_gravity="left|center_vertical"
             android:gravity="center"
+            android:paddingLeft="15dp"
             android:paddingRight="30dp"
-            android:layout_gravity="left|center_vertical"/>
+            android:text="{ion-chevron-left}"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Title"
-            android:textSize="30dp"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:layout_gravity="center"/>
+            android:text="Title"
+            android:textSize="30dp" />
     </FrameLayout>
 
     <LinearLayout
@@ -33,21 +34,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/forecast_transaction_price"
-                android:padding="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="30dp"
+            android:text="@string/forecast_transaction_price" />
 
-            <TextView
-                android:id="@+id/forecast_transaction_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/forecast_transaction_price"
-                android:textSize="80sp"
-                android:text="83700"/>
+        <TextView
+            android:id="@+id/forecast_transaction_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="83700"
+            android:textColor="@color/forecast_transaction_price"
+            android:textSize="80sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/current_status"/>
+                android:text="@string/current_status" />
 
         </LinearLayout>
 
@@ -69,12 +70,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/limitation"/>
+                android:text="@string/limitation" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7000"/>
+                android:text="7000" />
 
         </LinearLayout>
 
@@ -86,12 +87,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/current_people_number"/>
+                android:text="@string/current_people_number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7000"/>
+                android:text="7000" />
 
         </LinearLayout>
 
@@ -103,12 +104,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/system_time"/>
+                android:text="@string/system_time" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7000"/>
+                android:text="7000" />
 
         </LinearLayout>
 
@@ -120,15 +121,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/current_transaction_price"/>
+                android:text="@string/current_transaction_price" />
 
             <TextView
+                android:id="@+id/current_price"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7000"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 
