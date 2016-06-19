@@ -97,7 +97,9 @@ public class ActivityAuction extends Activity {
 
                     @Override
                     public void run() {
-                        currPriceTextView.setText(currentTransactionPrice);
+                        if (!currentTransactionPrice.equals("")) {
+                            currPriceTextView.setText(currentTransactionPrice);
+                        }
                         serverTimeTextView.setText(serverTime);
                     }
                 });
