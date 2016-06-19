@@ -6,16 +6,19 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 import java.util.ArrayList;
 
 @JsonObject
-public class CurrentPrice {
+public class CurrentPacket {
 
     @JsonField
-    public int price;
+    public int currentTransactionPrice;
 
-    public CurrentPrice() {
+    @JsonField
+    public long serverTime;
+
+    public CurrentPacket() {
     }
 
     @Override
     public String toString() {
-        return "price:"+this.price;
+        return "CurrentPacket { currentTransactionPrice:" + this.currentTransactionPrice + " serverTime:" + serverTime + " }";
     }
 }

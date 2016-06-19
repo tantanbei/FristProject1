@@ -12,10 +12,12 @@ import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.IoniconsModule;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
-import fristproject1.sample.com.fristproject1.networkpacket.CurrentPrice;
+import fristproject1.sample.com.fristproject1.networkpacket.CurrentPacket;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -24,6 +26,7 @@ import okhttp3.Response;
 
 public class ActivityAuction extends Activity {
     TextView currPriceTextView;
+    TextView serverTimeTextView;
 
     private boolean threadIsEnable = true;
     Runnable sendGetCurrPriceRunnable;
@@ -41,6 +44,7 @@ public class ActivityAuction extends Activity {
         setContentView(R.layout.activity_auction);
 
         currPriceTextView = (TextView) findViewById(R.id.current_price);
+        serverTimeTextView = (TextView) findViewById(R.id.server_time);
 
         if (sendGetCurrPriceRunnable == null) {
             sendGetCurrPriceRunnable = new Runnable() {
@@ -81,19 +85,30 @@ public class ActivityAuction extends Activity {
             public void onResponse(Call call, final Response response) throws IOException {
                 final String str = response.body().string();
 
-                final CurrentPrice currPrice = LoganSquare.parse(str, CurrentPrice.class);
+                final CurrentPacket currentPacket = LoganSquare.parse(str, CurrentPacket.class);
+                String tmpCurrentTransactionPrice = "";
+                final String currentTransactionPrice;
+                final String serverTime;
+                Log.d("tan", "text price:" + currPriceTextView.getText().toString());
 
-                Log.d("tan", "carPrices: " + currPrice.toString());
+                if (currPriceTextView.getText().toString().equals("")) {
+                    tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
+                } else if (Integer.parseInt(currPriceTextView.getText().toString()) < currentPacket.currentTransactionPrice) {
+                    tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
+                }
+                currentTransactionPrice = tmpCurrentTransactionPrice;
+
+                long time = currentPacket.serverTime;
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date d1 = new Date(time);
+                serverTime = format.format(d1);
+
                 handler.post(new Runnable() {
 
                     @Override
                     public void run() {
-                        Log.d("tan", "text price:" + currPriceTextView.getText().toString() + " curr price:" + currPrice.price);
-                        if (currPriceTextView.getText().toString().equals("")) {
-                            currPriceTextView.setText(String.valueOf(currPrice.price));
-                        } else if (Integer.parseInt(currPriceTextView.getText().toString()) < currPrice.price) {
-                            currPriceTextView.setText(String.valueOf(currPrice.price));
-                        }
+                        currPriceTextView.setText(currentTransactionPrice);
+                        serverTimeTextView.setText(serverTime);
                     }
                 });
             }

@@ -15,7 +15,7 @@
     <string name="current_status">目前拍卖状态</string>
     <string name="limitation">投放额度数：</string>
     <string name="current_people_number">目前已投标人数：</string>
-    <string name="system_time">目前系统时间：</string>
+    <string name="server_time">目前系统时间：</string>
     <string name="current_transaction_price">目前最低成交价：</string>
 
 </resources>
