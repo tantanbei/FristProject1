@@ -14,7 +14,10 @@ import com.joanzapata.iconify.fonts.IoniconsModule;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.networkpacket.CurrentPacket;
@@ -28,13 +31,10 @@ public class ActivityAuction extends Activity {
     TextView currPriceTextView;
     TextView serverTimeTextView;
 
-    private boolean threadIsEnable = true;
-    Runnable sendGetCurrPriceRunnable;
-    Thread thread;
+    Timer timer = new Timer(true);
+    TimerTask timerTask;
 
     OkHttpClient client = new OkHttpClient();
-
-    Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +46,14 @@ public class ActivityAuction extends Activity {
         currPriceTextView = (TextView) findViewById(R.id.current_price);
         serverTimeTextView = (TextView) findViewById(R.id.server_time);
 
-        if (sendGetCurrPriceRunnable == null) {
-            sendGetCurrPriceRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    while (threadIsEnable) {
-                        getCurrentPrice(Const.SERVER_IP + "/auction/price");
-                        try {
-                            Thread.sleep(300L);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            };
-        }
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                getCurrentPrice(Const.SERVER_IP + "/auction/price");
+            }
+        };
 
-        thread = new Thread(sendGetCurrPriceRunnable);
-        thread.start();
+        timer.schedule(timerTask, 1000, 300);
     }
 
     private void getCurrentPrice(String url) {
@@ -103,7 +93,7 @@ public class ActivityAuction extends Activity {
                 Date d1 = new Date(time);
                 serverTime = format.format(d1);
 
-                handler.post(new Runnable() {
+                App.Uihandler.post(new Runnable() {
 
                     @Override
                     public void run() {
@@ -120,6 +110,6 @@ public class ActivityAuction extends Activity {
     protected void onStop() {
         super.onStop();
 
-        threadIsEnable = false;
+        timer.cancel();
     }
 }

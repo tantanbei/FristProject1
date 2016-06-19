@@ -119,8 +119,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android-iconify-fontawesome-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="android-iconify-simplelineicons-2.2.2" level="project" />
-    <orderEntry type="library" exported="" name="jackson-core-2.5.1" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="jackson-core-2.5.1" level="project" />
     <orderEntry type="library" exported="" name="android-iconify-entypo-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="MPAndroidChart-v2.2.3" level="project" />
     <orderEntry type="library" exported="" name="android-iconify-2.2.2" level="project" />
