@@ -30,6 +30,7 @@ import okhttp3.Response;
 public class ActivityAuction extends Activity {
     TextView currPriceTextView;
     TextView serverTimeTextView;
+    TextView forecastTransactionPriceTextView;
 
     Timer timer = new Timer(true);
     TimerTask timerTask;
@@ -45,6 +46,8 @@ public class ActivityAuction extends Activity {
 
         currPriceTextView = (TextView) findViewById(R.id.current_price);
         serverTimeTextView = (TextView) findViewById(R.id.server_time);
+        forecastTransactionPriceTextView = (TextView) findViewById(R.id.forecast_transaction_price);
+
 
         timerTask = new TimerTask() {
             @Override
@@ -93,6 +96,8 @@ public class ActivityAuction extends Activity {
                 Date d1 = new Date(time);
                 serverTime = format.format(d1);
 
+                final int forecastPrice = currentPacket.forecastTransactionPrice;
+
                 App.Uihandler.post(new Runnable() {
 
                     @Override
@@ -101,6 +106,8 @@ public class ActivityAuction extends Activity {
                             currPriceTextView.setText(currentTransactionPrice);
                         }
                         serverTimeTextView.setText(serverTime);
+                        forecastTransactionPriceTextView.setText(String.valueOf(forecastPrice));
+
                     }
                 });
             }
