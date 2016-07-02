@@ -44,7 +44,6 @@ public class ActivityAuction extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Iconify.with(new IoniconsModule());
 
         setContentView(R.layout.activity_auction);
 
@@ -99,6 +98,9 @@ public class ActivityAuction extends Activity {
                 Log.d("tan", "text price:" + currPriceTextView.getText().toString());
 
                 if (currPriceTextView.getText().toString().equals("")) {
+                    if (currentPacket == null) {
+                        return;
+                    }
                     tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
                 } else if (Integer.parseInt(currPriceTextView.getText().toString()) < currentPacket.currentTransactionPrice) {
                     tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
