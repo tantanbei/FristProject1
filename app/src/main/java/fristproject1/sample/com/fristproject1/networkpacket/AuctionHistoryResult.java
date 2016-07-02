@@ -7,22 +7,22 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 public class AuctionHistoryResult {
 
     @JsonField
-    String date;
+    public String date;
 
     @JsonField
-    int limiation;
+    public int limiation;
 
     @JsonField
-    int peopleNumber;
+    public int peopleNumber;
 
     @JsonField
-    int minumumPrice;
+    public int minumumPrice;
 
     @JsonField
-    int averagePrice;
+    public int averagePrice;
 
     @JsonField
-    int cautionPrice;
+    public int cautionPrice;
 
     @Override
     public String toString() {

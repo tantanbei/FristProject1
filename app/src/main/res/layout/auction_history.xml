@@ -5,9 +5,13 @@
 
     <include layout="@layout/title_bar"/>
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/history_chart"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="250dp" />
 
 </LinearLayout>
