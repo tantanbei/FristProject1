@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.IoniconsModule;
+import com.joanzapata.iconify.widget.IconTextView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,8 @@ public class ActivityAuction extends Activity {
     TextView currPriceTextView;
     TextView serverTimeTextView;
     TextView forecastTransactionPriceTextView;
+    IconTextView goBack;
+    TextView title;
 
     Timer timer = new Timer(true);
     TimerTask timerTask;
@@ -47,6 +51,16 @@ public class ActivityAuction extends Activity {
         currPriceTextView = (TextView) findViewById(R.id.current_price);
         serverTimeTextView = (TextView) findViewById(R.id.server_time);
         forecastTransactionPriceTextView = (TextView) findViewById(R.id.forecast_transaction_price);
+        goBack = (IconTextView) findViewById(R.id.goBack);
+        title = (TextView) findViewById(R.id.title);
+
+        title.setText(R.string.auction);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         timerTask = new TimerTask() {

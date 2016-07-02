@@ -10,6 +10,7 @@
         android:orientation="horizontal">
 
         <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/goBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left|center_vertical"

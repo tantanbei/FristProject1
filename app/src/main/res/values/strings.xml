@@ -18,4 +18,10 @@
     <string name="server_time">目前系统时间：</string>
     <string name="current_transaction_price">目前最低成交价：</string>
 
+    <string name="auction">拍牌</string>
+    <string name="sale_car">买车</string>
+    <string name="fix_car">修车</string>
+    <string name="analysis_data">数据分析</string>
+    <string name="history_data">历史数据</string>
+
 </resources>

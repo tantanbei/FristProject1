@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.TypiconsModule;
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -36,6 +37,8 @@ public class ActivityHome extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Iconify.with(new TypiconsModule());
+        Iconify.with(new FontAwesomeModule());
+
         setContentView(R.layout.activity_home);
 
         homeFramelayout = (FrameLayout) findViewById(R.id.home_frame_layout);

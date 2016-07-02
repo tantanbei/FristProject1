@@ -11,15 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.joanzapata.iconify.widget.IconTextView;
+
 import java.util.ArrayList;
 
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.ActivityAuction;
+import fristproject1.sample.com.fristproject1.activity.ActivityHistoryData;
 
 public class HomeTabFragment extends Fragment {
 
     private ViewPager homeViewPager;
     private TextView auction;
+    private IconTextView historyData;
+
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
 
@@ -29,6 +34,7 @@ public class HomeTabFragment extends Fragment {
 
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
         auction = (TextView) view.findViewById(R.id.auction);
+        historyData = (IconTextView) view.findViewById(R.id.history_data);
 
         for (int i = 0; i < srcIds.length; i++) {
             ImageView imageView = new ImageView(getContext());
@@ -42,6 +48,14 @@ public class HomeTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityAuction.class);
+                startActivity(intent);
+            }
+        });
+
+        historyData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityHistoryData.class);
                 startActivity(intent);
             }
         });
