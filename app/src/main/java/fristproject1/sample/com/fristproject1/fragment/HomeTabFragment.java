@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
@@ -23,7 +24,7 @@ public class HomeTabFragment extends Fragment {
 
     private ViewPager homeViewPager;
     private TextView auction;
-    private IconTextView historyData;
+    private LinearLayout historyData;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
@@ -34,7 +35,7 @@ public class HomeTabFragment extends Fragment {
 
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
         auction = (TextView) view.findViewById(R.id.auction);
-        historyData = (IconTextView) view.findViewById(R.id.history_data);
+        historyData = (LinearLayout) view.findViewById(R.id.history_data);
 
         for (int i = 0; i < srcIds.length; i++) {
             ImageView imageView = new ImageView(getContext());
