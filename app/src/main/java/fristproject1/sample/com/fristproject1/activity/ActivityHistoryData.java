@@ -13,10 +13,13 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.RunnableFuture;
 
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
@@ -42,6 +45,13 @@ public class ActivityHistoryData extends Activity {
     LineChart historyChart;
     TextView title;
     IconTextView goBack;
+    TextView date;
+    TextView limiation;
+    TextView peopleNum;
+    TextView minPrice;
+    TextView averagePrice;
+    TextView cautionPrice;
+
     OkHttpClient client;
     Request request;
 
@@ -70,6 +80,12 @@ public class ActivityHistoryData extends Activity {
         title = (TextView) findViewById(R.id.title);
         goBack = (IconTextView) findViewById(R.id.goBack);
         switchType = (Spinner) findViewById(R.id.switch_type);
+        date = (TextView) findViewById(R.id.date);
+        limiation = (TextView) findViewById(R.id.limiation);
+        peopleNum = (TextView) findViewById(R.id.people_num);
+        minPrice = (TextView) findViewById(R.id.min_price);
+        averagePrice = (TextView) findViewById(R.id.average_price);
+        cautionPrice = (TextView) findViewById(R.id.caution_price);
 
         title.setText(R.string.history_data);
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +98,20 @@ public class ActivityHistoryData extends Activity {
         historyChart.setDragEnabled(true);
         historyChart.setScaleEnabled(true);
         historyChart.setTouchEnabled(true);
+        historyChart.animateX(1000);
+
+        historyChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                Log.d("tan", "onValueSelected: Entry:" + e.toString() + " dataSetIndex:" + dataSetIndex + " highlight:" + h);
+                showDetailByIndex(e.getXIndex());
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
         switchType.setSelection(showType - 1);
         switchType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -114,6 +144,25 @@ public class ActivityHistoryData extends Activity {
         thread.start();
     }
 
+    private void showDetailByIndex(final int index) {
+        if (dates == null || dates.size() == 1) {
+            return;
+        }
+
+        App.Uihandler.post(new Runnable() {
+            @Override
+            public void run() {
+                date.setText(dates.get(index));
+                limiation.setText(String.valueOf(limiations.get(index).getVal()));
+                peopleNum.setText(String.valueOf(peopleNums.get(index).getVal()));
+                minPrice.setText(String.valueOf(minimumPrices.get(index).getVal()));
+                averagePrice.setText(String.valueOf(averagePrices.get(index).getVal()));
+                cautionPrice.setText(String.valueOf(cautionPrices.get(index).getVal()));
+            }
+        });
+
+    }
+
     private void refreshData() {
 
         if (allHistoryCache != null && !forceToRefreshData) {
@@ -139,6 +188,7 @@ public class ActivityHistoryData extends Activity {
             generateDataAdapter();
             Log.d("tan", "refreshData: show chart");
             showChart(showType);
+            showDetailByIndex(dates.size() - 1);
 
         } catch (IOException e) {
             e.printStackTrace();

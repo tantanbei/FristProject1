@@ -24,6 +24,7 @@
     <string name="analysis_data">数据分析</string>
     <string name="history_data">历史数据</string>
 
+    <string name="date">日期</string>
     <string name="limiation">投放额度</string>
     <string name="people_num">投标人数</string>
     <string name="min_price">最低成交价</string>
