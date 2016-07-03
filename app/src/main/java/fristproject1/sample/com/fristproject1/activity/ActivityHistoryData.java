@@ -153,11 +153,11 @@ public class ActivityHistoryData extends Activity {
             @Override
             public void run() {
                 date.setText(dates.get(index));
-                limiation.setText(String.valueOf(limiations.get(index).getVal()));
-                peopleNum.setText(String.valueOf(peopleNums.get(index).getVal()));
-                minPrice.setText(String.valueOf(minimumPrices.get(index).getVal()));
-                averagePrice.setText(String.valueOf(averagePrices.get(index).getVal()));
-                cautionPrice.setText(String.valueOf(cautionPrices.get(index).getVal()));
+                limiation.setText(String.valueOf((int)limiations.get(index).getVal()));
+                peopleNum.setText(String.valueOf((int)peopleNums.get(index).getVal()));
+                minPrice.setText(String.valueOf((int)minimumPrices.get(index).getVal()));
+                averagePrice.setText(String.valueOf((int)averagePrices.get(index).getVal()));
+                cautionPrice.setText(String.valueOf((int)cautionPrices.get(index).getVal()));
             }
         });
 
