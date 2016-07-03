@@ -6,8 +6,11 @@
     <include layout="@layout/title_bar"/>
 
     <Spinner
+        android:id="@+id/switch_type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="wrap_content"
+        android:entries="@array/history_type"
+        android:layout_marginBottom="3dp" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/history_chart"

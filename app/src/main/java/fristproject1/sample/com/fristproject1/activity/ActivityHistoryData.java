@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -36,6 +38,7 @@ public class ActivityHistoryData extends Activity {
     final int SHOWCAUTIONPRICE = 5;
     int showType = 3;
 
+    Spinner switchType;
     LineChart historyChart;
     TextView title;
     IconTextView goBack;
@@ -66,6 +69,7 @@ public class ActivityHistoryData extends Activity {
         historyChart = (LineChart) findViewById(R.id.history_chart);
         title = (TextView) findViewById(R.id.title);
         goBack = (IconTextView) findViewById(R.id.goBack);
+        switchType = (Spinner) findViewById(R.id.switch_type);
 
         title.setText(R.string.history_data);
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +82,23 @@ public class ActivityHistoryData extends Activity {
         historyChart.setDragEnabled(true);
         historyChart.setScaleEnabled(true);
         historyChart.setTouchEnabled(true);
+
+        switchType.setSelection(showType - 1);
+        switchType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //need date is ready
+                if (dates != null && dates.size() != 0) {
+                    showChart(position + 1);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -116,6 +137,8 @@ public class ActivityHistoryData extends Activity {
             Log.d("tan", "refreshData: " + allHistoryCache.toString());
 
             generateDataAdapter();
+            Log.d("tan", "refreshData: show chart");
+            showChart(showType);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -181,7 +204,5 @@ public class ActivityHistoryData extends Activity {
         minimumPricesDataSet = new LineDataSet(minimumPrices, getString(R.string.min_price));
         averagePricesDataSet = new LineDataSet(averagePrices, getString(R.string.average_price));
         cautionPricesDataSet = new LineDataSet(cautionPrices, getString(R.string.caution_price));
-
-        showChart(SHOWAVERAGEPRICE);
     }
 }

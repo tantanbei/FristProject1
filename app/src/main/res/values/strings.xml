@@ -30,4 +30,12 @@
     <string name="average_price">平均成交价</string>
     <string name="caution_price">警示价</string>
 
+    <string-array name="history_type">
+        <item>投放额度</item>
+        <item>投标人数</item>
+        <item>最低成交价</item>
+        <item>平均成交价</item>
+        <item>警示价</item>
+    </string-array>
+
 </resources>
