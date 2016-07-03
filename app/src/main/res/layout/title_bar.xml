@@ -22,4 +22,10 @@
         android:text="Title"
         android:textSize="30dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/title_bar_bottom_line"
+        android:layout_gravity="bottom"/>
+
 </FrameLayout>
