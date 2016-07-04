@@ -181,7 +181,6 @@ public class ActivityHistoryData extends Activity {
         try {
             Response response = call.execute();
             final String str = response.body().string();
-            Log.d("tan", "str: " + str);
             allHistoryCache = LoganSquare.parse(str, AuctionHistoryResults.class);
             Log.d("tan", "refreshData: " + allHistoryCache.toString());
 
