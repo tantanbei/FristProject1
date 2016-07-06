@@ -30,6 +30,7 @@
     <string name="min_price">最低成交价</string>
     <string name="average_price">平均成交价</string>
     <string name="caution_price">警示价</string>
+    <string name="data_detail">价格变化趋势</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

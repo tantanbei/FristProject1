@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.ActivityAuction;
+import fristproject1.sample.com.fristproject1.activity.ActivityDataDetail;
 import fristproject1.sample.com.fristproject1.activity.ActivityHistoryData;
 
 public class HomeTabFragment extends Fragment {
@@ -25,6 +26,7 @@ public class HomeTabFragment extends Fragment {
     private ViewPager homeViewPager;
     private TextView auction;
     private LinearLayout historyData;
+    private LinearLayout dataDetail;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
@@ -36,6 +38,7 @@ public class HomeTabFragment extends Fragment {
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
         auction = (TextView) view.findViewById(R.id.auction);
         historyData = (LinearLayout) view.findViewById(R.id.history_data);
+        dataDetail = (LinearLayout) view.findViewById(R.id.data_detail);
 
         for (int i = 0; i < srcIds.length; i++) {
             ImageView imageView = new ImageView(getContext());
@@ -48,16 +51,21 @@ public class HomeTabFragment extends Fragment {
         auction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityAuction.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), ActivityAuction.class));
             }
         });
 
         historyData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityHistoryData.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), ActivityHistoryData.class));
+            }
+        });
+
+        dataDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActivityDataDetail.class));
             }
         });
 
