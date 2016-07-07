@@ -5,6 +5,14 @@
 
     <include layout="@layout/title_bar"/>
 
+    <Spinner
+        android:id="@+id/dates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:entries="@array/dates"
+        android:layout_marginBottom="4dp"/>
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/detail_chart"
         android:layout_width="match_parent"

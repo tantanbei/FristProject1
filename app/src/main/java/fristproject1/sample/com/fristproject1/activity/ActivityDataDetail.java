@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -32,12 +34,13 @@ public class ActivityDataDetail extends Activity {
 
     IconTextView goBack;
     TextView title;
+    Spinner dates;
     LineChart detailChart;
 
     OkHttpClient client;
     Request request;
 
-    String requestDate = "201509";
+    String requestDate;
 
     LineDataSet pricesDataSet;
     ArrayList<String> distances = new ArrayList<String>();
@@ -49,6 +52,7 @@ public class ActivityDataDetail extends Activity {
 
         goBack = (IconTextView) findViewById(R.id.goBack);
         title = (TextView) findViewById(R.id.title);
+        dates = (Spinner) findViewById(R.id.dates);
         detailChart = (LineChart) findViewById(R.id.detail_chart);
 
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -64,20 +68,29 @@ public class ActivityDataDetail extends Activity {
         detailChart.setScaleEnabled(true);
         detailChart.setTouchEnabled(true);
         detailChart.animateX(1000);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Thread thread = new Thread(new Runnable() {
+        dates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void run() {
-                refreshData();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                requestDate = parent.getItemAtPosition(position).toString();
+                Log.d("tan", "onItemSelected: " + position + " id:" + id + " request date:" + requestDate);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                    }
+                });
+
+                thread.start();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        thread.start();
+        dates.setSelection(0);
     }
 
     private void refreshData() {
@@ -108,6 +121,7 @@ public class ActivityDataDetail extends Activity {
     private void generateDataAdapter(AuctionDetails details) {
 
         final int size = details.Details.length;
+        distances.clear();
 
         ArrayList<Entry> prices = new ArrayList<Entry>();
 

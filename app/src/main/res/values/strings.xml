@@ -40,4 +40,23 @@
         <item>警示价</item>
     </string-array>
 
+    <string-array name="dates">
+        <item>201605</item>
+        <item>201604</item>
+        <item>201603</item>
+        <item>201602</item>
+        <item>201601</item>
+        <item>201512</item>
+        <item>201511</item>
+        <item>201510</item>
+        <item>201509</item>
+        <item>201508</item>
+        <item>201507</item>
+        <item>201506</item>
+        <item>201505</item>
+        <item>201504</item>
+        <item>201503</item>
+        <item>201502</item>
+        <item>201501</item>
+    </string-array>
 </resources>
