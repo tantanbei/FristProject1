@@ -31,6 +31,9 @@
     <string name="average_price">平均成交价</string>
     <string name="caution_price">警示价</string>
     <string name="data_detail">价格变化趋势</string>
+    <string name="auction_over">拍牌已经结束</string>
+    <string name="auction_unstart">拍牌未开始</string>
+    <string name="request_fails">请求失败</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

@@ -1,14 +1,19 @@
 package fristproject1.sample.com.fristproject1.activity;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bluelinelabs.logansquare.LoganSquare;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.IoniconsModule;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -18,10 +23,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeoutException;
 
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.String.XString;
 import fristproject1.sample.com.fristproject1.networkpacket.CurrentPacket;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -61,7 +68,6 @@ public class ActivityAuction extends Activity {
             }
         });
 
-
         timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -81,54 +87,81 @@ public class ActivityAuction extends Activity {
 
         Call call = client.newCall(request);
 
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("tan", e.toString());
-            }
+        try {
 
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                final String str = response.body().string();
+            Response response = call.execute();
+            final byte[] bs = response.body().bytes();
 
-                final CurrentPacket currentPacket = LoganSquare.parse(str, CurrentPacket.class);
-                String tmpCurrentTransactionPrice = "";
-                final String currentTransactionPrice;
-                final String serverTime;
-                Log.d("tan", "text price:" + currPriceTextView.getText().toString());
-
-                if (currPriceTextView.getText().toString().equals("")) {
-                    if (currentPacket == null) {
-                        return;
-                    }
-                    tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
-                } else if (Integer.parseInt(currPriceTextView.getText().toString()) < currentPacket.currentTransactionPrice) {
-                    tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
-                }
-                currentTransactionPrice = tmpCurrentTransactionPrice;
-
-                long time = currentPacket.serverTime;
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date d1 = new Date(time);
-                serverTime = format.format(d1);
-
-                final int forecastPrice = currentPacket.forecastTransactionPrice;
-
-                App.Uihandler.post(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if (!currentTransactionPrice.equals("")) {
-                            currPriceTextView.setText(currentTransactionPrice);
+            switch (bs[0]) {
+                case '1':
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ActivityAuction.this, R.string.auction_unstart, Toast.LENGTH_LONG).show();
                         }
-                        serverTimeTextView.setText(serverTime);
-                        forecastTransactionPriceTextView.setText(String.valueOf(forecastPrice));
-
-                    }
-                });
+                    });
+                    timerTask.cancel();
+                    return;
+                case '2':
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ActivityAuction.this, R.string.auction_over, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    timerTask.cancel();
+                    return;
             }
-        });
 
+            final CurrentPacket currentPacket = LoganSquare.parse(new String(bs, 1, bs.length - 1, "UTF-8"), CurrentPacket.class);
+            String tmpCurrentTransactionPrice = "";
+            final String currentTransactionPrice;
+            final String serverTime;
+            Log.d("tan", "text price:" + currPriceTextView.getText().toString());
+
+            if (currPriceTextView.getText().toString().equals("")) {
+                if (currentPacket == null) {
+                    return;
+                }
+                tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
+            } else if (Integer.parseInt(currPriceTextView.getText().toString()) < currentPacket.currentTransactionPrice) {
+                tmpCurrentTransactionPrice = String.valueOf(currentPacket.currentTransactionPrice);
+            }
+            currentTransactionPrice = tmpCurrentTransactionPrice;
+
+            long time = currentPacket.serverTime;
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date d1 = new Date(time);
+            serverTime = format.format(d1);
+
+            final int forecastPrice = currentPacket.forecastTransactionPrice;
+
+            App.Uihandler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (!currentTransactionPrice.equals("")) {
+                        currPriceTextView.setText(currentTransactionPrice);
+                    }
+                    serverTimeTextView.setText(serverTime);
+                    forecastTransactionPriceTextView.setText(String.valueOf(forecastPrice));
+
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            App.Uihandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ActivityAuction.this, R.string.request_fails, Toast.LENGTH_LONG).show();
+                }
+            });
+
+            timer.cancel();
+        } finally {
+            call.cancel();
+        }
     }
 
     @Override
