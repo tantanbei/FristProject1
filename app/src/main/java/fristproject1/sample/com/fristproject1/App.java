@@ -5,8 +5,10 @@ import android.os.Looper;
 import android.os.Handler;
 
 import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.EntypoModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.IoniconsModule;
+import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.TypiconsModule;
 
 public class App extends Application{
@@ -24,6 +26,8 @@ public class App extends Application{
     private void initIconify(){
         Iconify.with(new TypiconsModule());
         Iconify.with(new FontAwesomeModule());
+        Iconify.with(new EntypoModule());
+        Iconify.with(new MaterialModule());
         Iconify.with(new IoniconsModule());
     }
 }

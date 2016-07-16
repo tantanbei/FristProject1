@@ -12,13 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.joanzapata.iconify.widget.IconTextView;
-
 import java.util.ArrayList;
 
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.ActivityAuction;
-import fristproject1.sample.com.fristproject1.activity.ActivityDataDetail;
 import fristproject1.sample.com.fristproject1.activity.ActivityHistoryData;
 
 public class HomeTabFragment extends Fragment {
@@ -38,7 +35,6 @@ public class HomeTabFragment extends Fragment {
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
         auction = (TextView) view.findViewById(R.id.auction);
         historyData = (TextView) view.findViewById(R.id.history_data);
-//        dataDetail = (LinearLayout) view.findViewById(R.id.data_detail);
 
         for (int i = 0; i < srcIds.length; i++) {
             ImageView imageView = new ImageView(getContext());
@@ -61,13 +57,6 @@ public class HomeTabFragment extends Fragment {
                 startActivity(new Intent(getActivity(), ActivityHistoryData.class));
             }
         });
-
-//        dataDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getActivity(), ActivityDataDetail.class));
-//            }
-//        });
 
         return view;
     }
