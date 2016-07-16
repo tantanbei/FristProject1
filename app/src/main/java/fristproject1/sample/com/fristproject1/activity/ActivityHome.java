@@ -23,12 +23,8 @@ public class ActivityHome extends AppCompatActivity {
     private FrameLayout homeFramelayout;
 
     private LinearLayout tabHome;
-    private LinearLayout tabFavousable;
-    private LinearLayout tabDiscover;
     private LinearLayout tabMine;
     private IconTextView tabHomeIcon;
-    private IconTextView tabFavousableIcon;
-    private IconTextView tabDiscoverIcon;
     private IconTextView tabMineIcon;
 
     private View.OnClickListener tagClickListener;
@@ -41,12 +37,8 @@ public class ActivityHome extends AppCompatActivity {
 
         homeFramelayout = (FrameLayout) findViewById(R.id.home_frame_layout);
         tabHome = (LinearLayout) findViewById(R.id.tab_home);
-        tabFavousable = (LinearLayout) findViewById(R.id.tab_favourable);
-        tabDiscover = (LinearLayout) findViewById(R.id.tab_discover);
         tabMine = (LinearLayout) findViewById(R.id.tab_mine);
         tabHomeIcon = (IconTextView) findViewById(R.id.tab_home_icon);
-        tabFavousableIcon = (IconTextView) findViewById(R.id.tab_favourable_icon);
-        tabDiscoverIcon = (IconTextView) findViewById(R.id.tab_discover_icon);
         tabMineIcon = (IconTextView) findViewById(R.id.tab_mine_icon);
 
         tagClickListener = new View.OnClickListener() {
@@ -57,26 +49,10 @@ public class ActivityHome extends AppCompatActivity {
                 switch (viewId) {
                     case R.id.tab_home:
                         tabHomeIcon.setText("{typcn-home}");
-                        tabFavousableIcon.setText("{typcn-tag}");
-                        tabDiscoverIcon.setText("{typcn-world-outline}");
-                        tabMineIcon.setText("{typcn-user-outline}");
-                        break;
-                    case R.id.tab_favourable:
-                        tabHomeIcon.setText("{typcn-home-outline}");
-                        tabFavousableIcon.setText("{typcn-tags}");
-                        tabDiscoverIcon.setText("{typcn-world-outline}");
-                        tabMineIcon.setText("{typcn-user-outline}");
-                        break;
-                    case R.id.tab_discover:
-                        tabHomeIcon.setText("{typcn-home-outline}");
-                        tabFavousableIcon.setText("{typcn-tag}");
-                        tabDiscoverIcon.setText("{typcn-world}");
                         tabMineIcon.setText("{typcn-user-outline}");
                         break;
                     case R.id.tab_mine:
                         tabHomeIcon.setText("{typcn-home-outline}");
-                        tabFavousableIcon.setText("{typcn-tag}");
-                        tabDiscoverIcon.setText("{typcn-world-outline}");
                         tabMineIcon.setText("{typcn-user}");
                         break;
                 }
@@ -84,8 +60,6 @@ public class ActivityHome extends AppCompatActivity {
         };
 
         tabHome.setOnClickListener(tagClickListener);
-        tabFavousable.setOnClickListener(tagClickListener);
-        tabDiscover.setOnClickListener(tagClickListener);
         tabMine.setOnClickListener(tagClickListener);
 
         FragmentManager FM = getSupportFragmentManager();

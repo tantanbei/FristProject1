@@ -3,6 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/home_title_bar"/>
+
     <!--todo this viewpager height should it image height , not a fixed height-->
     <android.support.v4.view.ViewPager
         android:id="@+id/home_view_pager"
@@ -12,14 +14,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/auction"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/auction"
@@ -28,23 +30,14 @@
             android:layout_margin="3dp"/>
 
         <TextView
+            android:id="@+id/history_data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/sale_car"
+            android:text="@string/history_data"
             android:textSize="40sp"
             android:background="#00ff00"
-            android:layout_margin="3dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/fix_car"
-            android:textSize="40sp"
-            android:background="#ffff00"
             android:layout_margin="3dp"/>
 
     </LinearLayout>
@@ -58,109 +51,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/analysis_data"
+            android:text="@string/announcement"
             android:textSize="20sp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/history_data"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="{fa-bar-chart}"
-                    android:textSize="35sp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@drawable/circle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/history_data"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/data_detail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="{fa-bar-chart}"
-                    android:textSize="35sp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@drawable/circle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/data_detail"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="{fa-bar-chart}"
-                    android:textSize="35sp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@drawable/circle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/history_data"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="{fa-bar-chart}"
-                    android:textSize="35sp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@drawable/circle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/history_data"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 

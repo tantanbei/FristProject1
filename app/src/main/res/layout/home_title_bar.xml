@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginBottom="3dp"
+    android:background="@color/home_title_background">
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|center_vertical"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="30dp"
+        android:text="{typcn-th-menu}"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Title"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/custonmer_service"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="30dp"
+        android:textColor="@color/white"
+        android:text="{typcn-phone-outline}"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/title_bar_bottom_line"
+        android:layout_gravity="bottom"/>
+
+</FrameLayout>

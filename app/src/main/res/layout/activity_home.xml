@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
@@ -27,61 +27,63 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text=" {typcn-home} " />
+                android:text=" {typcn-home} "
+                android:textSize="15sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/tab_home" />
+                android:text="@string/tab_home"
+                android:textSize="10sp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/tab_favourable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/tab_favourable"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical">-->
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/tab_favourable_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text=" {typcn-tag} " />
+            <!--<com.joanzapata.iconify.widget.IconTextView-->
+                <!--android:id="@+id/tab_favourable_icon"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text=" {typcn-tag} " />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tab_favourable" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/tab_favourable" />-->
+        <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/tab_discover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/tab_discover"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical">-->
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/tab_discover_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text=" {typcn-world-outline} " />
+            <!--<com.joanzapata.iconify.widget.IconTextView-->
+                <!--android:id="@+id/tab_discover_icon"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text=" {typcn-world-outline} " />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tab_discover" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/tab_discover" />-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/tab_mine"
@@ -96,14 +98,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text=" {typcn-user-outline} " />
+                android:text=" {typcn-user-outline} "
+                android:textSize="15sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/tab_mine" />
+                android:text="@string/tab_mine"
+                android:textSize="10sp"/>
         </LinearLayout>
 
     </LinearLayout>

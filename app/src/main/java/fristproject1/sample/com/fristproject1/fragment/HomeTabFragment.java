@@ -25,7 +25,7 @@ public class HomeTabFragment extends Fragment {
 
     private ViewPager homeViewPager;
     private TextView auction;
-    private LinearLayout historyData;
+    private TextView historyData;
     private LinearLayout dataDetail;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
@@ -37,8 +37,8 @@ public class HomeTabFragment extends Fragment {
 
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
         auction = (TextView) view.findViewById(R.id.auction);
-        historyData = (LinearLayout) view.findViewById(R.id.history_data);
-        dataDetail = (LinearLayout) view.findViewById(R.id.data_detail);
+        historyData = (TextView) view.findViewById(R.id.history_data);
+//        dataDetail = (LinearLayout) view.findViewById(R.id.data_detail);
 
         for (int i = 0; i < srcIds.length; i++) {
             ImageView imageView = new ImageView(getContext());
@@ -62,12 +62,12 @@ public class HomeTabFragment extends Fragment {
             }
         });
 
-        dataDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ActivityDataDetail.class));
-            }
-        });
+//        dataDetail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), ActivityDataDetail.class));
+//            }
+//        });
 
         return view;
     }

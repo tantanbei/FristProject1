@@ -34,6 +34,7 @@
     <string name="auction_over">拍牌已经结束</string>
     <string name="auction_unstart">拍牌未开始</string>
     <string name="request_fails">请求失败</string>
+    <string name="announcement">信息公告</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
