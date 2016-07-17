@@ -1,6 +1,9 @@
 package fristproject1.sample.com.fristproject1.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -12,16 +15,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.joanzapata.iconify.widget.IconTextView;
+
 import java.util.ArrayList;
 
+import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.ActivityAuction;
 import fristproject1.sample.com.fristproject1.activity.ActivityHistoryData;
+import fristproject1.sample.com.fristproject1.activity.ActivityHome;
 
 public class HomeTabFragment extends Fragment {
 
+    Activity Parent;
+
+    private IconTextView homeMenu;
+    private IconTextView homeCustomerService;
     private ViewPager homeViewPager;
-    private TextView auction;
+    private LinearLayout auction;
     private TextView historyData;
     private LinearLayout dataDetail;
 
@@ -32,8 +43,10 @@ public class HomeTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_tab_fragment, container, false);
 
+        homeMenu = (IconTextView) view.findViewById(R.id.home_menu);
+        homeCustomerService = (IconTextView) view.findViewById(R.id.home_customer_service);
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
-        auction = (TextView) view.findViewById(R.id.auction);
+        auction = (LinearLayout) view.findViewById(R.id.auction_idle);
         historyData = (TextView) view.findViewById(R.id.history_data);
 
         for (int i = 0; i < srcIds.length; i++) {
@@ -41,6 +54,21 @@ public class HomeTabFragment extends Fragment {
             imageView.setBackgroundResource(srcIds[i]);
             ImageArrayList.add(imageView);
         }
+
+        homeMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ActivityHome) Parent).OpenDrawer();
+            }
+        });
+
+        homeCustomerService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
+                startActivity(intent);
+            }
+        });
 
         homeViewPager.setAdapter(new HomeViewPagerAdapter());
 
@@ -83,5 +111,18 @@ public class HomeTabFragment extends Fragment {
             container.addView(ImageArrayList.get(position % ImageArrayList.size()), 0);
             return ImageArrayList.get(position % ImageArrayList.size());
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+
+        try {
+            super.onAttach(context);
+
+            Parent = (ActivityHome) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

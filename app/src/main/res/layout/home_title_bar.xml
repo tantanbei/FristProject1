@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginBottom="3dp"
-    android:background="@color/home_title_background">
+    android:background="@color/home_title_background"
+    android:layout_gravity="top">
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/menu"
+        android:id="@+id/home_menu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="left|center_vertical"
@@ -21,12 +22,12 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Title"
+        android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="20dp" />
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/custonmer_service"
+        android:id="@+id/home_customer_service"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="right|center_vertical"

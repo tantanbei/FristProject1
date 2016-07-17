@@ -1,33 +1,29 @@
 package fristproject1.sample.com.fristproject1.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.joanzapata.iconify.Iconify;
-import com.joanzapata.iconify.fonts.FontAwesomeModule;
-import com.joanzapata.iconify.fonts.TypiconsModule;
 import com.joanzapata.iconify.widget.IconTextView;
 
+import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
-import fristproject1.sample.com.fristproject1.String.XString;
 import fristproject1.sample.com.fristproject1.fragment.HomeTabFragment;
 
 public class ActivityHome extends AppCompatActivity {
 
-    private FrameLayout homeFramelayout;
-    private DrawerLayout homeDrawerlayout;
+    private DrawerLayout homeDrawerLayout;
     private LinearLayout tabHome;
     private LinearLayout tabMine;
     private IconTextView tabHomeIcon;
@@ -47,8 +43,7 @@ public class ActivityHome extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
 
-        homeFramelayout = (FrameLayout) findViewById(R.id.home_frame_layout);
-        homeDrawerlayout = (DrawerLayout) findViewById(R.id.home_drawer_layout);
+        homeDrawerLayout = (DrawerLayout) findViewById(R.id.home_drawer_layout);
         tabHome = (LinearLayout) findViewById(R.id.tab_home);
         tabMine = (LinearLayout) findViewById(R.id.tab_mine);
         tabHomeIcon = (IconTextView) findViewById(R.id.tab_home_icon);
@@ -78,6 +73,18 @@ public class ActivityHome extends AppCompatActivity {
 
         //set home drawer listview
         homeDrawer.setAdapter(new ArrayAdapter(this, R.layout.home_drawer_row, strs));
+        homeDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
+                        startActivity(intent);
+                        break;
+
+                }
+            }
+        });
 
         //manage the fragment
         FragmentManager FM = getSupportFragmentManager();
@@ -86,5 +93,9 @@ public class ActivityHome extends AppCompatActivity {
         transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
         transaction.commit();
 
+    }
+
+    public void OpenDrawer() {
+        homeDrawerLayout.openDrawer(Gravity.LEFT);
     }
 }

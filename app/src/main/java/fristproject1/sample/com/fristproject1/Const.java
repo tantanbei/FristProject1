@@ -4,4 +4,5 @@ public class Const {
 
     static final public String SERVER_IP = "http://192.168.1.4";
 //    static final public String SERVER_IP = "http://114.215.88.33";
+    static final public String CUSTOMER_SERVICE_PHONE="18117541072";
 }
