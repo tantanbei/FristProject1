@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginBottom="3dp">
+    android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginBottom="1dp"
+    android:background="@color/home_title_background">
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/goBack"
@@ -8,6 +9,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="left|center_vertical"
         android:gravity="center"
+        android:textColor="@color/white"
         android:paddingLeft="15dp"
         android:paddingRight="30dp"
         android:text="{ion-chevron-left}"
@@ -19,6 +21,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
+        android:textColor="@color/white"
         android:text="Title"
         android:textSize="30dp" />
 

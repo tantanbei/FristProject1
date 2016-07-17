@@ -55,6 +55,11 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity
+            android:name=".activity.ActivityAuctionIdle"
+            android:label="@string/app_name">
+        </activity>
+
     </application>
 
 </manifest>
