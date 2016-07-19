@@ -39,7 +39,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_weight="4"
                         android:text="@string/auction"
@@ -47,13 +47,22 @@
                         android:textSize="40sp" />
 
                     <TextView
-                        android:id="@+id/auction_idle_status"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:text="本月拍牌"
+                        android:textSize="10sp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/idle_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_weight="3"
-                        android:textSize="20sp"
-                        android:text="离7月拍牌\n20天"
+                        android:textSize="30sp"
+                        android:text="    号"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -70,32 +79,131 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:layout_height="wrap_content"
                         android:layout_weight="2"
+                        android:gravity="center"
                         android:text="@string/auction"
                         android:textColor="@color/white"
                         android:textSize="40sp" />
 
                     <TextView
-                        android:id="@+id/auction_ready_status"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="20sp"
-                        android:text="离 月拍牌\n  天"
+                        android:textSize="10sp"
+                        android:text="拍牌倒计时"
                         android:textColor="@color/white"/>
 
                     <TextView
-                        android:id="@+id/auction_ready_forecast"
+                        android:id="@+id/ready_date"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="30sp"
+                        android:text="  天"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:text="本期价格预测"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/ready_forecast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textSize="20sp"
                         android:text="85200-85400"
+                        android:textColor="@color/forecast_transaction_price"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/auction_running"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@color/home_title_background"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/auction"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:text="本期预测价格"
                         android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/running_forecast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textSize="35sp"
+                        android:text="85200"
+                        android:textColor="@color/forecast_transaction_price"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/auction_over"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@color/home_title_background"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/auction"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:text="上期最低成交价"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/over_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textSize="35sp"
+                        android:text="85200"
+                        android:textColor="@color/forecast_transaction_price"/>
 
                 </LinearLayout>
 
