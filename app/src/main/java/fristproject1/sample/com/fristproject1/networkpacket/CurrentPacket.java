@@ -15,10 +15,10 @@ public class CurrentPacket {
     public int forecastTransactionPrice;
 
     @JsonField
-    public int limitation;
+    public int cautionPrice;
 
     @JsonField
-    public int currentPeopleNumber;
+    public int peopleNumber;
 
     @JsonField
     public long serverTime;
