@@ -115,7 +115,6 @@ public class ActivityAuction extends Activity {
             String tmpCurrentTransactionPrice = "";
             final String currentTransactionPrice;
             final String serverTime;
-            Log.d("tan", "text price:" + currPriceTextView.getText().toString());
 
             if (currPriceTextView.getText().toString().equals("")) {
                 if (currentPacket == null) {
