@@ -34,6 +34,8 @@ public class ActivityAuction extends Activity {
     TextView currPriceTextView;
     TextView serverTimeTextView;
     TextView forecastTransactionPriceTextView;
+    TextView limitation;
+    TextView peopleNum;
     IconTextView goBack;
     TextView title;
 
@@ -51,6 +53,8 @@ public class ActivityAuction extends Activity {
         currPriceTextView = (TextView) findViewById(R.id.current_price);
         serverTimeTextView = (TextView) findViewById(R.id.server_time);
         forecastTransactionPriceTextView = (TextView) findViewById(R.id.forecast_transaction_price);
+        limitation = (TextView) findViewById(R.id.limitation);
+        peopleNum = (TextView) findViewById(R.id.people_number);
         goBack = (IconTextView) findViewById(R.id.goBack);
         title = (TextView) findViewById(R.id.title);
 
@@ -129,6 +133,8 @@ public class ActivityAuction extends Activity {
             serverTime = format.format(d1);
 
             final int forecastPrice = currentPacket.forecastTransactionPrice;
+            final int people = currentPacket.peopleNumber;
+            final int limitationNum = currentPacket.limitation;
 
             App.Uihandler.post(new Runnable() {
 
@@ -138,8 +144,15 @@ public class ActivityAuction extends Activity {
                         currPriceTextView.setText(currentTransactionPrice);
                     }
                     serverTimeTextView.setText(serverTime);
-                    forecastTransactionPriceTextView.setText(String.valueOf(forecastPrice));
-
+                    if (Integer.parseInt(forecastTransactionPriceTextView.getText().toString()) < currentPacket.forecastTransactionPrice) {
+                        forecastTransactionPriceTextView.setText(String.valueOf(forecastPrice));
+                    }
+                    if (Integer.parseInt(limitation.getText().toString()) < currentPacket.limitation) {
+                        limitation.setText(String.valueOf(limitationNum));
+                    }
+                    if (Integer.parseInt(peopleNum.getText().toString()) < currentPacket.peopleNumber) {
+                        peopleNum.setText(String.valueOf(people));
+                    }
                 }
             });
         } catch (IOException e) {

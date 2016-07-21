@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="83700"
+            android:text="0"
             android:textColor="@color/forecast_transaction_price"
             android:textSize="80sp" />
 
@@ -52,9 +52,10 @@
                 android:text="@string/limitation" />
 
             <TextView
+                android:id="@+id/limitation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7000" />
+                android:text="0" />
 
         </LinearLayout>
 
@@ -64,6 +65,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/people_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/current_people_number" />
@@ -71,7 +73,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7000" />
+                android:text="0" />
 
         </LinearLayout>
 
@@ -106,7 +108,8 @@
             <TextView
                 android:id="@+id/current_price"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="0"/>
 
         </LinearLayout>
 
