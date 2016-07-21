@@ -21,6 +21,9 @@ public class CurrentPacket {
     public int peopleNumber;
 
     @JsonField
+    public int limitation;
+
+    @JsonField
     public long serverTime;
 
     public CurrentPacket() {
