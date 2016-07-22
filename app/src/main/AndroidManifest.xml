@@ -21,17 +21,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
 
         </activity>
 
         <activity
             android:name=".TestOkhttp"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
 
         <activity
             android:name=".activity.ActivityHome"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
 
             <intent-filter>
@@ -42,21 +45,25 @@
 
         <activity
             android:name=".activity.ActivityAuction"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
 
         <activity
             android:name=".activity.ActivityHistoryData"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
 
         <activity
             android:name=".activity.ActivityDataDetail"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
 
         <activity
             android:name=".activity.ActivityAuctionIdle"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
 
