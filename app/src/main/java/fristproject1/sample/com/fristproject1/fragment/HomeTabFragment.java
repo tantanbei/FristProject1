@@ -159,7 +159,7 @@ public class HomeTabFragment extends Fragment {
                                     if (status.Data.length == 1) {
                                         long time = status.Data[0];
                                         int day = XTime.GetDayByTimeStamp(time);
-                                        Log.d("tan", "day: "+day);
+                                        Log.d("tan", "day: " + day);
                                         idleDate.setText(day + "号");
                                     }
                                     break;
@@ -170,8 +170,31 @@ public class HomeTabFragment extends Fragment {
                                     auctionOver.setVisibility(View.GONE);
                                     if (status.Data.length == 2) {
                                         long time = status.Data[0];
-                                        int day = (int) ((time - System.currentTimeMillis()) / (1000 * 60 * 60 * 24));
-                                        readyDate.setText(day + "天");
+                                        int timeGap = (int) ((time - System.currentTimeMillis()));
+                                        int day = timeGap / (1000 * 60 * 60 * 24);
+
+                                        if (day != 0) {
+                                            readyDate.setText(day + "天");
+                                        } else {
+                                            int hour = timeGap / (1000 * 60 * 60);
+
+                                            if (hour != 0) {
+                                                readyDate.setText(hour + "小时");
+                                            } else {
+                                                int min = timeGap / (1000 * 60);
+                                                if (min != 0) {
+                                                    readyDate.setText(min + "分钟");
+                                                } else {
+                                                    int sec = timeGap / (1000);
+                                                    if (sec != 0) {
+                                                        readyDate.setText(sec + "秒");
+                                                        refreshData();
+                                                    }
+                                                }
+                                            }
+                                        }
+
+
                                         readyForecast.setText(status.Data[1] + "-" + (status.Data[1] + 300));
                                     }
                                     break;
@@ -180,7 +203,7 @@ public class HomeTabFragment extends Fragment {
                                     auctionReady.setVisibility(View.GONE);
                                     auctionRunning.setVisibility(View.VISIBLE);
                                     auctionOver.setVisibility(View.GONE);
-                                    if (status.Data.length == 1){
+                                    if (status.Data.length == 1) {
                                         runningForecast.setText(String.valueOf(status.Data[0]));
                                     }
                                     break;
@@ -189,7 +212,7 @@ public class HomeTabFragment extends Fragment {
                                     auctionReady.setVisibility(View.GONE);
                                     auctionRunning.setVisibility(View.GONE);
                                     auctionOver.setVisibility(View.VISIBLE);
-                                    if (status.Data.length == 1){
+                                    if (status.Data.length == 1) {
                                         overPrice.setText(String.valueOf(status.Data[0]));
                                     }
                                     break;
