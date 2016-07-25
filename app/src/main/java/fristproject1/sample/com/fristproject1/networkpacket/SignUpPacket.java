@@ -9,16 +9,16 @@ import fristproject1.sample.com.fristproject1.networkpacket.base.JsonBase;
 public class SignUpPacket extends JsonBase {
 
     @JsonField
-    public String phone;
+    public String Phone;
 
     @JsonField
-    public String password;
+    public String Password;
 
     public SignUpPacket() {
     }
 
     public SignUpPacket(String phone, String password) {
-        this.phone = phone;
-        this.password = password;
+        this.Phone = phone;
+        this.Password = password;
     }
 }
