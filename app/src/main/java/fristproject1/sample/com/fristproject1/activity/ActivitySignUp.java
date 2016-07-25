@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import fristproject1.sample.com.fristproject1.R;
-import fristproject1.sample.com.fristproject1.String.XString;
+import fristproject1.sample.com.fristproject1.string.XString;
 
 public class ActivitySignUp extends Activity{
 
@@ -51,6 +51,8 @@ public class ActivitySignUp extends Activity{
                     Toast.makeText(ActivitySignUp.this, R.string.confirm_password_error,Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
             }
         });
     }

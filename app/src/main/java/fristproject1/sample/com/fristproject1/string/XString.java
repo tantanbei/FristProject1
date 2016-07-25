@@ -1,10 +1,7 @@
-package fristproject1.sample.com.fristproject1.String;
+package fristproject1.sample.com.fristproject1.string;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
-
-import fristproject1.sample.com.fristproject1.R;
 
 public class XString {
 

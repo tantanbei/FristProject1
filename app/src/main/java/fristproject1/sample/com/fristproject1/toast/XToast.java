@@ -1,8 +1,6 @@
-package fristproject1.sample.com.fristproject1.Toast;
+package fristproject1.sample.com.fristproject1.toast;
 
 import android.content.Context;
-
-import fristproject1.sample.com.fristproject1.Const;
 
 public class XToast {
 
