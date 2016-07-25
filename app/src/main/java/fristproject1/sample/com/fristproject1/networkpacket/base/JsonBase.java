@@ -1,4 +1,4 @@
-package fristproject1.sample.com.fristproject1.networkpacket;
+package fristproject1.sample.com.fristproject1.networkpacket.base;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 

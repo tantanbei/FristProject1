@@ -7,8 +7,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+
+import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.http.Http;
+import fristproject1.sample.com.fristproject1.networkpacket.SignUpPacket;
 import fristproject1.sample.com.fristproject1.string.XString;
+import okhttp3.Response;
 
 public class ActivitySignUp extends Activity{
 
@@ -52,6 +58,12 @@ public class ActivitySignUp extends Activity{
                     return;
                 }
 
+                try {
+                    Response response = Http.Post(Const.SERVER_IP+Const.URL_SING_UP,new SignUpPacket(phone.getText().toString(),password.getText().toString()));
+                    //// TODO: 7/25/16  
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
