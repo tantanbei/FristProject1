@@ -40,6 +40,8 @@
     <string name="sign_up">注册</string>
     <string name="verification_error">验证码输入不正确</string>
     <string name="confirm_password_error">两次密码输入不相同</string>
+    <string name="warning_phone_number">请输入11位手机号码</string>
+    <string name="warning_registered">此手机号码已经被注册</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

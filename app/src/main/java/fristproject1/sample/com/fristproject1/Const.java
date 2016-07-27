@@ -9,4 +9,5 @@ public class Const {
 
     static final public String URL_SING_UP = "/signup";
     static final public String URL_SIGN_IN = "/signin";
+    static final public String URL_GET_CODE = "/signup/code";
 }
