@@ -2,6 +2,7 @@ package fristproject1.sample.com.fristproject1.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,7 @@ public class ActivitySignUp extends Activity {
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phoneNumber= phone.getText().toString();
+                final String phoneNumber = phone.getText().toString();
 
                 if (XString.IsEmpty(phoneNumber) || phoneNumber.length() != 11) {
                     Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.warning_phone_number), Toast.LENGTH_SHORT).show();
@@ -63,23 +64,25 @@ public class ActivitySignUp extends Activity {
                     int n = random.nextInt(10);
                     verificationCode += n;
                 }
+
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            final Response response = Http.Post(Const.SERVER_IP+Const.URL_GET_CODE,new GetCode(phoneNumber,verificationCode));
+                            Log.d("tan", "get code phone:" + phoneNumber + " code:" + verificationCode);
+                            final Response response = Http.Post(Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, verificationCode));
 
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
-                            if (!packet.Ok){
-                                if (packet.Data.equals("0")){
+                            if (!packet.Ok) {
+                                if (packet.Data.equals("0")) {
                                     App.Uihandler.post(new Runnable() {
                                         @Override
                                         public void run() {
                                             Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.warning_registered), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                                }else {
+                                } else {
                                     App.Uihandler.post(new Runnable() {
                                         @Override
                                         public void run() {
@@ -89,12 +92,16 @@ public class ActivitySignUp extends Activity {
                                 }
                             }
                         } catch (IOException e) {
+                            App.Uihandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.request_fails), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             e.printStackTrace();
                         }
                     }
                 });
-
-
             }
         });
 
