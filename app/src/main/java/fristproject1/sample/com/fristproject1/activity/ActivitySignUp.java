@@ -118,13 +118,16 @@ public class ActivitySignUp extends Activity {
                     return;
                 }
 
-                if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
-                    Toast.makeText(ActivitySignUp.this, R.string.confirm_password_error, Toast.LENGTH_SHORT).show();
+                String passwordStr = password.getText().toString();
+                String confirmStr = confirmPassword.getText().toString();
+
+                if (confirmStr.length() < 6 || confirmStr.length() > 20 || passwordStr.length() < 6 || passwordStr.length() > 20 || !passwordStr.equals(confirmStr)) {
+                    Toast.makeText(ActivitySignUp.this, R.string.password_invalid, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 try {
-                    Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpPacket(phone.getText().toString(), password.getText().toString()));
+                    Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpPacket(phone.getText().toString(), passwordStr));
                     //// TODO: 7/25/16  
                 } catch (IOException e) {
                     e.printStackTrace();
