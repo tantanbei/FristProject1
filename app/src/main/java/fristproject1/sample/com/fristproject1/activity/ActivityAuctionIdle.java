@@ -12,17 +12,23 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 
-public class ActivityAuctionIdle extends Activity {
+public class ActivityAuctionIdle extends XActivity {
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.auction_idle_first, R.mipmap.auction_idle_second};
 
     @Override
+    public int GetContentView() {
+        return R.layout.activity_auction_idle;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_auction_idle);
+        title.setText(R.string.announcement);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.acution_idle_view_page);
 

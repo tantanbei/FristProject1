@@ -16,6 +16,7 @@ import java.util.Random;
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.GetCode;
 import fristproject1.sample.com.fristproject1.networkpacket.OkPacket;
@@ -24,7 +25,7 @@ import fristproject1.sample.com.fristproject1.string.XString;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import okhttp3.Response;
 
-public class ActivitySignUp extends Activity {
+public class ActivitySignUp extends XActivity {
 
     EditText phone;
     EditText code;
@@ -37,10 +38,13 @@ public class ActivitySignUp extends Activity {
     String phoneNumber;
 
     @Override
+    public int GetContentView() {
+        return R.layout.activity_signup;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_signup);
 
         phone = (EditText) findViewById(R.id.phone);
         code = (EditText) findViewById(R.id.code);
@@ -48,6 +52,8 @@ public class ActivitySignUp extends Activity {
         confirmPassword = (EditText) findViewById(R.id.confirm_password);
         getCode = (Button) findViewById(R.id.get_verification_code);
         signUp = (Button) findViewById(R.id.sign_up);
+
+        title.setText(R.string.register);
 
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override

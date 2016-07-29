@@ -22,7 +22,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/white"
-        android:text="Title"
+        android:text="@string/app_name"
         android:textSize="30dp" />
 
     <View

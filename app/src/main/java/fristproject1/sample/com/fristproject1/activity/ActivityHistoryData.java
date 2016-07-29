@@ -24,6 +24,7 @@ import java.util.concurrent.RunnableFuture;
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.networkpacket.AuctionHistoryResult;
 import fristproject1.sample.com.fristproject1.networkpacket.AuctionHistoryResults;
 import fristproject1.sample.com.fristproject1.networkpacket.RequestAuctionHistoryPacket;
@@ -32,7 +33,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ActivityHistoryData extends Activity {
+public class ActivityHistoryData extends XActivity {
 
     final int SHOWLIMIATIONS = 1;
     final int SHOWPEOPLENUM = 2;
@@ -43,8 +44,6 @@ public class ActivityHistoryData extends Activity {
 
     Spinner switchType;
     LineChart historyChart;
-    TextView title;
-    IconTextView goBack;
     TextView date;
     TextView limiation;
     TextView peopleNum;
@@ -72,13 +71,15 @@ public class ActivityHistoryData extends Activity {
     LineDataSet cautionPricesDataSet;
 
     @Override
+    public int GetContentView() {
+        return R.layout.auction_history;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.auction_history);
 
         historyChart = (LineChart) findViewById(R.id.history_chart);
-        title = (TextView) findViewById(R.id.title);
-        goBack = (IconTextView) findViewById(R.id.goBack);
         switchType = (Spinner) findViewById(R.id.switch_type);
         date = (TextView) findViewById(R.id.date);
         limiation = (TextView) findViewById(R.id.limiation);
@@ -88,12 +89,6 @@ public class ActivityHistoryData extends Activity {
         cautionPrice = (TextView) findViewById(R.id.caution_price);
 
         title.setText(R.string.history_data);
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         historyChart.setDragEnabled(true);
         historyChart.setScaleEnabled(true);

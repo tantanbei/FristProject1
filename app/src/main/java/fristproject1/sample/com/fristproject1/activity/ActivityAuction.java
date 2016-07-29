@@ -24,20 +24,19 @@ import java.util.TimerTask;
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.networkpacket.CurrentPacket;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ActivityAuction extends Activity {
+public class ActivityAuction extends XActivity {
     TextView currPriceTextView;
     TextView serverTimeTextView;
     TextView forecastTransactionPriceTextView;
     TextView limitation;
     TextView peopleNum;
-    IconTextView goBack;
-    TextView title;
 
     Timer timer = new Timer(true);
     TimerTask timerTask;
@@ -45,26 +44,21 @@ public class ActivityAuction extends Activity {
     OkHttpClient client = new OkHttpClient();
 
     @Override
+    public int GetContentView() {
+        return R.layout.activity_auction;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_auction);
 
         currPriceTextView = (TextView) findViewById(R.id.current_price);
         serverTimeTextView = (TextView) findViewById(R.id.server_time);
         forecastTransactionPriceTextView = (TextView) findViewById(R.id.forecast_transaction_price);
         limitation = (TextView) findViewById(R.id.limitation);
         peopleNum = (TextView) findViewById(R.id.people_number);
-        goBack = (IconTextView) findViewById(R.id.goBack);
-        title = (TextView) findViewById(R.id.title);
 
         title.setText(R.string.auction);
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         timerTask = new TimerTask() {
             @Override

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.networkpacket.AuctionDetail;
 import fristproject1.sample.com.fristproject1.networkpacket.AuctionDetails;
 import fristproject1.sample.com.fristproject1.networkpacket.AuctionHistoryResult;
@@ -30,10 +31,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ActivityDataDetail extends Activity {
+public class ActivityDataDetail extends XActivity {
 
-    IconTextView goBack;
-    TextView title;
     Spinner dates;
     LineChart detailChart;
 
@@ -46,21 +45,16 @@ public class ActivityDataDetail extends Activity {
     ArrayList<String> distances = new ArrayList<String>();
 
     @Override
+    public int GetContentView() {
+        return R.layout.activity_deitail;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deitail);
 
-        goBack = (IconTextView) findViewById(R.id.goBack);
-        title = (TextView) findViewById(R.id.title);
         dates = (Spinner) findViewById(R.id.dates);
         detailChart = (LineChart) findViewById(R.id.detail_chart);
-
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         title.setText(R.string.data_detail);
 

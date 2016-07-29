@@ -45,6 +45,7 @@
     <string name="password_invalid">密码不合法</string>
     <string name="send_success">发送成功</string>
     <string name="register_success">注册成功</string>
+    <string name="register">注册</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
