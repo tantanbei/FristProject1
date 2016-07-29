@@ -34,6 +34,7 @@ public class ActivitySignUp extends Activity {
     Button signUp;
 
     String verificationCode;
+    String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class ActivitySignUp extends Activity {
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phoneNumber = phone.getText().toString();
+                phoneNumber = phone.getText().toString();
 
                 if (XString.IsEmpty(phoneNumber) || phoneNumber.length() != 11) {
                     Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.warning_phone_number), Toast.LENGTH_SHORT).show();
@@ -90,6 +91,13 @@ public class ActivitySignUp extends Activity {
                                         }
                                     });
                                 }
+                            } else {
+                                App.Uihandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.send_success), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         } catch (IOException e) {
                             App.Uihandler.post(new Runnable() {
@@ -118,21 +126,52 @@ public class ActivitySignUp extends Activity {
                     return;
                 }
 
-                String passwordStr = password.getText().toString();
-                String confirmStr = confirmPassword.getText().toString();
+                final String passwordStr = password.getText().toString();
+                final String confirmStr = confirmPassword.getText().toString();
 
                 if (confirmStr.length() < 6 || confirmStr.length() > 20 || passwordStr.length() < 6 || passwordStr.length() > 20 || !passwordStr.equals(confirmStr)) {
                     Toast.makeText(ActivitySignUp.this, R.string.password_invalid, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                try {
-                    Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpPacket(phone.getText().toString(), passwordStr));
-                    //// TODO: 7/25/16  
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpPacket(phoneNumber, passwordStr));
+                            OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
+
+                            if (!packet.Ok) {
+                                if (packet.Data.equals("0")) {
+                                    App.Uihandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.warning_registered), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else {
+                                    App.Uihandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.request_fails), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            } else {
+                                App.Uihandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.register_success), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
             }
         });
     }
