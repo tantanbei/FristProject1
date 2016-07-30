@@ -13,6 +13,7 @@ public abstract class XActivity extends Activity {
 
     public IconTextView goBack;
     public TextView title;
+    public TextView rigthBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public abstract class XActivity extends Activity {
 
         goBack = (IconTextView) findViewById(R.id.goBack);
         title = (TextView) findViewById(R.id.title);
+        rigthBtn = (TextView) findViewById(R.id.right_button);
 
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override

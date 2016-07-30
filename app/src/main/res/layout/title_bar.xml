@@ -6,12 +6,10 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/goBack"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
-        android:gravity="center"
         android:textColor="@color/white"
-        android:paddingLeft="15dp"
-        android:paddingRight="30dp"
+        android:layout_marginLeft="15dp"
         android:text="{ion-chevron-left}"
         android:textSize="30sp" />
 
@@ -24,6 +22,17 @@
         android:textColor="@color/white"
         android:text="@string/app_name"
         android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/right_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="right"
+        android:layout_marginRight="15dp"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"

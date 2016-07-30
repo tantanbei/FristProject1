@@ -46,7 +46,7 @@
     <string name="send_success">发送成功</string>
     <string name="register_success">注册成功</string>
     <string name="register">注册</string>
-    <string name="signin">登录</string>
+    <string name="sign_in">登录</string>
     <string name="reset_password">忘记密码？</string>
 
     <string-array name="history_type">
