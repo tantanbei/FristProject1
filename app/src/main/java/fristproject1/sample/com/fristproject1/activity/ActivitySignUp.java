@@ -173,6 +173,12 @@ public class ActivitySignUp extends XActivity {
                                 });
                             }
                         } catch (IOException e) {
+                            App.Uihandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.request_fails), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             e.printStackTrace();
                         }
 
