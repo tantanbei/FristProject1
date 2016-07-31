@@ -15,7 +15,7 @@ import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.SignUpInPacket;
 import okhttp3.Response;
 
-public class ActivitySignIn extends XActivity{
+public class ActivitySignIn extends XActivity {
     EditText phone;
     EditText password;
     Button signin;
@@ -36,17 +36,17 @@ public class ActivitySignIn extends XActivity{
         phone = (EditText) findViewById(R.id.phone);
         password = (EditText) findViewById(R.id.password);
         signin = (Button) findViewById(R.id.sign_in);
-        
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phoneNum = phone.getText().toString();
-                if (phoneNum.length()!=11){
-                    Toast.makeText(ActivitySignIn.this, R.string.warning_phone_number,Toast.LENGTH_SHORT).show();
+                if (phoneNum.length() != 11) {
+                    Toast.makeText(ActivitySignIn.this, R.string.warning_phone_number, Toast.LENGTH_SHORT).show();
                 }
 
                 try {
-                    Response response = Http.Post(Const.SERVER_IP+Const.URL_SIGN_IN,new SignUpInPacket(phoneNum,password.getText().toString()));
+                    Response response = Http.Post(Const.SERVER_IP + Const.URL_SIGN_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
                     //// TODO: 2016/7/31
                 } catch (IOException e) {
                     e.printStackTrace();
