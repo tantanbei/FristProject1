@@ -6,7 +6,7 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 import fristproject1.sample.com.fristproject1.networkpacket.base.JsonBase;
 
 @JsonObject
-public class SignUpPacket extends JsonBase {
+public class SignUpInPacket extends JsonBase {
 
     @JsonField
     public String Phone;
@@ -14,10 +14,10 @@ public class SignUpPacket extends JsonBase {
     @JsonField
     public String Password;
 
-    public SignUpPacket() {
+    public SignUpInPacket() {
     }
 
-    public SignUpPacket(String phone, String password) {
+    public SignUpInPacket(String phone, String password) {
         this.Phone = phone;
         this.Password = password;
     }

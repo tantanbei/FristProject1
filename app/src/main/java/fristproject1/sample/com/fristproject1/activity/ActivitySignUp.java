@@ -1,6 +1,5 @@
 package fristproject1.sample.com.fristproject1.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +19,7 @@ import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.GetCode;
 import fristproject1.sample.com.fristproject1.networkpacket.OkPacket;
-import fristproject1.sample.com.fristproject1.networkpacket.SignUpPacket;
+import fristproject1.sample.com.fristproject1.networkpacket.SignUpInPacket;
 import fristproject1.sample.com.fristproject1.string.XString;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import okhttp3.Response;
@@ -145,7 +144,7 @@ public class ActivitySignUp extends XActivity {
                     @Override
                     public void run() {
                         try {
-                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpPacket(phoneNumber, passwordStr));
+                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpInPacket(phoneNumber, passwordStr));
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
                             if (!packet.Ok) {
