@@ -6,13 +6,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bluelinelabs.logansquare.LoganSquare;
+
 import java.io.IOException;
 
+import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.http.Http;
+import fristproject1.sample.com.fristproject1.networkpacket.OkPacket;
 import fristproject1.sample.com.fristproject1.networkpacket.SignUpInPacket;
+import fristproject1.sample.com.fristproject1.string.XString;
+import fristproject1.sample.com.fristproject1.thread.XThread;
 import okhttp3.Response;
 
 public class ActivitySignIn extends XActivity {
@@ -40,17 +46,56 @@ public class ActivitySignIn extends XActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNum = phone.getText().toString();
+                final String phoneNum = phone.getText().toString();
                 if (phoneNum.length() != 11) {
                     Toast.makeText(ActivitySignIn.this, R.string.warning_phone_number, Toast.LENGTH_SHORT).show();
                 }
 
-                try {
-                    Response response = Http.Post(Const.SERVER_IP + Const.URL_SIGN_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
-                    //// TODO: 2016/7/31
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SIGN_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
+
+                            OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
+                            if (!packet.Ok) {
+                                if (packet.Data.equals("0")) {
+                                    App.Uihandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(ActivitySignIn.this, R.string.wrong_phone_password, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else {
+                                    App.Uihandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(ActivitySignIn.this, R.string.request_fails, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            } else {
+                                App.Uihandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ActivitySignIn.this, R.string.sign_in_success, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                            App.Uihandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ActivitySignIn.this,1811 R.string.request_fails, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
 
