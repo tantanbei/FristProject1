@@ -1,6 +1,7 @@
 package fristproject1.sample.com.fristproject1.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.OkPacket;
 import fristproject1.sample.com.fristproject1.networkpacket.SignUpInPacket;
+import fristproject1.sample.com.fristproject1.networkpacket.User;
 import fristproject1.sample.com.fristproject1.string.XString;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import okhttp3.Response;
@@ -82,6 +84,9 @@ public class ActivitySignIn extends XActivity {
                                         Toast.makeText(ActivitySignIn.this, R.string.sign_in_success, Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
+                                User user = LoganSquare.parse(packet.Data, User.class);
+                                Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone);
                             }
 
                         } catch (IOException e) {
@@ -90,7 +95,7 @@ public class ActivitySignIn extends XActivity {
                             App.Uihandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(ActivitySignIn.this,1811 R.string.request_fails, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ActivitySignIn.this, R.string.request_fails, Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
