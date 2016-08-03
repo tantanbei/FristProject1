@@ -87,6 +87,8 @@ public class ActivitySignIn extends XActivity {
 
                                 User user = LoganSquare.parse(packet.Data, User.class);
                                 Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone);
+
+
                             }
 
                         } catch (IOException e) {
