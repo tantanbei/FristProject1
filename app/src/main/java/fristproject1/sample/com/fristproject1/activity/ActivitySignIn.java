@@ -15,6 +15,7 @@ import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.base.XActivity;
+import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.OkPacket;
 import fristproject1.sample.com.fristproject1.networkpacket.SignUpInPacket;
@@ -88,7 +89,10 @@ public class ActivitySignIn extends XActivity {
                                 User user = LoganSquare.parse(packet.Data, User.class);
                                 Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone);
 
-
+                                Pref.Set(Pref.USERID,user.UserId);
+                                Pref.Set(Pref.USERNAME,user.UserName);
+                                Pref.Set(Pref.USERPHONE,user.UserPhone);
+                                Pref.Save();
                             }
 
                         } catch (IOException e) {
