@@ -1,4 +1,5 @@
 package fristproject1.sample.com.fristproject1.db;
+
 import com.bluelinelabs.logansquare.LoganSquare;
 
 import java.io.ByteArrayInputStream;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import fristproject1.sample.com.fristproject1.App;
+import fristproject1.sample.com.fristproject1.file.XFile;
 import fristproject1.sample.com.fristproject1.string.XString;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import okio.BufferedSink;
@@ -116,41 +118,9 @@ public class Pref {
         if (PREF_DATA != null && !force) {
             return;
         }
-        InputStream inputStream = null;
-        int length;
 
-        final File f = new File(path);
-        if (!f.exists()) {
-            return;
-        }
 
-        try {
-            inputStream = new FileInputStream(f);
-            length = inputStream.available();
-        } catch (Exception e) {
-           e.printStackTrace();
-            try {
-                inputStream.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            return;
-        }
-
-        final byte[] bytes = new byte[length];
-
-        try {
-            inputStream.read(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ;
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        final byte[] bytes = XFile.GetFile(path);
 
         if (bytes == null || bytes.length == 0) {
             //delete file
@@ -166,6 +136,10 @@ public class Pref {
 
             //need to remove json file if corrupted...JsonPrefModel
             DeleteAll();
+        }
+
+        if (PREF_DATA == null || PREF_DATA.Data == null) {
+            PREF_DATA = new PrefPacket();
         }
     }
 

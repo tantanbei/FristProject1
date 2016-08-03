@@ -15,13 +15,15 @@ public class App extends Application{
 
     static public Handler Uihandler = new Handler(Looper.getMainLooper());
 
-    public static App INSTANCE;
+    public static App INSTANCE ;
 
     public static String AppDbDirectory;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        INSTANCE = this;
 
         initIconify();
 

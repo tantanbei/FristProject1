@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.fragment.HomeTabFragment;
 
 public class ActivityHome extends AppCompatActivity {
@@ -31,6 +33,9 @@ public class ActivityHome extends AppCompatActivity {
     private ListView homeDrawer;
 
     private View.OnClickListener tagClickListener;
+
+    //manage the fragment
+    private FragmentManager FM;
 
     final private String[] strs = new String[]{"{md-headset-mic}  联系客服"
             , "{entypo-new-message}  意见反馈"
@@ -57,12 +62,27 @@ public class ActivityHome extends AppCompatActivity {
 
                 switch (viewId) {
                     case R.id.tab_home:
-                        tabHomeIcon.setText("{typcn-home}");
-                        tabMineIcon.setText("{typcn-user-outline}");
+                        if (!tabHomeIcon.getText().equals("{typcn-home}")){
+                            tabHomeIcon.setText("{typcn-home}");
+                            tabMineIcon.setText("{typcn-user-outline}");
+
+                            FragmentTransaction transaction = FM.beginTransaction();
+                            HomeTabFragment homeTabFragment = new HomeTabFragment();
+                            transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
+                            transaction.commit();
+                        }
                         break;
                     case R.id.tab_mine:
-                        tabHomeIcon.setText("{typcn-home-outline}");
-                        tabMineIcon.setText("{typcn-user}");
+                        if (!tabMineIcon.getText().equals("{typcn-user}")){
+                            tabHomeIcon.setText("{typcn-home-outline}");
+                            tabMineIcon.setText("{typcn-user}");
+
+                            if (Pref.Get(Pref.USERID,0)==0){
+                                startActivity(new Intent(ActivityHome.this,ActivitySignIn.class));
+                            }else {
+                                Log.d("tan", "have session");
+                            }
+                        }
                         break;
                 }
             }
@@ -87,7 +107,7 @@ public class ActivityHome extends AppCompatActivity {
         });
 
         //manage the fragment
-        FragmentManager FM = getSupportFragmentManager();
+        FM = getSupportFragmentManager();
         FragmentTransaction transaction = FM.beginTransaction();
         HomeTabFragment homeTabFragment = new HomeTabFragment();
         transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
