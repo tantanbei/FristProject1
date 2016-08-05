@@ -45,30 +45,11 @@
         android:text="@string/please_add_car" />
 
     <LinearLayout
+        android:id="@+id/add_car_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:padding="10dp"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:id="@+id/car_style"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:entries="@array/car_style" />
-
-        <Spinner
-            android:id="@+id/car_age"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:entries="@array/car_age"/>
-
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/add"/>
+        android:orientation="vertical">
 
     </LinearLayout>
 
