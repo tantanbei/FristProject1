@@ -15,10 +15,19 @@
         android:text="@string/have_car_question" />
 
     <RadioGroup
+        android:id="@+id/have_or_not_car"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
+
+        <RadioButton
+            android:id="@+id/no_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/no_car"/>
 
         <RadioButton
             android:id="@+id/have_car"
@@ -27,29 +36,25 @@
             android:layout_weight="1"
             android:text="@string/have_car"/>
 
-        <RadioButton
-            android:id="@+id/no_car"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/no_car"/>
-
     </RadioGroup>
 
     <TextView
+        android:id="@+id/text_add_car"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/please_add_car" />
+        android:text="@string/please_add_car"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/add_car_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
     </LinearLayout>
 
