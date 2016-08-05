@@ -1,5 +1,6 @@
 package fristproject1.sample.com.fristproject1.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -89,9 +90,9 @@ public class ActivitySignIn extends XActivity {
                                 User user = LoganSquare.parse(packet.Data, User.class);
                                 Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone);
 
-                                Pref.Set(Pref.USERID,user.UserId);
-                                Pref.Set(Pref.USERNAME,user.UserName);
-                                Pref.Set(Pref.USERPHONE,user.UserPhone);
+                                Pref.Set(Pref.USERID, user.UserId);
+                                Pref.Set(Pref.USERNAME, user.UserName);
+                                Pref.Set(Pref.USERPHONE, user.UserPhone);
                                 Pref.Save();
                             }
 
@@ -110,5 +111,11 @@ public class ActivitySignIn extends XActivity {
             }
         });
 
+        rigthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivitySignIn.this, ActivitySignUp.class));
+            }
+        });
     }
 }
