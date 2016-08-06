@@ -62,7 +62,7 @@ public class ActivityHome extends AppCompatActivity {
 
                 switch (viewId) {
                     case R.id.tab_home:
-                        if (!tabHomeIcon.getText().equals("{typcn-home}")){
+                        if (!tabHomeIcon.getText().equals("{typcn-home}")) {
                             tabHomeIcon.setText("{typcn-home}");
                             tabMineIcon.setText("{typcn-user-outline}");
 
@@ -73,13 +73,13 @@ public class ActivityHome extends AppCompatActivity {
                         }
                         break;
                     case R.id.tab_mine:
-                        if (!tabMineIcon.getText().equals("{typcn-user}")){
+                        if (!tabMineIcon.getText().equals("{typcn-user}")) {
                             tabHomeIcon.setText("{typcn-home-outline}");
                             tabMineIcon.setText("{typcn-user}");
 
-                            if (Pref.Get(Pref.USERID,0)==0){
-                                startActivity(new Intent(ActivityHome.this,ActivitySignIn.class));
-                            }else {
+                            if (Pref.Get(Pref.USERID, 0) == 0) {
+                                startActivity(new Intent(ActivityHome.this, ActivitySignIn.class));
+                            } else {
                                 Log.d("tan", "have session");
                             }
                         }
@@ -96,7 +96,7 @@ public class ActivityHome extends AppCompatActivity {
         homeDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
                         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
                         startActivity(intent);

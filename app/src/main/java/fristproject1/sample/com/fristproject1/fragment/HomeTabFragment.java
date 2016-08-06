@@ -30,6 +30,7 @@ import fristproject1.sample.com.fristproject1.activity.ActivityAuction;
 import fristproject1.sample.com.fristproject1.activity.ActivityAuctionIdle;
 import fristproject1.sample.com.fristproject1.activity.ActivityHistoryData;
 import fristproject1.sample.com.fristproject1.activity.ActivityHome;
+import fristproject1.sample.com.fristproject1.fragment.base.XFragment;
 import fristproject1.sample.com.fristproject1.networkpacket.AuctionStatus;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import fristproject1.sample.com.fristproject1.time.XTime;
@@ -38,9 +39,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class HomeTabFragment extends Fragment {
-
-    Activity Parent;
+public class HomeTabFragment extends XFragment {
 
     Runnable refreshRunnable;
 
@@ -62,6 +61,8 @@ public class HomeTabFragment extends Fragment {
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
+
+    private Activity currParent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -235,19 +236,6 @@ public class HomeTabFragment extends Fragment {
         }
 
         XThread.RunBackground(refreshRunnable, delay);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-
-        try {
-            super.onAttach(context);
-
-            Parent = (ActivityHome) context;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     public class HomeViewPagerAdapter extends PagerAdapter {
