@@ -94,6 +94,8 @@ public class ActivitySignIn extends XActivity {
                                 Pref.Set(Pref.USERNAME, user.UserName);
                                 Pref.Set(Pref.USERPHONE, user.UserPhone);
                                 Pref.Save();
+
+                                finish();
                             }
 
                         } catch (Exception e) {

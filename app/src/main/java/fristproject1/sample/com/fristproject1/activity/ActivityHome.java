@@ -22,6 +22,7 @@ import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.fragment.HomeTabFragment;
+import fristproject1.sample.com.fristproject1.fragment.MineTabFragment;
 
 public class ActivityHome extends AppCompatActivity {
 
@@ -77,11 +78,10 @@ public class ActivityHome extends AppCompatActivity {
                             tabHomeIcon.setText("{typcn-home-outline}");
                             tabMineIcon.setText("{typcn-user}");
 
-                            if (Pref.Get(Pref.USERID, 0) == 0) {
-                                startActivity(new Intent(ActivityHome.this, ActivitySignIn.class));
-                            } else {
-                                Log.d("tan", "have session");
-                            }
+                            FragmentTransaction transaction = FM.beginTransaction();
+                            MineTabFragment homeTabFragment = new MineTabFragment();
+                            transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
+                            transaction.commit();
                         }
                         break;
                 }
