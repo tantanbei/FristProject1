@@ -75,6 +75,13 @@ public class ActivityHome extends AppCompatActivity {
                         break;
                     case R.id.tab_mine:
                         if (!tabMineIcon.getText().equals("{typcn-user}")) {
+
+                            //check the session
+                            if (Pref.Get(Pref.USERID, 0) == 0) {
+                                startActivity(new Intent(ActivityHome.this, ActivitySignIn.class));
+                                return;
+                            }
+
                             tabHomeIcon.setText("{typcn-home-outline}");
                             tabMineIcon.setText("{typcn-user}");
 
