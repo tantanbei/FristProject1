@@ -115,6 +115,7 @@ public class ActivitySignIn extends XActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ActivitySignIn.this, ActivitySignUp.class));
+                finish();
             }
         });
     }

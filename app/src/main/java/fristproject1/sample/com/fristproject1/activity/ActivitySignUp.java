@@ -1,5 +1,6 @@
 package fristproject1.sample.com.fristproject1.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +45,9 @@ public class ActivitySignUp extends XActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        rigthBtn.setVisibility(View.VISIBLE);
+        rigthBtn.setText(R.string.sign_in);
 
         phone = (EditText) findViewById(R.id.phone);
         code = (EditText) findViewById(R.id.code);
@@ -183,6 +187,14 @@ public class ActivitySignUp extends XActivity {
 
                     }
                 });
+            }
+        });
+
+        rigthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivitySignUp.this, ActivitySignIn.class));
+                finish();
             }
         });
     }
