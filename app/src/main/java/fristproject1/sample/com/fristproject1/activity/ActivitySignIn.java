@@ -60,7 +60,7 @@ public class ActivitySignIn extends XActivity {
                     @Override
                     public void run() {
                         try {
-                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SIGN_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
+                            Response response = Http.Post(ActivitySignIn.this, Const.SERVER_IP + Const.URL_SIGN_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
 
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
                             if (!packet.Ok) {
@@ -96,7 +96,7 @@ public class ActivitySignIn extends XActivity {
                                 Pref.Save();
                             }
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
 
                             App.Uihandler.post(new Runnable() {

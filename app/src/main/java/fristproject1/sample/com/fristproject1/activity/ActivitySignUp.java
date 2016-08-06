@@ -76,7 +76,7 @@ public class ActivitySignUp extends XActivity {
                     public void run() {
                         try {
                             Log.d("tan", "get code phone:" + phoneNumber + " code:" + verificationCode);
-                            final Response response = Http.Post(Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, verificationCode));
+                            final Response response = Http.Post(ActivitySignUp.this, Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, verificationCode));
 
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
@@ -144,7 +144,7 @@ public class ActivitySignUp extends XActivity {
                     @Override
                     public void run() {
                         try {
-                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpInPacket(phoneNumber, passwordStr));
+                            Response response = Http.Post(ActivitySignUp.this, Const.SERVER_IP + Const.URL_SING_UP, new SignUpInPacket(phoneNumber, passwordStr));
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
                             if (!packet.Ok) {

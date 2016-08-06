@@ -1,7 +1,12 @@
 package fristproject1.sample.com.fristproject1.http;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.IOException;
 
+import fristproject1.sample.com.fristproject1.App;
+import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.networkpacket.base.JsonBase;
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -27,24 +32,49 @@ public class Http {
         return call.execute();
     }
 
-    static public Response Post(String url, String json) throws IOException {
-        RequestBody body = RequestBody.create(JSON, json);
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-        return client.newCall(request).execute();
+    static public Response Post(final Context context, final String url, final String json) {
+        try {
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            return client.newCall(request).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            App.Uihandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        return null;
     }
 
-    static public Response Post(String url, JsonBase packet) throws IOException {
+    static public Response Post(final Context context, final String url, final JsonBase packet) {
+        try {
 
-        String json = packet.ToJsonString();
+            String json = packet.ToJsonString();
 
-        RequestBody body = RequestBody.create(JSON, json);
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-        return client.newCall(request).execute();
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+
+            return client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            App.Uihandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        return null;
     }
 }

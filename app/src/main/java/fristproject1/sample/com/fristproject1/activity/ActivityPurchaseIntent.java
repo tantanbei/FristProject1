@@ -1,5 +1,6 @@
 package fristproject1.sample.com.fristproject1.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -88,16 +89,19 @@ public class ActivityPurchaseIntent extends XActivity {
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            Response response = Http.Post(Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet);
-                            //todo response...
-                            
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        Response response = Http.Post(ActivityPurchaseIntent.this, Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet);
+                        //todo response...
+
                     }
                 });
 
+            }
+        });
+
+        rigthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoMine();
             }
         });
     }
@@ -149,5 +153,9 @@ public class ActivityPurchaseIntent extends XActivity {
             }
         });
         addCarRoot.addView(addView);
+    }
+
+    private void gotoMine(){
+        finish();
     }
 }
