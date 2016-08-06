@@ -98,7 +98,7 @@ public class ActivityHistoryData extends XActivity {
         historyChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                Log.d("tan", "onValueSelected: Entry:" + e.toString() + " dataSetIndex:" + dataSetIndex + " highlight:" + h);
+//                Log.d("tan", "onValueSelected: Entry:" + e.toString() + " dataSetIndex:" + dataSetIndex + " highlight:" + h);
                 showDetailByIndex(e.getXIndex());
             }
 

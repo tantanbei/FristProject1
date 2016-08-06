@@ -17,10 +17,12 @@ import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.base.XActivity;
+import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.GetCode;
 import fristproject1.sample.com.fristproject1.networkpacket.OkPacket;
 import fristproject1.sample.com.fristproject1.networkpacket.SignUpInPacket;
+import fristproject1.sample.com.fristproject1.networkpacket.User;
 import fristproject1.sample.com.fristproject1.string.XString;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import okhttp3.Response;
@@ -174,6 +176,16 @@ public class ActivitySignUp extends XActivity {
                                         Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.register_success), Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
+                                User user = LoganSquare.parse(packet.Data,User.class);
+                                Pref.Set(Pref.USERID, user.UserId);
+                                Pref.Set(Pref.USERNAME, user.UserName);
+                                Pref.Set(Pref.USERPHONE, user.UserPhone);
+                                Pref.Save();
+                                Log.d("tan", "sign up user:"+user.UserId);
+
+                                startActivity(new Intent(ActivitySignUp.this,ActivityPurchaseIntent.class));
+                                finish();
                             }
                         } catch (IOException e) {
                             App.Uihandler.post(new Runnable() {
