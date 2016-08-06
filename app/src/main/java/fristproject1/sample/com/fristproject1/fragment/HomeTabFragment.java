@@ -31,6 +31,7 @@ import fristproject1.sample.com.fristproject1.activity.ActivityAuctionIdle;
 import fristproject1.sample.com.fristproject1.activity.ActivityHistoryData;
 import fristproject1.sample.com.fristproject1.activity.ActivityHome;
 import fristproject1.sample.com.fristproject1.fragment.base.XFragment;
+import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.AuctionStatus;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import fristproject1.sample.com.fristproject1.time.XTime;
@@ -145,13 +146,10 @@ public class HomeTabFragment extends XFragment {
             refreshRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    Request request = new Request.Builder()
-                            .url(Const.SERVER_IP + "/auction/status")
-                            .method("GET", null)
-                            .build();
 
                     try {
-                        final Response response = client.newCall(request).execute();
+
+                        final Response response = Http.Get(Parent, Const.SERVER_IP + Const.URL_AUCTION_STATUS);
                         final String str = response.body().string();
                         Log.d("tan", "refreshData: " + str);
 

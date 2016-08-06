@@ -20,16 +20,27 @@ public class Http {
 
     static OkHttpClient client = new OkHttpClient();
 
-    static public Response Get(String url) throws IOException {
+    static public Response Get(final Context context, final String url) {
+        try {
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
 
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
+            Call call = client.newCall(request);
 
-        Call call = client.newCall(request);
+            return call.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            App.Uihandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
-        return call.execute();
+        return null;
     }
 
     static public Response Post(final Context context, final String url, final String json) {

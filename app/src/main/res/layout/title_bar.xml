@@ -21,7 +21,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:text="@string/app_name"
-        android:textSize="30dp" />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/right_button"
