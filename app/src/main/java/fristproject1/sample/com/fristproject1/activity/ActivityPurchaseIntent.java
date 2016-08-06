@@ -9,11 +9,24 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.base.XActivity;
+import fristproject1.sample.com.fristproject1.http.Http;
+import fristproject1.sample.com.fristproject1.networkpacket.Purchase_intent_car;
 import fristproject1.sample.com.fristproject1.string.XString;
+import fristproject1.sample.com.fristproject1.thread.XThread;
+import okhttp3.Response;
+
+//car style
+//        0:德系
+//        1:日系
+//        2:美系
+//        3:国产
+//        4:其他
 
 public class ActivityPurchaseIntent extends XActivity {
 
@@ -21,6 +34,7 @@ public class ActivityPurchaseIntent extends XActivity {
     LinearLayout addCarRoot;
     Spinner intentCarStyle;
     RadioGroup haveOrNotCar;
+    Button submit;
 
     ArrayList<Integer> haveCarStyles = new ArrayList<Integer>();
     ArrayList<Integer> haveCarAges = new ArrayList<Integer>();
@@ -43,6 +57,7 @@ public class ActivityPurchaseIntent extends XActivity {
         addCarRoot = (LinearLayout) findViewById(R.id.add_car_layout);
         intentCarStyle = (Spinner) findViewById(R.id.intent_car_style);
         haveOrNotCar = (RadioGroup) findViewById(R.id.have_or_not_car);
+        submit = (Button) findViewById(R.id.submit);
 
         haveOrNotCar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -58,6 +73,31 @@ public class ActivityPurchaseIntent extends XActivity {
                         selectHaveCar();
                         break;
                 }
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Purchase_intent_car packet = new Purchase_intent_car();
+                packet.HavaORNotCar = haveOrNotCar.getCheckedRadioButtonId() == R.id.no_car ? false : true;
+                packet.HaveCarStyles = haveCarStyles;
+                packet.HaveCarAges = haveCarAges;
+                packet.IntentCarStyle = intentCarStyle.getSelectedItemPosition();
+
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Response response = Http.Post(Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet);
+                            //todo response...
+                            
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
             }
         });
     }
