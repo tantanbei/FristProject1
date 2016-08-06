@@ -21,13 +21,12 @@ public class XFile {
             length = inputStream.available();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
-        }finally {
             try {
                 inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception ee) {
+                ee.printStackTrace();
             }
+            return null;
         }
 
         final byte[] bytes = new byte[length];
