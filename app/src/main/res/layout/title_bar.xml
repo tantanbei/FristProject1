@@ -5,8 +5,8 @@
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/goBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
         android:layout_gravity="left|center_vertical"
         android:textColor="@color/white"
         android:layout_marginLeft="15dp"
@@ -25,8 +25,8 @@
 
     <TextView
         android:id="@+id/right_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
         android:layout_gravity="right|center_vertical"
         android:textColor="@color/white"
         android:textSize="20sp"
