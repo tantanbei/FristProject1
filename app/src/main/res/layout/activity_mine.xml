@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="30dp"
+        android:minHeight="40dp"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
         android:layout_marginTop="10dp"
@@ -39,7 +39,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="30dp"
+        android:minHeight="40dp"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
         android:background="@color/white">
@@ -67,7 +67,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="30dp"
+        android:minHeight="40dp"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
         android:background="@color/white">
@@ -77,6 +77,35 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="phone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:text="1112154884648684"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_gravity="bottom"
+            android:background="@color/title_bar_bottom_line"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="avatar"/>
 
         <TextView
             android:layout_width="wrap_content"
