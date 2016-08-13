@@ -19,29 +19,29 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/home_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"/>
+                android:layout_height="120dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:padding="3dp"
                 android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="3dp">
 
                 <LinearLayout
                     android:id="@+id/auction_idle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/round_rectangle">
+                    android:background="@drawable/round_rectangle"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_weight="4"
+                        android:gravity="center"
                         android:text="@string/auction"
                         android:textColor="@color/white"
                         android:textSize="40sp" />
@@ -49,21 +49,21 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:text="本月拍牌"
-                        android:textSize="10sp"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/idle_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_weight="3"
-                        android:textSize="30sp"
+                        android:gravity="center"
                         android:text="    号"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
 
                 </LinearLayout>
 
@@ -72,9 +72,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:background="@color/home_title_background"
+                    android:orientation="vertical"
                     android:visibility="gone">
 
                     <TextView
@@ -91,29 +91,28 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="10sp"
                         android:text="拍牌倒计时"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/ready_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:gravity="center"
                         android:layout_weight="2"
-                        android:textSize="30sp"
+                        android:gravity="center"
                         android:text="  天"
-                        />
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="10sp"
                         android:text="本期价格预测"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/ready_forecast"
@@ -121,9 +120,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="20sp"
                         android:text="85200-85400"
-                        android:textColor="@color/forecast_transaction_price"/>
+                        android:textColor="@color/forecast_transaction_price"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -132,9 +131,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:background="@color/home_title_background"
+                    android:orientation="vertical"
                     android:visibility="gone">
 
                     <TextView
@@ -151,9 +150,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="10sp"
                         android:text="本期预测价格"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/running_forecast"
@@ -161,9 +160,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:textSize="35sp"
                         android:text="85200"
-                        android:textColor="@color/forecast_transaction_price"/>
+                        android:textColor="@color/forecast_transaction_price"
+                        android:textSize="35sp" />
 
                 </LinearLayout>
 
@@ -172,9 +171,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:background="@color/home_title_background"
+                    android:orientation="vertical"
                     android:visibility="gone">
 
                     <TextView
@@ -191,9 +190,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="10sp"
                         android:text="上期最低成交价"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/over_price"
@@ -201,9 +200,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:textSize="35sp"
                         android:text="85200"
-                        android:textColor="@color/forecast_transaction_price"/>
+                        android:textColor="@color/forecast_transaction_price"
+                        android:textSize="35sp" />
 
                 </LinearLayout>
 
@@ -236,11 +235,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_in_everyday"
-                    android:textSize="30sp"
+                    android:background="@color/sign_in_everyday"
                     android:padding="5dp"
+                    android:text="@string/sign_in_everyday"
                     android:textColor="@color/white"
-                    android:background="@color/sign_in_everyday"/>
+                    android:textSize="30sp" />
 
             </LinearLayout>
 

@@ -64,6 +64,9 @@
     <string name="user_info">用户信息</string>
     <string name="sign_in_everyday">每日签到</string>
     <string name="activity">活动</string>
+    <string name="avatar">头像</string>
+    <string name="username">用户名</string>
+    <string name="phone_number">手机号</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

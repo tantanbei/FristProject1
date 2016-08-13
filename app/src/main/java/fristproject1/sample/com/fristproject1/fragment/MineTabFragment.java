@@ -17,6 +17,7 @@ import fristproject1.sample.com.fristproject1.activity.ActivitySignIn;
 import fristproject1.sample.com.fristproject1.activity.ActivityUserInfo;
 import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.fragment.base.XFragment;
+import fristproject1.sample.com.fristproject1.string.XString;
 
 public class MineTabFragment extends XFragment {
 
@@ -64,6 +65,6 @@ public class MineTabFragment extends XFragment {
         }
 
         username = (TextView) view.findViewById(R.id.username);
-        username.setText(Pref.Get(Pref.USERNAME, "Paipable"));
+        username.setText(Pref.Get(Pref.USERNAME, XString.GetString(Parent, R.string.app_name)));
     }
 }
