@@ -18,7 +18,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Http {
-    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    final private static String SUCCEED = "succeed";//0:mean is failed; 1: mean is succeed
+
+    final public static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     static OkHttpClient client = new OkHttpClient();
 
@@ -29,9 +31,13 @@ public class Http {
                     .get()
                     .build();
 
-            Call call = client.newCall(request);
+            Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                throw new IOException();
+            }
 
-            return call.execute();
+            return response;
+
         } catch (IOException e) {
             e.printStackTrace();
             App.Uihandler.post(new Runnable() {
@@ -52,7 +58,13 @@ public class Http {
                     .url(url)
                     .post(body)
                     .build();
-            return client.newCall(request).execute();
+
+            Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                throw new IOException();
+            }
+
+            return response;
         } catch (Exception e) {
             e.printStackTrace();
             App.Uihandler.post(new Runnable() {
@@ -77,7 +89,12 @@ public class Http {
                     .post(body)
                     .build();
 
-            return client.newCall(request).execute();
+            Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                throw new IOException();
+            }
+
+            return response;
         } catch (IOException e) {
             e.printStackTrace();
             App.Uihandler.post(new Runnable() {
@@ -110,6 +127,11 @@ public class Http {
                     .build();
 
             Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                throw new IOException();
+            }
+
+            return response;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,5 +144,13 @@ public class Http {
         }
 
         return null;
+    }
+
+    static private boolean checkIsSucceed(Response response) {
+        if (response.header(SUCCEED, "0").equals("0")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
