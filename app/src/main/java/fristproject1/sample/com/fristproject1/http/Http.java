@@ -7,7 +7,9 @@ import java.io.IOException;
 
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.R;
+import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.networkpacket.base.JsonBase;
+import fristproject1.sample.com.fristproject1.string.XString;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -76,6 +78,39 @@ public class Http {
                     .build();
 
             return client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            App.Uihandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        return null;
+    }
+
+    static public Response Post(final Context context, final String url, final JsonBase packet, final boolean withSession) {
+        if (!withSession) {
+            return Post(context, url, packet);
+        }
+
+        try {
+
+            int userId = Pref.Get(Pref.USERID, 0);
+
+            String json = packet.ToJsonString();
+
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .header("userid", String.valueOf(userId))
+                    .post(body)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
         } catch (IOException e) {
             e.printStackTrace();
             App.Uihandler.post(new Runnable() {

@@ -1,6 +1,5 @@
 package fristproject1.sample.com.fristproject1.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import fristproject1.sample.com.fristproject1.Const;
@@ -81,7 +79,7 @@ public class ActivityPurchaseIntent extends XActivity {
             @Override
             public void onClick(View v) {
                 final Purchase_intent_car packet = new Purchase_intent_car();
-                packet.HavaORNotCar = haveOrNotCar.getCheckedRadioButtonId() == R.id.no_car ? false : true;
+                packet.HaveORNotCar = haveOrNotCar.getCheckedRadioButtonId() == R.id.no_car ? false : true;
                 packet.HaveCarStyles = haveCarStyles;
                 packet.HaveCarAges = haveCarAges;
                 packet.IntentCarStyle = intentCarStyle.getSelectedItemPosition();
@@ -89,7 +87,7 @@ public class ActivityPurchaseIntent extends XActivity {
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Response response = Http.Post(ActivityPurchaseIntent.this, Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet);
+                        Response response = Http.Post(ActivityPurchaseIntent.this, Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet, true);
                         //todo response...
 
                     }
@@ -155,7 +153,7 @@ public class ActivityPurchaseIntent extends XActivity {
         addCarRoot.addView(addView);
     }
 
-    private void gotoMine(){
+    private void gotoMine() {
         finish();
     }
 }

@@ -11,7 +11,7 @@ import fristproject1.sample.com.fristproject1.networkpacket.base.JsonBase;
 @JsonObject
 public class Purchase_intent_car extends JsonBase{
     @JsonField
-    public boolean HavaORNotCar;
+    public boolean HaveORNotCar;
 
     @JsonField
     public ArrayList<Integer> HaveCarStyles;
