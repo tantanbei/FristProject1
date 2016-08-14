@@ -9,4 +9,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="forecast_transaction_price">#ff0000</color>
     <color name="title_bar_bottom_line">#b6b6b6</color>
+    <color name="sign_in_everyday">#ff8a31</color>
 </resources>
