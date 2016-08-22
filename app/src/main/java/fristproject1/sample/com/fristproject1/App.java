@@ -4,12 +4,14 @@ import android.app.Application;
 import android.os.Looper;
 import android.os.Handler;
 
+import com.crashlytics.android.Crashlytics;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.IoniconsModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.TypiconsModule;
+import io.fabric.sdk.android.Fabric;
 
 public class App extends Application{
 
@@ -22,6 +24,7 @@ public class App extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         INSTANCE = this;
 
