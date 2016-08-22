@@ -114,4 +114,16 @@
         <item>六年</item>
         <item>六年以上</item>
     </string-array>
+
+    <string-array name="strategy_types">
+        <item>29分00秒</item>
+        <item>29分10秒</item>
+        <item>29分20秒</item>
+        <item>29分30秒</item>
+        <item>29分40秒</item>
+        <item>29分43秒</item>
+        <item>29分45秒</item>
+        <item>29分48秒</item>
+        <item>29分50秒</item>
+    </string-array>
 </resources>
