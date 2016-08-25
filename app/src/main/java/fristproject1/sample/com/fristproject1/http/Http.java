@@ -24,7 +24,7 @@ public class Http {
 
     static OkHttpClient client = new OkHttpClient();
 
-    static public Response Get(final Context context, final String url) {
+    static public Response Get(final Context context, final String url) throws IOException {
         try {
             Request request = new Request.Builder()
                     .url(url)

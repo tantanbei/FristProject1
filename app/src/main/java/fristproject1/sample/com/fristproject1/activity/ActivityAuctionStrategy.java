@@ -1,6 +1,7 @@
 package fristproject1.sample.com.fristproject1.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class ActivityAuctionStrategy extends XActivity {
     TextView second40;
     TextView second45;
     TextView second50;
+    TextView forecastPrirce;
 
     Timer timer = new Timer(true);
     TimerTask timerTask;
@@ -42,6 +44,7 @@ public class ActivityAuctionStrategy extends XActivity {
         second40 = (TextView) findViewById(R.id.second_40);
         second45 = (TextView) findViewById(R.id.second_45);
         second50 = (TextView) findViewById(R.id.second_50);
+        forecastPrirce = (TextView) findViewById(R.id.forecast_transaction_price);
 
     }
 
@@ -92,6 +95,7 @@ public class ActivityAuctionStrategy extends XActivity {
                             App.Uihandler.post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    forecastPrirce.setText(String.valueOf(packet.ForecastPrice));
                                     second30.setText(String.valueOf(packet.Second30));
                                     second40.setText(String.valueOf(packet.Second40));
                                     second45.setText(String.valueOf(packet.Second45));
@@ -102,9 +106,17 @@ public class ActivityAuctionStrategy extends XActivity {
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    timer.cancel();
                 }
             }
         });
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        timer.cancel();
     }
 }
