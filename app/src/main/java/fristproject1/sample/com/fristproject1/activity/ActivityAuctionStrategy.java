@@ -80,7 +80,7 @@ public class ActivityAuctionStrategy extends XActivity {
                                     Toast.makeText(ActivityAuctionStrategy.this, R.string.auction_unstart, Toast.LENGTH_LONG).show();
                                 }
                             });
-                            timerTask.cancel();
+                            timer.cancel();
                             return;
                         case 2:
                             App.Uihandler.post(new Runnable() {
@@ -89,7 +89,7 @@ public class ActivityAuctionStrategy extends XActivity {
                                     Toast.makeText(ActivityAuctionStrategy.this, R.string.auction_over, Toast.LENGTH_LONG).show();
                                 }
                             });
-                            timerTask.cancel();
+                            timer.cancel();
                             return;
                         case 0:
                             App.Uihandler.post(new Runnable() {
