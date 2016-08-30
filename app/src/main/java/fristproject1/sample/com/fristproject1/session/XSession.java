@@ -12,4 +12,10 @@ public class XSession {
             return true;
         }
     }
+
+    static public void Logout() {
+        Pref.Set(Pref.USERID, 0);
+        Pref.Set(Pref.USERNAME, "");
+        Pref.Set(Pref.USERPHONE, "");
+    }
 }

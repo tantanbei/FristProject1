@@ -1,11 +1,13 @@
 package fristproject1.sample.com.fristproject1.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.db.Pref;
+import fristproject1.sample.com.fristproject1.session.XSession;
 import fristproject1.sample.com.fristproject1.string.XString;
 
 public class ActivityUserInfo extends XActivity {
@@ -26,5 +28,14 @@ public class ActivityUserInfo extends XActivity {
 
         userName.setText(Pref.Get(Pref.USERNAME, XString.GetString(this, R.string.app_name)));
         phoneNum.setText(Pref.Get(Pref.USERPHONE, ""));
+
+        TextView logout = (TextView) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                XSession.Logout();
+                ActivityUserInfo.this.finish();
+            }
+        });
     }
 }
