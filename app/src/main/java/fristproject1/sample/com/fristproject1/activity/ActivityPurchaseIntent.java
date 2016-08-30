@@ -79,7 +79,6 @@ public class ActivityPurchaseIntent extends XActivity {
             @Override
             public void onClick(View v) {
                 final Purchase_intent_car packet = new Purchase_intent_car();
-                packet.HaveORNotCar = haveOrNotCar.getCheckedRadioButtonId() == R.id.no_car ? false : true;
                 packet.HaveCarStyles = haveCarStyles;
                 packet.HaveCarAges = haveCarAges;
                 packet.IntentCarStyle = intentCarStyle.getSelectedItemPosition();

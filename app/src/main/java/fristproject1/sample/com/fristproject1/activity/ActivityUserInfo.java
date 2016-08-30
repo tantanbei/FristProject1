@@ -9,6 +9,8 @@ import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.string.XString;
 
 public class ActivityUserInfo extends XActivity {
+    TextView userName;
+    TextView phoneNum;
 
     @Override
     public int GetContentView() {
@@ -19,11 +21,10 @@ public class ActivityUserInfo extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TextView userName = (TextView) findViewById(R.id.username);
-        TextView phoneNum = (TextView) findViewById(R.id.phone_number);
-
+        userName = (TextView) findViewById(R.id.username);
+        phoneNum = (TextView) findViewById(R.id.phone_number);
 
         userName.setText(Pref.Get(Pref.USERNAME, XString.GetString(this, R.string.app_name)));
-        phoneNum.setText(Pref.Get(Pref.USERPHONE, "18117541072"));
+        phoneNum.setText(Pref.Get(Pref.USERPHONE, ""));
     }
 }

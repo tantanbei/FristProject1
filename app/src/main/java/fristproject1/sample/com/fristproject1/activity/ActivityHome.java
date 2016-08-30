@@ -23,6 +23,7 @@ import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.fragment.HomeTabFragment;
 import fristproject1.sample.com.fristproject1.fragment.MineTabFragment;
+import fristproject1.sample.com.fristproject1.session.XSession;
 
 public class ActivityHome extends AppCompatActivity {
 
@@ -77,7 +78,7 @@ public class ActivityHome extends AppCompatActivity {
                         if (!tabMineIcon.getText().equals("{typcn-user}")) {
 
                             //check the session
-                            if (Pref.Get(Pref.USERID, 0) == 0) {
+                            if (!XSession.IsValid()) {
                                 startActivity(new Intent(ActivityHome.this, ActivitySignIn.class));
                                 return;
                             }

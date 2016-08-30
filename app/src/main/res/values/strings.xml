@@ -67,6 +67,7 @@
     <string name="avatar">头像</string>
     <string name="username">用户名</string>
     <string name="phone_number">手机号</string>
+    <string name="log_out">注销</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
