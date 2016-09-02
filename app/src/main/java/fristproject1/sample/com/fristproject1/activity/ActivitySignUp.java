@@ -177,14 +177,14 @@ public class ActivitySignUp extends XActivity {
                                     }
                                 });
 
-                                User user = LoganSquare.parse(packet.Data,User.class);
+                                User user = LoganSquare.parse(packet.Data, User.class);
                                 Pref.Set(Pref.USERID, user.UserId);
                                 Pref.Set(Pref.USERNAME, user.UserName);
                                 Pref.Set(Pref.USERPHONE, user.UserPhone);
                                 Pref.Save();
-                                Log.d("tan", "sign up user:"+user.UserId);
+                                Log.d("tan", "sign up user:" + user.UserId);
 
-                                startActivity(new Intent(ActivitySignUp.this,ActivityPurchaseIntent.class));
+                                startActivity(new Intent(ActivitySignUp.this, ActivityInitUserInfo.class));
                                 finish();
                             }
                         } catch (IOException e) {
