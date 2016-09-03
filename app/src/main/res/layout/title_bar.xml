@@ -26,13 +26,13 @@
 
     <TextView
         android:id="@+id/right_button"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:maxWidth="100dp"
         android:layout_gravity="right"
         android:gravity="center_vertical"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:text="right"
         android:layout_marginRight="15dp"
         android:visibility="gone"/>
 
