@@ -13,6 +13,7 @@
         android:src="@mipmap/ic_launcher"/>
 
     <EditText
+        android:id="@+id/new_username"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

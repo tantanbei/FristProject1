@@ -11,6 +11,7 @@ public class Const {
     static final public String URL_SIGN_IN = "/signin";
     static final public String URL_GET_CODE = "/signup/code";
     static final public String URL_PURCHASE_INTENT = "/user/purchase";
+    static final public String URL_CHANGE_USERNAME = "/user/change/username";
     static final public String URL_AUCTION_STATUS = "/auction/status";
 
     static final public String URL_AUCTION_STRATEGY = "/auction/strategy";
