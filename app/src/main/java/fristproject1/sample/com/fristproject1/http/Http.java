@@ -4,13 +4,12 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.networkpacket.base.JsonBase;
-import fristproject1.sample.com.fristproject1.string.XString;
-import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,6 +29,43 @@ public class Http {
                     .url(url)
                     .get()
                     .build();
+
+            Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                throw new IOException();
+            }
+
+            return response;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            App.Uihandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        return null;
+    }
+
+    static public Response Get(final Context context, final String url, final ArrayList<String> heads, final ArrayList<String> values) throws Exception {
+        try {
+
+            if (heads.size() != values.size()) {
+                throw new Exception("heads size is not equal value size!!!");
+            }
+
+            Request.Builder builder = new Request.Builder()
+                    .url(url)
+                    .get();
+
+            for (int i = 0; i < heads.size(); i++) {
+                builder.header(heads.get(i), values.get(i));
+            }
+
+            Request request = builder.build();
 
             Response response = client.newCall(request).execute();
             if (!checkIsSucceed(response)) {
