@@ -50,6 +50,37 @@ public class Http {
         return null;
     }
 
+    static public Response Get(final Context context, final String url, final String heads, final String values) throws Exception {
+        try {
+
+            Request.Builder builder = new Request.Builder()
+                    .url(url)
+                    .get();
+
+            builder.header(heads, values);
+
+            Request request = builder.build();
+
+            Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                throw new IOException();
+            }
+
+            return response;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            App.Uihandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        return null;
+    }
+
     static public Response Get(final Context context, final String url, final ArrayList<String> heads, final ArrayList<String> values) throws Exception {
         try {
 

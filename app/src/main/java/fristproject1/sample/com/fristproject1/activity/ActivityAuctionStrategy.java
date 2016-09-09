@@ -21,6 +21,9 @@ import fristproject1.sample.com.fristproject1.thread.XThread;
 import okhttp3.Response;
 
 public class ActivityAuctionStrategy extends XActivity {
+    final String STRATEGY_TYPE = "strategy_type";
+    final String FREQUENCY_STRATEGY = "0";
+    final String AVERAGE_STRATEGY = "1";
 
     TextView second30;
     TextView second40;
@@ -30,6 +33,8 @@ public class ActivityAuctionStrategy extends XActivity {
 
     Timer timer = new Timer(true);
     TimerTask timerTask;
+
+    String strategyType = FREQUENCY_STRATEGY;
 
     @Override
     public int GetContentView() {
@@ -69,7 +74,7 @@ public class ActivityAuctionStrategy extends XActivity {
             @Override
             public void run() {
                 try {
-                    Response response = Http.Get(ActivityAuctionStrategy.this, url);
+                    Response response = Http.Get(ActivityAuctionStrategy.this, url, STRATEGY_TYPE, strategyType);
 
                     final StrategyPacket packet = LoganSquare.parse(response.body().byteStream(), StrategyPacket.class);
                     switch (packet.Style) {
