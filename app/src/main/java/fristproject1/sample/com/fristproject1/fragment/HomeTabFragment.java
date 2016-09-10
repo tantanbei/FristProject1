@@ -28,6 +28,7 @@ import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.ActivityAuction;
 import fristproject1.sample.com.fristproject1.activity.ActivityAuctionIdle;
+import fristproject1.sample.com.fristproject1.activity.ActivityAuctionStrategy;
 import fristproject1.sample.com.fristproject1.activity.ActivityHistoryData;
 import fristproject1.sample.com.fristproject1.activity.ActivityHome;
 import fristproject1.sample.com.fristproject1.fragment.base.XFragment;
@@ -116,7 +117,7 @@ public class HomeTabFragment extends XFragment {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Parent, ActivityAuction.class));
+                startActivity(new Intent(Parent, ActivityAuctionStrategy.class));
             }
         };
 

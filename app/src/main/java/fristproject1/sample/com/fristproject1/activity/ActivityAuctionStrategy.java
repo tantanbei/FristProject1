@@ -20,11 +20,13 @@ import fristproject1.sample.com.fristproject1.networkpacket.StrategyPacket;
 import fristproject1.sample.com.fristproject1.thread.XThread;
 import okhttp3.Response;
 
-public class ActivityAuctionStrategy extends XActivity {
+public class ActivityAuctionStrategy extends XActivity implements View.OnClickListener {
     final String STRATEGY_TYPE = "strategy_type";
     final String FREQUENCY_STRATEGY = "0";
     final String AVERAGE_STRATEGY = "1";
 
+    TextView frequency;
+    TextView average;
     TextView second30;
     TextView second40;
     TextView second45;
@@ -51,6 +53,11 @@ public class ActivityAuctionStrategy extends XActivity {
         second50 = (TextView) findViewById(R.id.second_50);
         forecastPrirce = (TextView) findViewById(R.id.forecast_transaction_price);
 
+        frequency = (TextView) findViewById(R.id.frequency_strategy);
+        average = (TextView) findViewById(R.id.average_strategy);
+
+        frequency.setOnClickListener(this);
+        average.setOnClickListener(this);
     }
 
     @Override
@@ -123,5 +130,35 @@ public class ActivityAuctionStrategy extends XActivity {
         super.onStop();
 
         timer.cancel();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d("tan", "onClick: " + v.getId());
+        switch (v.getId()) {
+            case R.id.frequency_strategy:
+                if (strategyType.equals(FREQUENCY_STRATEGY)) {
+                    return;
+                }
+
+                frequency.setBackgroundResource(R.color.colorPrimary);
+                frequency.setTextColor(getResources().getColor(R.color.white));
+                average.setBackgroundResource(R.drawable.rectangle);
+                average.setTextColor(getResources().getColor(R.color.black));
+                strategyType = FREQUENCY_STRATEGY;
+                break;
+
+            case R.id.average_strategy:
+                if (strategyType.equals(AVERAGE_STRATEGY)) {
+                    return;
+                }
+
+                average.setBackgroundResource(R.color.colorPrimary);
+                average.setTextColor(getResources().getColor(R.color.white));
+                frequency.setBackgroundResource(R.drawable.rectangle);
+                frequency.setTextColor(getResources().getColor(R.color.black));
+                strategyType = AVERAGE_STRATEGY;
+                break;
+        }
     }
 }
