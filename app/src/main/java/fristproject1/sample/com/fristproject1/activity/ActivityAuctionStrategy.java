@@ -33,7 +33,7 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
     TextView second50;
     TextView forecastPrirce;
 
-    Timer timer = new Timer(true);
+    Timer timer;
     TimerTask timerTask;
 
     String strategyType = FREQUENCY_STRATEGY;
@@ -71,6 +71,7 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
             }
         };
 
+        timer = new Timer(true);
         timer.schedule(timerTask, 1000, 300);
     }
 
