@@ -27,11 +27,12 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
 
     TextView frequency;
     TextView average;
+    TextView strategyTitle;
     TextView second30;
     TextView second40;
     TextView second45;
     TextView second50;
-    TextView forecastPrirce;
+    TextView forecastPrice;
 
     Timer timer;
     TimerTask timerTask;
@@ -51,7 +52,9 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
         second40 = (TextView) findViewById(R.id.second_40);
         second45 = (TextView) findViewById(R.id.second_45);
         second50 = (TextView) findViewById(R.id.second_50);
-        forecastPrirce = (TextView) findViewById(R.id.forecast_transaction_price);
+        forecastPrice = (TextView) findViewById(R.id.forecast_transaction_price);
+
+        strategyTitle = (TextView) findViewById(R.id.algorithm_title);
 
         frequency = (TextView) findViewById(R.id.frequency_strategy);
         average = (TextView) findViewById(R.id.average_strategy);
@@ -108,7 +111,7 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
                             App.Uihandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    forecastPrirce.setText(String.valueOf(packet.ForecastPrice));
+                                    forecastPrice.setText(String.valueOf(packet.ForecastPrice));
                                     second30.setText(String.valueOf(packet.Second30));
                                     second40.setText(String.valueOf(packet.Second40));
                                     second45.setText(String.valueOf(packet.Second45));
@@ -146,7 +149,9 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
                 frequency.setTextColor(getResources().getColor(R.color.white));
                 average.setBackgroundResource(R.drawable.rectangle);
                 average.setTextColor(getResources().getColor(R.color.black));
+                strategyTitle.setText(R.string.frequency_strategy);
                 strategyType = FREQUENCY_STRATEGY;
+                getStrategyPrice();
                 break;
 
             case R.id.average_strategy:
@@ -158,7 +163,9 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
                 average.setTextColor(getResources().getColor(R.color.white));
                 frequency.setBackgroundResource(R.drawable.rectangle);
                 frequency.setTextColor(getResources().getColor(R.color.black));
+                strategyTitle.setText(R.string.average_strategy);
                 strategyType = AVERAGE_STRATEGY;
+                getStrategyPrice();
                 break;
         }
     }
