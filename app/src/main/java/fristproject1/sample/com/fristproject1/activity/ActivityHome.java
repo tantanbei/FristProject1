@@ -26,6 +26,8 @@ import fristproject1.sample.com.fristproject1.fragment.MineTabFragment;
 import fristproject1.sample.com.fristproject1.session.XSession;
 
 public class ActivityHome extends AppCompatActivity {
+    private int HOMEFRAGMENT = 0;
+    private int MINEFRAGMENT = 1;
 
     private DrawerLayout homeDrawerLayout;
     private LinearLayout tabHome;
@@ -38,6 +40,7 @@ public class ActivityHome extends AppCompatActivity {
 
     //manage the fragment
     private FragmentManager FM;
+    private int fragmentType = HOMEFRAGMENT;
 
     final private String[] strs = new String[]{"{md-headset-mic}  联系客服"
             , "{entypo-new-message}  意见反馈"
@@ -62,35 +65,37 @@ public class ActivityHome extends AppCompatActivity {
             public void onClick(View v) {
                 int viewId = v.getId();
 
+                FragmentTransaction transaction = FM.beginTransaction();
+
                 switch (viewId) {
                     case R.id.tab_home:
-                        if (!tabHomeIcon.getText().equals("{typcn-home}")) {
-                            tabHomeIcon.setText("{typcn-home}");
-                            tabMineIcon.setText("{typcn-user-outline}");
-
-                            FragmentTransaction transaction = FM.beginTransaction();
-                            HomeTabFragment homeTabFragment = new HomeTabFragment();
-                            transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
-                            transaction.commit();
+                        if (fragmentType == HOMEFRAGMENT) {
+                            return;
                         }
+
+                        tabHomeIcon.setText("{typcn-home}");
+                        tabMineIcon.setText("{typcn-user-outline}");
+
+
+                        HomeTabFragment homeTabFragment = new HomeTabFragment();
+                        transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
+                        transaction.commit();
+
+                        fragmentType = HOMEFRAGMENT;
                         break;
                     case R.id.tab_mine:
-                        if (!tabMineIcon.getText().equals("{typcn-user}")) {
-
-                            //check the session
-                            if (!XSession.IsValid()) {
-                                startActivity(new Intent(ActivityHome.this, ActivitySignIn.class));
-                                return;
-                            }
-
-                            tabHomeIcon.setText("{typcn-home-outline}");
-                            tabMineIcon.setText("{typcn-user}");
-
-                            FragmentTransaction transaction = FM.beginTransaction();
-                            MineTabFragment homeTabFragment = new MineTabFragment();
-                            transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
-                            transaction.commit();
+                        if (fragmentType == MINEFRAGMENT) {
+                            return;
                         }
+
+                        tabHomeIcon.setText("{typcn-home-outline}");
+                        tabMineIcon.setText("{typcn-user}");
+
+                        MineTabFragment mineTabFragment = new MineTabFragment();
+                        transaction.replace(R.id.home_frame_layout, mineTabFragment, "HomeTabFragment");
+                        transaction.commit();
+
+                        fragmentType = MINEFRAGMENT;
                         break;
                 }
             }
@@ -125,5 +130,17 @@ public class ActivityHome extends AppCompatActivity {
 
     public void OpenDrawer() {
         homeDrawerLayout.openDrawer(Gravity.LEFT);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //check the session
+        if (!XSession.IsValid()) {
+            Log.d("tan", "onClick: go to sign in");
+            startActivity(new Intent(this, ActivitySignIn.class));
+            return;
+        }
     }
 }

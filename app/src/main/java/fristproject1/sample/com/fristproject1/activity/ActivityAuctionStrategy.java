@@ -32,7 +32,6 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
     TextView second40;
     TextView second45;
     TextView second50;
-    TextView forecastPrice;
 
     Timer timer;
     TimerTask timerTask;
@@ -52,7 +51,6 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
         second40 = (TextView) findViewById(R.id.second_40);
         second45 = (TextView) findViewById(R.id.second_45);
         second50 = (TextView) findViewById(R.id.second_50);
-        forecastPrice = (TextView) findViewById(R.id.forecast_transaction_price);
 
         strategyTitle = (TextView) findViewById(R.id.algorithm_title);
 
@@ -111,7 +109,6 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
                             App.Uihandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    forecastPrice.setText(String.valueOf(packet.ForecastPrice));
                                     second30.setText(String.valueOf(packet.Second30));
                                     second40.setText(String.valueOf(packet.Second40));
                                     second45.setText(String.valueOf(packet.Second45));

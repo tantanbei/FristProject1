@@ -48,6 +48,9 @@ public class ActivitySignUp extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        needSession = false;
+
+        goBack.setVisibility(View.GONE);
         rigthBtn.setVisibility(View.VISIBLE);
         rigthBtn.setText(R.string.sign_in);
 
@@ -205,9 +208,14 @@ public class ActivitySignUp extends XActivity {
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivitySignUp.this, ActivitySignIn.class));
                 finish();
+                startActivity(new Intent(ActivitySignUp.this, ActivitySignIn.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        System.exit(0);
     }
 }

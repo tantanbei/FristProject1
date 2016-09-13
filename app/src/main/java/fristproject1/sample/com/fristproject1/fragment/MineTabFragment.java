@@ -54,12 +54,6 @@ public class MineTabFragment extends XFragment {
     public void onStart() {
         super.onStart();
 
-        //check the session
-        if (Pref.Get(Pref.USERID, 0) == 0) {
-            startActivity(new Intent(Parent, ActivitySignIn.class));
-            return;
-        }
-
         if (view == null) {
             return;
         }
