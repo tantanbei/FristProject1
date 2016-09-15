@@ -40,7 +40,7 @@ public class ActivityInitUserInfo extends XActivity {
 
                 final String newUsername = username.getText().toString();
                 if (newUsername.equals(Pref.Get(Pref.USERNAME, ""))) {
-                    XToast.Show(ActivityInitUserInfo.this, "用户名无改变");
+                    XToast.Show("用户名无改变");
                     return;
                 }
 

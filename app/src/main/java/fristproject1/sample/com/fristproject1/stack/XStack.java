@@ -32,6 +32,10 @@ public class XStack {
         }
     }
 
+    public static int Size(){
+        return history.size();
+    }
+
     private static void gc() {
         if (history == null) {
             history = new ArrayList<>();

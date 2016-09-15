@@ -24,6 +24,7 @@ import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.fragment.HomeTabFragment;
 import fristproject1.sample.com.fristproject1.fragment.MineTabFragment;
 import fristproject1.sample.com.fristproject1.session.XSession;
+import fristproject1.sample.com.fristproject1.stack.XStack;
 
 public class ActivityHome extends AppCompatActivity {
     private int HOMEFRAGMENT = 0;
@@ -50,6 +51,8 @@ public class ActivityHome extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        XStack.Push(this);
 
         setContentView(R.layout.activity_home);
 
@@ -136,12 +139,21 @@ public class ActivityHome extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        XStack.Push(this);
+
         //check the session
         if (!XSession.IsValid()) {
             Log.d("tan", "onClick: go to sign in");
             startActivity(new Intent(this, ActivitySignIn.class));
             return;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        XStack.Push(this);
+        Log.d("tan", "onResume: xstack size:" + XStack.Size());
     }
 
     @Override

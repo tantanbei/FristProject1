@@ -13,6 +13,7 @@ import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.ActivitySignIn;
 import fristproject1.sample.com.fristproject1.activity.ActivitySignUp;
 import fristproject1.sample.com.fristproject1.session.XSession;
+import fristproject1.sample.com.fristproject1.stack.XStack;
 
 public abstract class XActivity extends Activity {
     public boolean needSession = true;
@@ -24,6 +25,8 @@ public abstract class XActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        XStack.Push(this);
 
         setContentView(GetContentView());
 
@@ -45,6 +48,8 @@ public abstract class XActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
+        XStack.Push(this);
+
         //check the session
         if (!XSession.IsValid() && needSession) {
             Log.d("tan", "onClick: go to sign in");
@@ -52,5 +57,14 @@ public abstract class XActivity extends Activity {
             finish();
             return;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        XStack.Push(this);
+
+        Log.d("tan", "onResume: xstack size:" + XStack.Size());
     }
 }
