@@ -1,6 +1,5 @@
 package fristproject1.sample.com.fristproject1.toast;
 
-import android.content.Context;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
