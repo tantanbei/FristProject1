@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.github.mikephil.charting.charts.LineChart;
@@ -24,6 +23,7 @@ import java.util.ArrayList;
 
 import fristproject1.sample.com.fristproject1.networkpacket.CarPriceOneTime;
 import fristproject1.sample.com.fristproject1.networkpacket.CarPrices;
+import fristproject1.sample.com.fristproject1.toast.XToast;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -72,7 +72,7 @@ public class TestOkhttp extends Activity {
             public void onClick(View v) {
                 carId = etCarId.getText().toString();
                 if (carId == "" || carId == null) {
-                    Toast.makeText(getApplicationContext(), "need input the car id!!!", Toast.LENGTH_SHORT);
+                    XToast.Show("need input the car id!!!");
                     return;
                 }
 

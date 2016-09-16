@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 
@@ -18,6 +17,7 @@ import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.http.Http;
 import fristproject1.sample.com.fristproject1.networkpacket.StrategyPacket;
 import fristproject1.sample.com.fristproject1.thread.XThread;
+import fristproject1.sample.com.fristproject1.toast.XToast;
 import okhttp3.Response;
 
 public class ActivityAuctionStrategy extends XActivity implements View.OnClickListener {
@@ -88,21 +88,11 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
                     final StrategyPacket packet = LoganSquare.parse(response.body().byteStream(), StrategyPacket.class);
                     switch (packet.Style) {
                         case 1:
-                            App.Uihandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ActivityAuctionStrategy.this, R.string.auction_unstart, Toast.LENGTH_LONG).show();
-                                }
-                            });
+                            XToast.Show(R.string.auction_unstart);
                             timer.cancel();
                             return;
                         case 2:
-                            App.Uihandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ActivityAuctionStrategy.this, R.string.auction_over, Toast.LENGTH_LONG).show();
-                                }
-                            });
+                            XToast.Show(R.string.auction_over);
                             timer.cancel();
                             return;
                         case 0:

@@ -1,19 +1,9 @@
 package fristproject1.sample.com.fristproject1.activity;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bluelinelabs.logansquare.LoganSquare;
-import com.joanzapata.iconify.Iconify;
-import com.joanzapata.iconify.fonts.IoniconsModule;
-import com.joanzapata.iconify.widget.IconTextView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -26,6 +16,7 @@ import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.base.XActivity;
 import fristproject1.sample.com.fristproject1.networkpacket.CurrentPacket;
+import fristproject1.sample.com.fristproject1.toast.XToast;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -86,21 +77,11 @@ public class ActivityAuction extends XActivity {
 
             switch (bs[0]) {
                 case '1':
-                    App.Uihandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(ActivityAuction.this, R.string.auction_unstart, Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    XToast.Show(R.string.auction_unstart);
                     timerTask.cancel();
                     return;
                 case '2':
-                    App.Uihandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(ActivityAuction.this, R.string.auction_over, Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    XToast.Show(R.string.auction_over);
                     timerTask.cancel();
                     return;
             }
@@ -151,12 +132,7 @@ public class ActivityAuction extends XActivity {
         } catch (IOException e) {
             e.printStackTrace();
 
-            App.Uihandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(ActivityAuction.this, R.string.request_fails, Toast.LENGTH_LONG).show();
-                }
-            });
+            XToast.Show(R.string.request_fails);
 
             timer.cancel();
         } finally {

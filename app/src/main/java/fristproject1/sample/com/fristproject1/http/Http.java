@@ -1,15 +1,14 @@
 package fristproject1.sample.com.fristproject1.http;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.db.Pref;
 import fristproject1.sample.com.fristproject1.networkpacket.base.JsonBase;
+import fristproject1.sample.com.fristproject1.toast.XToast;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -39,12 +38,7 @@ public class Http {
 
         } catch (IOException e) {
             e.printStackTrace();
-            App.Uihandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
-                }
-            });
+            XToast.Show(R.string.request_fails);
         }
 
         return null;
@@ -70,12 +64,7 @@ public class Http {
 
         } catch (IOException e) {
             e.printStackTrace();
-            App.Uihandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
-                }
-            });
+            XToast.Show(R.string.request_fails);
         }
 
         return null;
@@ -107,12 +96,7 @@ public class Http {
 
         } catch (IOException e) {
             e.printStackTrace();
-            App.Uihandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
-                }
-            });
+            XToast.Show(R.string.request_fails);
         }
 
         return null;
@@ -134,12 +118,7 @@ public class Http {
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-            App.Uihandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
-                }
-            });
+            XToast.Show(R.string.request_fails);
         }
 
         return null;
@@ -164,12 +143,7 @@ public class Http {
             return response;
         } catch (IOException e) {
             e.printStackTrace();
-            App.Uihandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
-                }
-            });
+            XToast.Show(R.string.request_fails);
         }
 
         return null;
@@ -202,12 +176,7 @@ public class Http {
 
         } catch (IOException e) {
             e.printStackTrace();
-            App.Uihandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, R.string.request_fails, Toast.LENGTH_SHORT).show();
-                }
-            });
+            XToast.Show(R.string.request_fails);
         }
 
         return null;

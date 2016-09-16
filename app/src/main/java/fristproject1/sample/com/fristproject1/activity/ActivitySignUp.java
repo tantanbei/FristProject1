@@ -6,14 +6,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 
 import java.io.IOException;
 import java.util.Random;
 
-import fristproject1.sample.com.fristproject1.App;
 import fristproject1.sample.com.fristproject1.Const;
 import fristproject1.sample.com.fristproject1.R;
 import fristproject1.sample.com.fristproject1.activity.base.XActivity;
@@ -25,6 +23,7 @@ import fristproject1.sample.com.fristproject1.networkpacket.SignUpInPacket;
 import fristproject1.sample.com.fristproject1.networkpacket.User;
 import fristproject1.sample.com.fristproject1.string.XString;
 import fristproject1.sample.com.fristproject1.thread.XThread;
+import fristproject1.sample.com.fristproject1.toast.XToast;
 import okhttp3.Response;
 
 public class ActivitySignUp extends XActivity {
@@ -69,7 +68,7 @@ public class ActivitySignUp extends XActivity {
                 phoneNumber = phone.getText().toString();
 
                 if (XString.IsEmpty(phoneNumber) || phoneNumber.length() != 11) {
-                    Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.warning_phone_number), Toast.LENGTH_SHORT).show();
+                    XToast.Show(R.string.warning_phone_number);
                     return;
                 }
 
@@ -91,35 +90,15 @@ public class ActivitySignUp extends XActivity {
 
                             if (!packet.Ok) {
                                 if (packet.Data.equals("0")) {
-                                    App.Uihandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.warning_registered), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    XToast.Show(R.string.warning_registered);
                                 } else {
-                                    App.Uihandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.request_fails), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    XToast.Show(R.string.request_fails);
                                 }
                             } else {
-                                App.Uihandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.send_success), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                XToast.Show(R.string.send_success);
                             }
                         } catch (IOException e) {
-                            App.Uihandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.request_fails), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            XToast.Show(R.string.request_fails);
                             e.printStackTrace();
                         }
                     }
@@ -131,12 +110,12 @@ public class ActivitySignUp extends XActivity {
             @Override
             public void onClick(View v) {
                 if (XString.IsEmpty(code.getText().toString())) {
-                    Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.input_verification_code), Toast.LENGTH_SHORT).show();
+                    XToast.Show(R.string.input_verification_code);
                     return;
                 }
 
                 if (!code.getText().toString().equals(verificationCode)) {
-                    Toast.makeText(ActivitySignUp.this, R.string.verification_error, Toast.LENGTH_SHORT).show();
+                    XToast.Show(R.string.verification_error);
                     return;
                 }
 
@@ -144,7 +123,7 @@ public class ActivitySignUp extends XActivity {
                 final String confirmStr = confirmPassword.getText().toString();
 
                 if (confirmStr.length() < 6 || confirmStr.length() > 20 || passwordStr.length() < 6 || passwordStr.length() > 20 || !passwordStr.equals(confirmStr)) {
-                    Toast.makeText(ActivitySignUp.this, R.string.password_invalid, Toast.LENGTH_SHORT).show();
+                    XToast.Show(R.string.password_invalid);
                     return;
                 }
 
@@ -158,27 +137,12 @@ public class ActivitySignUp extends XActivity {
 
                             if (!packet.Ok) {
                                 if (packet.Data.equals("0")) {
-                                    App.Uihandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.warning_registered), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    XToast.Show(R.string.warning_registered);
                                 } else {
-                                    App.Uihandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.request_fails), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    XToast.Show(R.string.request_fails);
                                 }
                             } else {
-                                App.Uihandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.register_success), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                XToast.Show(R.string.register_success);
 
                                 User user = LoganSquare.parse(packet.Data, User.class);
                                 Pref.Set(Pref.USERID, user.UserId);
@@ -191,12 +155,7 @@ public class ActivitySignUp extends XActivity {
                                 finish();
                             }
                         } catch (IOException e) {
-                            App.Uihandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ActivitySignUp.this, XString.GetString(ActivitySignUp.this, R.string.request_fails), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            XToast.Show(R.string.request_fails);
                             e.printStackTrace();
                         }
 
