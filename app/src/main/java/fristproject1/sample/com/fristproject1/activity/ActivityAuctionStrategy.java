@@ -83,7 +83,7 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
             @Override
             public void run() {
                 try {
-                    Response response = Http.Get(ActivityAuctionStrategy.this, url, STRATEGY_TYPE, strategyType);
+                    Response response = Http.Get( url, STRATEGY_TYPE, strategyType);
 
                     final StrategyPacket packet = LoganSquare.parse(response.body().byteStream(), StrategyPacket.class);
                     switch (packet.Style) {
