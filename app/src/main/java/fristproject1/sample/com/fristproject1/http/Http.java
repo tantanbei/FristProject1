@@ -22,7 +22,7 @@ public class Http {
 
     static OkHttpClient client = new OkHttpClient();
 
-    static public Response Get(final Context context, final String url) throws IOException {
+    static public Response Get(final String url) throws IOException {
         try {
             Request request = new Request.Builder()
                     .url(url)
@@ -44,7 +44,7 @@ public class Http {
         return null;
     }
 
-    static public Response Get(final Context context, final String url, final String heads, final String values) throws Exception {
+    static public Response Get(final String url, final String heads, final String values) throws Exception {
         try {
 
             Request.Builder builder = new Request.Builder()
@@ -70,7 +70,7 @@ public class Http {
         return null;
     }
 
-    static public Response Get(final Context context, final String url, final ArrayList<String> heads, final ArrayList<String> values) throws Exception {
+    static public Response Get(final String url, final ArrayList<String> heads, final ArrayList<String> values) throws Exception {
         try {
 
             if (heads.size() != values.size()) {
@@ -102,7 +102,7 @@ public class Http {
         return null;
     }
 
-    static public Response Post(final Context context, final String url, final String json) {
+    static public Response Post(final String url, final String json) {
         try {
             RequestBody body = RequestBody.create(JSON, json);
             Request request = new Request.Builder()
@@ -124,7 +124,7 @@ public class Http {
         return null;
     }
 
-    static public Response Post(final Context context, final String url, final JsonBase packet) {
+    static public Response Post(final String url, final JsonBase packet) {
         try {
 
             String json = packet.ToJsonString();
@@ -149,9 +149,9 @@ public class Http {
         return null;
     }
 
-    static public Response Post(final Context context, final String url, final JsonBase packet, final boolean withSession) {
+    static public Response Post(final String url, final JsonBase packet, final boolean withSession) {
         if (!withSession) {
-            return Post(context, url, packet);
+            return Post(url, packet);
         }
 
         try {
