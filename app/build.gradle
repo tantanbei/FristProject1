@@ -58,7 +58,7 @@ dependencies {
     compile 'com.joanzapata.iconify:android-iconify-weathericons:2.2.2' // (v2.0)
     compile 'com.joanzapata.iconify:android-iconify-simplelineicons:2.2.2' // (v1.0.0)
     compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2' // (v2.0.1)
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.3@aar') {
         transitive = true;
     }
 
