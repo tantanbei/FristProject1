@@ -89,10 +89,15 @@ public class ActivitySignUp extends XActivity {
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
                             if (!packet.Ok) {
-                                if (packet.Data.equals("0")) {
-                                    XToast.Show(R.string.warning_registered);
-                                } else {
-                                    XToast.Show(R.string.request_fails);
+                                switch (packet.Data) {
+                                    case "0":
+                                        XToast.Show(R.string.warning_registered);
+                                        break;
+                                    case "1":
+                                        XToast.Show(R.string.warning_get_verification_code);
+                                        break;
+                                    default:
+                                        XToast.Show(R.string.request_fails);
                                 }
                             } else {
                                 XToast.Show(R.string.send_success);
