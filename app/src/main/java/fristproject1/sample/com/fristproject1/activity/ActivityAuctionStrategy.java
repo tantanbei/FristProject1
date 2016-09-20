@@ -77,13 +77,13 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
     }
 
     private void getStrategyPrice() {
-        final String url = Const.SERVER_IP + Const.URL_AUCTION_STRATEGY;
+        final String url = Const.SERVER_IP + Const.URL_AUCTION_STRATEGY + "?type=" + strategyType;
 
         XThread.RunBackground(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Response response = Http.Get( url, STRATEGY_TYPE, strategyType);
+                    Response response = Http.Get(url);
 
                     final StrategyPacket packet = LoganSquare.parse(response.body().byteStream(), StrategyPacket.class);
                     switch (packet.Style) {
