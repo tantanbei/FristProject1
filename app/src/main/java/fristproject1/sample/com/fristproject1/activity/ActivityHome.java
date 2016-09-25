@@ -112,12 +112,16 @@ public class ActivityHome extends AppCompatActivity {
         homeDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
                 switch (position) {
                     case 0:
-                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
+                        intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
                         startActivity(intent);
                         break;
-
+                    case 1:
+                        intent = new Intent(ActivityHome.this, ActivityFeedback.class);
+                        startActivity(intent);
+                        break;
                 }
             }
         });

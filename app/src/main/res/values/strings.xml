@@ -71,6 +71,8 @@
     <string name="log_out">注销</string>
     <string name="frequency_strategy">激进策略</string>
     <string name="average_strategy">普通策略</string>
+    <string name="feedback_hint">请输入您遇到的问题，我们会在以后的版本中做出改进，谢谢！</string>
+    <string name="alert_feedback_content">意见内容不能为空！</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
