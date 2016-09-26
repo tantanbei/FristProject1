@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 
@@ -26,6 +27,7 @@ public class ActivitySignIn extends XActivity {
     EditText phone;
     EditText password;
     Button signin;
+    TextView forgetPassword;
 
     @Override
     public int GetContentView() {
@@ -46,6 +48,7 @@ public class ActivitySignIn extends XActivity {
         phone = (EditText) findViewById(R.id.phone);
         password = (EditText) findViewById(R.id.password);
         signin = (Button) findViewById(R.id.sign_in);
+        forgetPassword = (TextView) findViewById(R.id.forget_password);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +101,13 @@ public class ActivitySignIn extends XActivity {
             public void onClick(View v) {
                 finish();
                 startActivity(new Intent(ActivitySignIn.this, ActivitySignUp.class));
+            }
+        });
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
