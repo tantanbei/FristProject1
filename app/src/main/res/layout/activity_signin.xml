@@ -44,6 +44,6 @@
         android:gravity="right"
         android:textSize="10sp"
         android:textColor="@color/home_title_background"
-        android:text="@string/reset_password"/>
+        android:text="@string/forget_password"/>
 
 </LinearLayout>

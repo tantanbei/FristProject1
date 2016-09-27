@@ -27,6 +27,10 @@ import fristproject1.sample.com.fristproject1.toast.XToast;
 import okhttp3.Response;
 
 public class ActivitySignUp extends XActivity {
+    private static final String ACTIVITY_TYPE = "ACTIVITY_TYPE";
+    private static final int SIGN_UP = 0;
+    private static final int RESET_PASSWORD = 1;
+    private static final int MODIFY_PASSWORD = 2;
 
     EditText phone;
     EditText code;
@@ -38,6 +42,8 @@ public class ActivitySignUp extends XActivity {
     String verificationCode;
     String phoneNumber;
 
+    int activityType;
+
     @Override
     public int GetContentView() {
         return R.layout.activity_signup;
@@ -47,11 +53,32 @@ public class ActivitySignUp extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        needSession = false;
+        Intent intent = getIntent();
+        activityType = intent.getIntExtra(ACTIVITY_TYPE, SIGN_UP);
 
-        goBack.setVisibility(View.GONE);
-        rigthBtn.setVisibility(View.VISIBLE);
-        rigthBtn.setText(R.string.sign_in);
+        switch (activityType) {
+            case SIGN_UP:
+                needSession = false;
+
+                goBack.setVisibility(View.GONE);
+                rigthBtn.setVisibility(View.VISIBLE);
+                rigthBtn.setText(R.string.sign_in);
+                break;
+
+            case RESET_PASSWORD:
+                needSession = false;
+
+                goBack.setVisibility(View.GONE);
+                rigthBtn.setVisibility(View.VISIBLE);
+                rigthBtn.setText(R.string.reset_password);
+                break;
+
+            case MODIFY_PASSWORD:
+                break;
+
+            default:
+                throw new RuntimeException("unknow activity type! check code!");
+        }
 
         phone = (EditText) findViewById(R.id.phone);
         code = (EditText) findViewById(R.id.code);
@@ -84,7 +111,22 @@ public class ActivitySignUp extends XActivity {
                     public void run() {
                         try {
                             Log.d("tan", "get code phone:" + phoneNumber + " code:" + verificationCode);
-                            final Response response = Http.Post(Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, verificationCode));
+
+                            final Response response;
+                            switch (activityType) {
+                                case SIGN_UP:
+                                    response = Http.Post(Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, false, verificationCode));
+                                    break;
+
+                                case RESET_PASSWORD:
+                                case MODIFY_PASSWORD:
+                                    response = Http.Post(Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, true, verificationCode));
+                                    break;
+
+                                default:
+                                    return;
+                            }
+
 
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
@@ -96,6 +138,8 @@ public class ActivitySignUp extends XActivity {
                                     case "1":
                                         XToast.Show(R.string.warning_get_verification_code);
                                         break;
+                                    case "2":
+                                        XToast.Show(R.string.has_not_registered);
                                     default:
                                         XToast.Show(R.string.request_fails);
                                 }

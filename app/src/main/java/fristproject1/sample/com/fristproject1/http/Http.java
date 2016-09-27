@@ -183,7 +183,7 @@ public class Http {
     }
 
     static private boolean checkIsSucceed(Response response) {
-        if (response.header(SUCCEED, "0").equals("0")) {
+        if (response == null || response.header(SUCCEED, "0").equals("0")) {
             return false;
         } else {
             return true;

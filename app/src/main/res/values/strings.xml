@@ -48,7 +48,8 @@
     <string name="register_success">注册成功</string>
     <string name="register">注册</string>
     <string name="sign_in">登录</string>
-    <string name="reset_password">忘记密码？</string>
+    <string name="forget_password">忘记密码？</string>
+    <string name="reset_password">重置密码</string>
     <string name="have_car_question">您现在有车吗？</string>
     <string name="have_car">有车</string>
     <string name="no_car">没有车</string>
@@ -73,6 +74,7 @@
     <string name="average_strategy">普通策略</string>
     <string name="feedback_hint">请输入您遇到的问题，我们会在以后的版本中做出改进，谢谢！</string>
     <string name="alert_feedback_content">意见内容不能为空！</string>
+    <string name="has_not_registered">此手机号码未被注册</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
