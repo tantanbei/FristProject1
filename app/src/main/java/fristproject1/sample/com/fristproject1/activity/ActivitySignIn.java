@@ -100,14 +100,18 @@ public class ActivitySignIn extends XActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(ActivitySignIn.this, ActivitySignUp.class));
+                Intent intent = new Intent(ActivitySignIn.this, ActivitySignUp.class);
+                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.SIGN_UP);
+                startActivity(intent);
             }
         });
 
         forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ActivitySignIn.this, ActivitySignUp.class);
+                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.RESET_PASSWORD);
+                startActivity(intent);
             }
         });
     }

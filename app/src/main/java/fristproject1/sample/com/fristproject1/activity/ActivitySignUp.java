@@ -27,10 +27,10 @@ import fristproject1.sample.com.fristproject1.toast.XToast;
 import okhttp3.Response;
 
 public class ActivitySignUp extends XActivity {
-    private static final String ACTIVITY_TYPE = "ACTIVITY_TYPE";
-    private static final int SIGN_UP = 0;
-    private static final int RESET_PASSWORD = 1;
-    private static final int MODIFY_PASSWORD = 2;
+    public static final String ACTIVITY_TYPE = "ACTIVITY_TYPE";
+    public static final int SIGN_UP = 0;
+    public static final int RESET_PASSWORD = 1;
+    public static final int MODIFY_PASSWORD = 2;
 
     EditText phone;
     EditText code;
@@ -63,14 +63,14 @@ public class ActivitySignUp extends XActivity {
                 goBack.setVisibility(View.GONE);
                 rigthBtn.setVisibility(View.VISIBLE);
                 rigthBtn.setText(R.string.sign_in);
+
+                title.setText(R.string.register);
                 break;
 
             case RESET_PASSWORD:
                 needSession = false;
 
-                goBack.setVisibility(View.GONE);
-                rigthBtn.setVisibility(View.VISIBLE);
-                rigthBtn.setText(R.string.reset_password);
+                title.setText(R.string.reset_password);
                 break;
 
             case MODIFY_PASSWORD:
@@ -86,8 +86,6 @@ public class ActivitySignUp extends XActivity {
         confirmPassword = (EditText) findViewById(R.id.confirm_password);
         getCode = (Button) findViewById(R.id.get_verification_code);
         signUp = (Button) findViewById(R.id.sign_up);
-
-        title.setText(R.string.register);
 
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,10 +222,15 @@ public class ActivitySignUp extends XActivity {
 
     @Override
     public void onBackPressed() {
-        final Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (activityType == SIGN_UP) {
+            final Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        startActivity(intent);
+            startActivity(intent);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 }
