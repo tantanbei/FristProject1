@@ -1,0 +1,126 @@
+package com.whoplate.paipable.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.bluelinelabs.logansquare.LoganSquare;
+import com.whoplate.paipable.Const;
+import com.whoplate.paipable.R;
+import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.db.Pref;
+import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.networkpacket.OkPacket;
+import com.whoplate.paipable.networkpacket.SignUpInPacket;
+import com.whoplate.paipable.networkpacket.User;
+import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.toast.XToast;
+
+import okhttp3.Response;
+
+public class ActivitySignIn extends XActivity {
+    EditText phone;
+    EditText password;
+    Button signin;
+    TextView forgetPassword;
+
+    @Override
+    public int GetContentView() {
+        return R.layout.activity_signin;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        needSession = false;
+
+        goBack.setVisibility(View.GONE);
+        title.setText(R.string.sign_in);
+        rigthBtn.setVisibility(View.VISIBLE);
+        rigthBtn.setText(R.string.sign_up);
+
+        phone = (EditText) findViewById(R.id.phone);
+        password = (EditText) findViewById(R.id.password);
+        signin = (Button) findViewById(R.id.sign_in);
+        forgetPassword = (TextView) findViewById(R.id.forget_password);
+
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String phoneNum = phone.getText().toString();
+                if (phoneNum.length() != 11) {
+                    XToast.Show(R.string.warning_phone_number);
+                }
+
+
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SIGN_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
+
+                            OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
+                            if (!packet.Ok) {
+                                if (packet.Data.equals("0")) {
+                                    XToast.Show(R.string.wrong_phone_password);
+                                } else {
+                                    XToast.Show(R.string.request_fails);
+                                }
+                            } else {
+                                XToast.Show(R.string.sign_in_success);
+
+                                User user = LoganSquare.parse(packet.Data, User.class);
+                                Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone);
+
+                                Pref.Set(Pref.USERID, user.UserId);
+                                Pref.Set(Pref.USERNAME, user.UserName);
+                                Pref.Set(Pref.USERPHONE, user.UserPhone);
+                                Pref.Save();
+
+                                finish();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                            XToast.Show(R.string.request_fails);
+                        }
+                    }
+                });
+            }
+        });
+
+        rigthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ActivitySignIn.this, ActivitySignUp.class);
+                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.SIGN_UP);
+                startActivity(intent);
+            }
+        });
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivitySignIn.this, ActivitySignUp.class);
+                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.RESET_PASSWORD);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
+    }
+}

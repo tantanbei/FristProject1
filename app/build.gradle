@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "fristproject1.sample.com.fristproject1"
+        applicationId "paipable.whoplate.com"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
