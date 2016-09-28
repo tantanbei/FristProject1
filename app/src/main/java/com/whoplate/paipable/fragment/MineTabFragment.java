@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.whoplate.paipable.R;
+import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.ActivityUserInfo;
 import com.whoplate.paipable.db.Pref;
 import com.whoplate.paipable.fragment.base.XFragment;
@@ -23,6 +24,8 @@ public class MineTabFragment extends XFragment {
 
     LinearLayout userInfo;
     TextView username;
+
+    TextView point;
 
     @Nullable
     @Override
@@ -37,11 +40,19 @@ public class MineTabFragment extends XFragment {
         title.setText(R.string.user_info);
 
         userInfo = (LinearLayout) view.findViewById(R.id.user_info);
+        point = (TextView) view.findViewById(R.id.point);
 
         userInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Parent, ActivityUserInfo.class));
+            }
+        });
+
+        point.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Parent, ActivitySignIn.class));
             }
         });
 
