@@ -9,22 +9,26 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|end">
+        android:layout_gravity="right|end"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="current point:"
+            android:layout_gravity="center"
+            android:text="@string/current_point"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/point"
-            android:layout_width="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:maxLines="1"
             android:text="0"
             android:textColor="@color/red"
-            android:textSize="12sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -32,22 +36,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="the day of you have signed in"
-        android:textSize="12sp" />
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="您已连续签到的天数"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/keep_sign_in_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:padding="5dp"
         android:text="0"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sign in" />
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/round_rectangle"
+        android:padding="5dp"
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </LinearLayout>

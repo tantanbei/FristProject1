@@ -75,6 +75,8 @@
     <string name="feedback_hint">请输入您遇到的问题，我们会在以后的版本中做出改进，谢谢！</string>
     <string name="alert_feedback_content">意见内容不能为空！</string>
     <string name="has_not_registered">此手机号码未被注册</string>
+    <string name="current_point">当前积分：</string>
+    <string name="sign_in">签到</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
