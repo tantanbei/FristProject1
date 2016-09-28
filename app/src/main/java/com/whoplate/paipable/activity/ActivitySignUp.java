@@ -61,7 +61,7 @@ public class ActivitySignUp extends XActivity {
 
                 goBack.setVisibility(View.GONE);
                 rigthBtn.setVisibility(View.VISIBLE);
-                rigthBtn.setText(R.string.sign_in);
+                rigthBtn.setText(R.string.login);
 
                 title.setText(R.string.register);
                 break;
@@ -214,7 +214,7 @@ public class ActivitySignUp extends XActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(ActivitySignUp.this, ActivitySignIn.class));
+                startActivity(new Intent(ActivitySignUp.this, ActivityLogIn.class));
             }
         });
     }

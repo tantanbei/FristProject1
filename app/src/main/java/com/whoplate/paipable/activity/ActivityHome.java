@@ -146,7 +146,7 @@ public class ActivityHome extends AppCompatActivity {
         //check the session
         if (!XSession.IsValid()) {
             Log.d("tan", "onClick: go to sign in");
-            startActivity(new Intent(this, ActivitySignIn.class));
+            startActivity(new Intent(this, ActivityLogIn.class));
             return;
         }
     }

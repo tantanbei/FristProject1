@@ -22,15 +22,15 @@ import com.whoplate.paipable.toast.XToast;
 
 import okhttp3.Response;
 
-public class ActivitySignIn extends XActivity {
+public class ActivityLogIn extends XActivity {
     EditText phone;
     EditText password;
-    Button signin;
+    Button login;
     TextView forgetPassword;
 
     @Override
     public int GetContentView() {
-        return R.layout.activity_signin;
+        return R.layout.activity_login;
     }
 
     @Override
@@ -40,16 +40,16 @@ public class ActivitySignIn extends XActivity {
         needSession = false;
 
         goBack.setVisibility(View.GONE);
-        title.setText(R.string.sign_in);
+        title.setText(R.string.login);
         rigthBtn.setVisibility(View.VISIBLE);
         rigthBtn.setText(R.string.sign_up);
 
         phone = (EditText) findViewById(R.id.phone);
         password = (EditText) findViewById(R.id.password);
-        signin = (Button) findViewById(R.id.sign_in);
+        login = (Button) findViewById(R.id.log_in);
         forgetPassword = (TextView) findViewById(R.id.forget_password);
 
-        signin.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String phoneNum = phone.getText().toString();
@@ -72,7 +72,7 @@ public class ActivitySignIn extends XActivity {
                                     XToast.Show(R.string.request_fails);
                                 }
                             } else {
-                                XToast.Show(R.string.sign_in_success);
+                                XToast.Show(R.string.login_success);
 
                                 User user = LoganSquare.parse(packet.Data, User.class);
                                 Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone);
@@ -99,7 +99,7 @@ public class ActivitySignIn extends XActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent intent = new Intent(ActivitySignIn.this, ActivitySignUp.class);
+                Intent intent = new Intent(ActivityLogIn.this, ActivitySignUp.class);
                 intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.SIGN_UP);
                 startActivity(intent);
             }
@@ -108,7 +108,7 @@ public class ActivitySignIn extends XActivity {
         forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivitySignIn.this, ActivitySignUp.class);
+                Intent intent = new Intent(ActivityLogIn.this, ActivitySignUp.class);
                 intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.RESET_PASSWORD);
                 startActivity(intent);
             }

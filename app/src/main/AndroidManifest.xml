@@ -74,7 +74,7 @@
         </activity>
 
         <activity
-            android:name=".activity.ActivitySignIn"
+            android:name=".activity.ActivityLogIn"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>

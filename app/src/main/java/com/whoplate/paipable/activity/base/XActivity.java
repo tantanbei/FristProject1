@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.whoplate.paipable.R;
-import com.whoplate.paipable.activity.ActivitySignIn;
+import com.whoplate.paipable.activity.ActivityLogIn;
 import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
 
@@ -51,7 +51,7 @@ public abstract class XActivity extends Activity {
         //check the session
         if (!XSession.IsValid() && needSession) {
             Log.d("tan", "onClick: go to sign in");
-            startActivity(new Intent(this, ActivitySignIn.class));
+            startActivity(new Intent(this, ActivityLogIn.class));
             finish();
             return;
         }
