@@ -14,4 +14,5 @@ public class Const {
     static final public String URL_CHANGE_USERNAME = "/user/change/username";
     static final public String URL_AUCTION_STATUS = "/auction/status";
     static final public String URL_AUCTION_STRATEGY = "/auction/strategy";
+    static final public String URL_POINT_STATUS = "/point/get";
 }

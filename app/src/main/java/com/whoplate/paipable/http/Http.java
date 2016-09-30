@@ -23,7 +23,7 @@ public class Http {
 
     static OkHttpClient client = new OkHttpClient();
 
-    static public Response Get(final String url) throws IOException {
+    static public Response Get(final String url) {
         try {
             Request request = new Request.Builder()
                     .url(url)
@@ -45,7 +45,32 @@ public class Http {
         return null;
     }
 
-    static public Response Get(final String url, final String heads, final String values) throws Exception {
+    static public Response Get(final String url, final boolean withSession) {
+        try {
+            int userId = Pref.Get(Pref.USERID, 0);
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .header("userid", String.valueOf(userId))
+                    .get()
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                throw new IOException();
+            }
+
+            return response;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            XToast.Show(R.string.request_fails);
+        }
+
+        return null;
+    }
+
+    static public Response Get(final String url, final String heads, final String values) {
         try {
 
             Request.Builder builder = new Request.Builder()
@@ -71,11 +96,11 @@ public class Http {
         return null;
     }
 
-    static public Response Get(final String url, final ArrayList<String> heads, final ArrayList<String> values) throws Exception {
+    static public Response Get(final String url, final ArrayList<String> heads, final ArrayList<String> values) {
         try {
 
             if (heads.size() != values.size()) {
-                throw new Exception("heads size is not equal value size!!!");
+                throw new RuntimeException("heads size is not equal value size!!!");
             }
 
             Request.Builder builder = new Request.Builder()
