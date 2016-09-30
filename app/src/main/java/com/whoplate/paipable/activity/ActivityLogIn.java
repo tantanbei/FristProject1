@@ -62,7 +62,7 @@ public class ActivityLogIn extends XActivity {
                     @Override
                     public void run() {
                         try {
-                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SIGN_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
+                            Response response = Http.Post(Const.SERVER_IP + Const.URL_LOG_IN, new SignUpInPacket(phoneNum, password.getText().toString()));
 
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
                             if (!packet.Ok) {
