@@ -60,8 +60,6 @@ public class HomeTabFragment extends XFragment {
     private TextView historyData;
     private TextView signInEveryDay;
 
-    private OkHttpClient client = new OkHttpClient();
-
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
 
