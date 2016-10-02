@@ -2,14 +2,17 @@ package com.whoplate.paipable.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
+import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.PointStatus;
+import com.whoplate.paipable.networkpacket.SignInBack;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
 
@@ -20,6 +23,7 @@ import okhttp3.Response;
 public class ActivitySignIn extends XActivity {
     TextView myPoint;
     TextView myKeepDays;
+    TextView signIn;
 
     @Override
     public int GetContentView() {
@@ -34,7 +38,34 @@ public class ActivitySignIn extends XActivity {
 
         myPoint = (TextView) findViewById(R.id.point);
         myKeepDays = (TextView) findViewById(R.id.keep_sign_in_day);
+        signIn = (TextView) findViewById(R.id.sign_in);
 
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            Response response = Http.Get(Const.SERVER_IP + Const.URL_SIGN_IN, true);
+                            final SignInBack packet = LoganSquare.parse(response.body().byteStream(), SignInBack.class);
+
+                            App.Uihandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    myPoint.setText(Integer.toString(packet.Point));
+                                    myKeepDays.setText(Integer.toString(packet.KeepDays));
+                                }
+                            });
+                        } catch (IOException e) {
+                            XToast.Show(R.string.request_fails);
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
 
     }
 
@@ -51,8 +82,16 @@ public class ActivitySignIn extends XActivity {
             public void run() {
                 try {
                     Response response = Http.Get(Const.SERVER_IP + Const.URL_POINT_STATUS, true);
+                    final PointStatus pointStatus = LoganSquare.parse(response.body().byteStream(), PointStatus.class);
 
-                    PointStatus pointStatus = LoganSquare.parse(response.body().byteStream(), PointStatus.class);
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            signIn.setClickable(!pointStatus.IsSignInToday);
+                            myPoint.setText(Integer.toString(pointStatus.Point));
+                            myKeepDays.setText(Integer.toString(pointStatus.KeepDays));
+                        }
+                    });
 
                     Log.d("tan", "pointStatus:" + pointStatus.ToJsonString());
                 } catch (IOException e) {

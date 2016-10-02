@@ -25,6 +25,7 @@ import com.whoplate.paipable.activity.ActivityAuctionIdle;
 import com.whoplate.paipable.activity.ActivityAuctionStrategy;
 import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
+import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
@@ -57,6 +58,7 @@ public class HomeTabFragment extends XFragment {
     private TextView runningForecast;
     private TextView overPrice;
     private TextView historyData;
+    private TextView signInEveryDay;
 
     private OkHttpClient client = new OkHttpClient();
 
@@ -82,6 +84,7 @@ public class HomeTabFragment extends XFragment {
         readyForecast = (TextView) view.findViewById(R.id.ready_forecast);
         runningForecast = (TextView) view.findViewById(R.id.running_forecast);
         overPrice = (TextView) view.findViewById(R.id.over_price);
+        signInEveryDay = (TextView) view.findViewById(R.id.sign_in_everyday);
 
         for (int i = 0; i < srcIds.length; i++) {
             ImageView imageView = new ImageView(getContext());
@@ -128,6 +131,13 @@ public class HomeTabFragment extends XFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Parent, ActivityHistoryData.class));
+            }
+        });
+
+        signInEveryDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Parent, ActivitySignIn.class));
             }
         });
 
