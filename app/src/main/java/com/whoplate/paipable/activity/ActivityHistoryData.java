@@ -148,11 +148,11 @@ public class ActivityHistoryData extends XActivity {
             @Override
             public void run() {
                 date.setText(dates.get(index));
-                limiation.setText(String.valueOf((int)limiations.get(index).getVal()));
-                peopleNum.setText(String.valueOf((int)peopleNums.get(index).getVal()));
-                minPrice.setText(String.valueOf((int)minimumPrices.get(index).getVal()));
-                averagePrice.setText(String.valueOf((int)averagePrices.get(index).getVal()));
-                cautionPrice.setText(String.valueOf((int)cautionPrices.get(index).getVal()));
+                limiation.setText(String.valueOf((int) limiations.get(index).getVal()));
+                peopleNum.setText(String.valueOf((int) peopleNums.get(index).getVal()));
+                minPrice.setText(String.valueOf((int) minimumPrices.get(index).getVal()));
+                averagePrice.setText(String.valueOf((int) averagePrices.get(index).getVal()));
+                cautionPrice.setText(String.valueOf((int) cautionPrices.get(index).getVal()));
             }
         });
 
@@ -176,12 +176,13 @@ public class ActivityHistoryData extends XActivity {
         try {
             Response response = call.execute();
             final String str = response.body().string();
-            if (str == null || str.length() == 0){
+            if (str == null || str.length() == 0) {
                 return;
             }
             allHistoryCache = LoganSquare.parse(str, AuctionHistoryResults.class);
-
-            Log.d("tan", "refreshData: " + allHistoryCache.toString());
+            if (allHistoryCache == null || allHistoryCache.auctionHistoryResults == null) {
+                return;
+            }
 
             generateDataAdapter();
             Log.d("tan", "refreshData: show chart");

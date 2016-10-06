@@ -11,9 +11,13 @@ public class AuctionHistoryResults {
 
     @Override
     public String toString() {
+        if (auctionHistoryResults == null){
+            return "";
+        }
+
         String str = "";
-        for (int i = 0; i < auctionHistoryResults.length; i++) {
-            str += auctionHistoryResults[i].toString();
+        for (AuctionHistoryResult result : auctionHistoryResults) {
+            str += result.toString();
         }
         return str;
     }
