@@ -13,7 +13,7 @@ import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
-import com.whoplate.paipable.networkpacket.Purchase_intent_car;
+import com.whoplate.paipable.networkpacket.PurchaseIntentCar;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
 
@@ -79,17 +79,18 @@ public class ActivityPurchaseIntent extends XActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Purchase_intent_car packet = new Purchase_intent_car();
+                final PurchaseIntentCar packet = new PurchaseIntentCar();
                 packet.HaveCarStyles = haveCarStyles;
                 packet.HaveCarAges = haveCarAges;
                 packet.IntentCarStyle = intentCarStyle.getSelectedItemPosition();
 
+                Log.d("tan", "purchase intent json packet" + packet.ToJsonString());
+
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Response response = Http.Post(Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet, true);
-                        //todo response...
-
+                        Http.Post(Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet, true);
+                        finish();
                     }
                 });
 

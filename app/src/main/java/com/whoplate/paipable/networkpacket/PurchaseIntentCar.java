@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 @JsonObject
-public class Purchase_intent_car extends JsonBase {
+public class PurchaseIntentCar extends JsonBase {
     @JsonField
     public boolean HaveORNotCar;
 
@@ -21,5 +21,7 @@ public class Purchase_intent_car extends JsonBase {
 
     @JsonField
     public int IntentCarStyle;
+
+    public PurchaseIntentCar(){}
 
 }
