@@ -4,7 +4,7 @@
     <color name="black">#000000</color>
     <color name="grey">#f0f0f0</color>
     <color name="red">#ff0000</color>
-    
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="home_title_background">#6b5ac2</color>
@@ -12,4 +12,6 @@
     <color name="forecast_transaction_price">#ff0000</color>
     <color name="title_bar_bottom_line">#b6b6b6</color>
     <color name="sign_in_everyday">#ff8a31</color>
+
+    <color name="button_unClickable">#909090</color>
 </resources>

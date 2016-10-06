@@ -13,6 +13,7 @@ import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.PointStatus;
 import com.whoplate.paipable.networkpacket.SignInBack;
+import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
 
@@ -54,6 +55,9 @@ public class ActivitySignIn extends XActivity {
                             App.Uihandler.post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    signIn.setClickable(false);
+                                    signIn.setText(R.string.signed_in_today );
+                                    signIn.setBackgroundResource(R.color.button_unClickable);
                                     myPoint.setText(Integer.toString(packet.Point));
                                     myKeepDays.setText(Integer.toString(packet.KeepDays));
                                 }
@@ -88,6 +92,8 @@ public class ActivitySignIn extends XActivity {
                         @Override
                         public void run() {
                             signIn.setClickable(!pointStatus.IsSignInToday);
+                            signIn.setText(pointStatus.IsSignInToday ? R.string.signed_in_today : R.string.sign_in);
+                            signIn.setBackgroundResource(pointStatus.IsSignInToday ? R.color.button_unClickable : R.color.colorPrimary);
                             myPoint.setText(Integer.toString(pointStatus.Point));
                             myKeepDays.setText(Integer.toString(pointStatus.KeepDays));
                         }

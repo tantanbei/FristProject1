@@ -53,7 +53,6 @@ public abstract class XActivity extends Activity {
             Log.d("tan", "onClick: go to sign in");
             startActivity(new Intent(this, ActivityLogIn.class));
             finish();
-            return;
         }
     }
 
