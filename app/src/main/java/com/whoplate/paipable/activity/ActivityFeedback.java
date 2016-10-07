@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.whoplate.paipable.App;
 import com.whoplate.paipable.BuildConfig;
+import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.networkpacket.FeedbackPacket;
 import com.whoplate.paipable.string.XString;
+import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
 
 import okhttp3.Response;
@@ -17,9 +21,9 @@ import okhttp3.Response;
 public class ActivityFeedback extends XActivity {
 
     private EditText content;
-    private String DeviceMessage = "\nDevice: " + Build.MANUFACTURER +
-            "/" + Build.MODEL + "\nAndroid Version:" + Build.VERSION.RELEASE +
-            "\nApp Version:" + BuildConfig.VERSION_NAME;
+    static final private String DeviceMessage = "{ Device: " + Build.MANUFACTURER +
+            "/" + Build.MODEL + " && Android Version:" + Build.VERSION.RELEASE +
+            " && App Version:" + BuildConfig.VERSION_NAME+" }";
 
     @Override
     public int GetContentView() {
@@ -30,7 +34,7 @@ public class ActivityFeedback extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        title.setText("意见反馈");
+        title.setText(R.string.feedback);
         rigthBtn.setText(R.string.submit);
         rigthBtn.setVisibility(View.VISIBLE);
 
@@ -46,8 +50,24 @@ public class ActivityFeedback extends XActivity {
                     return;
                 }
 
-                Response response = Http.Post("url", "json string");
-                //// TODO: 16-9-25  
+                final FeedbackPacket packet = new FeedbackPacket(contentStr, DeviceMessage);
+
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        Response response = Http.Post(Const.SERVER_IP + Const.URL_FEEDBACK, packet, true);
+
+                        if (response != null) {
+
+                            App.Uihandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    finish();
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
     }

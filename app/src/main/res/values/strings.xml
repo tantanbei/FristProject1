@@ -78,6 +78,7 @@
     <string name="current_point">当前积分：</string>
     <string name="sign_in">签到</string>
     <string name="signed_in_today">今日已签到</string>
+    <string name="feedback">意见反馈</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

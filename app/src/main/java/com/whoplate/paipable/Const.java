@@ -16,4 +16,5 @@ public class Const {
     static final public String URL_AUCTION_STRATEGY = "/auction/strategy";
     static final public String URL_POINT_STATUS = "/point/get";
     static final public String URL_SIGN_IN = "/signin";
+    static final public String URL_FEEDBACK = "/feedback/add";
 }
