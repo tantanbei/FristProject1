@@ -7,11 +7,7 @@ public class XSession {
 
     static public boolean IsValid() {
         int userId = Pref.Get(Pref.USERID, 0);
-        if (userId == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(userId == 0);
     }
 
     static public void Logout() {

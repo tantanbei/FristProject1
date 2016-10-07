@@ -114,10 +114,12 @@ public class ActivityHome extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
+                        homeDrawerLayout.closeDrawers();
                         startActivity(intent);
                         break;
                     case 1:
                         intent = new Intent(ActivityHome.this, ActivityFeedback.class);
+                        homeDrawerLayout.closeDrawers();
                         startActivity(intent);
                         break;
                 }
