@@ -130,7 +130,7 @@ public class ActivityPurchaseIntent extends XActivity {
                     carAge.setVisibility(View.VISIBLE);
                     add.setText(R.string.confirm);
                 } else {
-                    if (add.getText().equals(XString.GetString(ActivityPurchaseIntent.this, R.string.confirm))) {
+                    if (add.getText().equals(XString.GetString(R.string.confirm))) {
                         haveCarStyles.add(0, carStyle.getSelectedItemPosition());
                         haveCarAges.add(0, carAge.getSelectedItemPosition());
                         Log.d("tan", "add: carStyle:" + carStyle.getSelectedItemPosition() + " carAge:" + carAge.getSelectedItemPosition());

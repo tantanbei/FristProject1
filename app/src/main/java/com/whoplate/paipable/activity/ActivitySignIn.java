@@ -14,6 +14,7 @@ import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.PointStatus;
 import com.whoplate.paipable.networkpacket.SignInBack;
 import com.whoplate.paipable.session.XSession;
+import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
 
@@ -22,6 +23,9 @@ import java.io.IOException;
 import okhttp3.Response;
 
 public class ActivitySignIn extends XActivity {
+    int base = 5;
+    int MAX_TIMES = 4;
+
     TextView myPoint;
     TextView myKeepDays;
     TextView signIn;
@@ -55,8 +59,10 @@ public class ActivitySignIn extends XActivity {
                             App.Uihandler.post(new Runnable() {
                                 @Override
                                 public void run() {
+
+                                    XToast.Show(String.format(XString.GetString(R.string.sign_in_tip), getAddPoint(packet.KeepDays), getAddPoint(packet.KeepDays + 1)));
                                     signIn.setClickable(false);
-                                    signIn.setText(R.string.signed_in_today );
+                                    signIn.setText(R.string.signed_in_today);
                                     signIn.setBackgroundResource(R.color.button_unClickable);
                                     myPoint.setText(Integer.toString(packet.Point));
                                     myKeepDays.setText(Integer.toString(packet.KeepDays));
@@ -106,5 +112,13 @@ public class ActivitySignIn extends XActivity {
                 }
             }
         });
+    }
+
+    private int getAddPoint(int keepSignIn) {
+        if (keepSignIn < MAX_TIMES) {
+            return base * keepSignIn;
+        } else {
+            return base * MAX_TIMES;
+        }
     }
 }

@@ -68,6 +68,6 @@ public class MineTabFragment extends XFragment {
         }
 
         username = (TextView) view.findViewById(R.id.username);
-        username.setText(Pref.Get(Pref.USERNAME, XString.GetString(Parent, R.string.app_name)));
+        username.setText(Pref.Get(Pref.USERNAME, XString.GetString(R.string.app_name)));
     }
 }

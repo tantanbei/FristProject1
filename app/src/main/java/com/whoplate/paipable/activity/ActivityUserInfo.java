@@ -27,7 +27,7 @@ public class ActivityUserInfo extends XActivity {
         userName = (TextView) findViewById(R.id.username);
         phoneNum = (TextView) findViewById(R.id.phone_number);
 
-        userName.setText(Pref.Get(Pref.USERNAME, XString.GetString(this, R.string.app_name)));
+        userName.setText(Pref.Get(Pref.USERNAME, XString.GetString(R.string.app_name)));
         phoneNum.setText(Pref.Get(Pref.USERPHONE, ""));
 
         TextView logout = (TextView) findViewById(R.id.logout);
