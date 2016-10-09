@@ -11,7 +11,7 @@ public class RequestAuctionHistoryPacket extends JsonBase {
     boolean needDate;
 
     @JsonField
-    boolean needLimiation;
+    boolean needLimitation;
 
     @JsonField
     boolean needPeopleNum;
@@ -27,14 +27,14 @@ public class RequestAuctionHistoryPacket extends JsonBase {
 
     @Override
     public String toString() {
-        return "needDate:" + needDate + " needLimiation:" + needLimiation + " needPeopleNum:" + needPeopleNum + " needMinimumPrice:" + needMinimumPrice + " needAveragePrice:" + needAveragePrice + " needCautionPrice:" + needCautionPrice;
+        return "needDate:" + needDate + " needLimiation:" + needLimitation + " needPeopleNum:" + needPeopleNum + " needMinimumPrice:" + needMinimumPrice + " needAveragePrice:" + needAveragePrice + " needCautionPrice:" + needCautionPrice;
     }
 
     public RequestAuctionHistoryPacket(){}
 
-    public RequestAuctionHistoryPacket(boolean needDate, boolean needLimiation,boolean needPeopleNum,boolean needMinimimPrice,boolean needAveragePrice,boolean needCautionPrice) {
+    public RequestAuctionHistoryPacket(boolean needDate, boolean needLimitation,boolean needPeopleNum,boolean needMinimimPrice,boolean needAveragePrice,boolean needCautionPrice) {
         this.needDate = needDate;
-        this.needLimiation = needLimiation;
+        this.needLimitation = needLimitation;
         this.needPeopleNum = needPeopleNum;
         this.needMinimumPrice = needMinimimPrice;
         this.needAveragePrice = needAveragePrice;
