@@ -1,6 +1,5 @@
 package com.whoplate.paipable.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.joanzapata.iconify.widget.IconTextView;
 import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
@@ -26,7 +24,6 @@ import com.whoplate.paipable.networkpacket.RequestAuctionHistoryPacket;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.RunnableFuture;
 
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -233,9 +230,9 @@ public class ActivityHistoryData extends XActivity {
         for (int i = 0; i < size; i++) {
             AuctionHistoryResult oneRow = allHistoryCache.auctionHistoryResults[i];
 
-            Entry limiation = new Entry(oneRow.limiation, i);
+            Entry limiation = new Entry(oneRow.limitation, i);
             Entry peopleNum = new Entry(oneRow.peopleNumber, i);
-            Entry minimimPrice = new Entry(oneRow.minumumPrice, i);
+            Entry minimimPrice = new Entry(oneRow.minimumPrice, i);
             Entry averagePrice = new Entry(oneRow.averagePrice, i);
             Entry cautionPrice = new Entry(oneRow.cautionPrice, i);
 

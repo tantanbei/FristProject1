@@ -10,13 +10,13 @@ public class AuctionHistoryResult {
     public String date;
 
     @JsonField
-    public int limiation;
+    public int limitation;
 
     @JsonField
     public int peopleNumber;
 
     @JsonField
-    public int minumumPrice;
+    public int minimumPrice;
 
     @JsonField
     public int averagePrice;
@@ -26,6 +26,6 @@ public class AuctionHistoryResult {
 
     @Override
     public String toString() {
-        return "date:" + date + " limiation:" + limiation + " peopleNumber:" + peopleNumber + " minumumPrice:" + minumumPrice + " averagePrice:" + averagePrice + " cautionPrice:" + cautionPrice;
+        return "date:" + date + " limitation:" + limitation + " peopleNumber:" + peopleNumber + " minimumPrice:" + minimumPrice + " averagePrice:" + averagePrice + " cautionPrice:" + cautionPrice;
     }
 }
