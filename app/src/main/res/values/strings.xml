@@ -80,6 +80,7 @@
     <string name="signed_in_today">今日已签到</string>
     <string name="feedback">意见反馈</string>
     <string name="sign_in_tip">今日已成功签到，获得%1$d积分，明天签到可获得%2$d积分</string>
+    <string name="price_detail">详细价格变化</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

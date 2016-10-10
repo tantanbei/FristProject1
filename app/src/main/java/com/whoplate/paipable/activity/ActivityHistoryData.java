@@ -32,17 +32,17 @@ import okhttp3.Response;
 
 public class ActivityHistoryData extends XActivity {
 
-    final int SHOWLIMIATIONS = 1;
-    final int SHOWPEOPLENUM = 2;
-    final int SHOWMINIMUMPRICE = 3;
-    final int SHOWAVERAGEPRICE = 4;
-    final int SHOWCAUTIONPRICE = 5;
+    final int SHOW_LIMITATIONS = 1;
+    final int SHOW_PEOPLE_NUM = 2;
+    final int SHOW_MINIMUM_PRICE = 3;
+    final int SHOW_AVERAGE_PRICE = 4;
+    final int SHOW_CAUTION_PRICE = 5;
     int showType = 3;
 
     Spinner switchType;
     LineChart historyChart;
     TextView date;
-    TextView limiation;
+    TextView limitation;
     TextView peopleNum;
     TextView minPrice;
     TextView averagePrice;
@@ -55,13 +55,13 @@ public class ActivityHistoryData extends XActivity {
     boolean forceToRefreshData;
 
     ArrayList<String> dates = new ArrayList<String>();
-    ArrayList<Entry> limiations = new ArrayList<Entry>();
+    ArrayList<Entry> limitations = new ArrayList<Entry>();
     ArrayList<Entry> peopleNums = new ArrayList<Entry>();
     ArrayList<Entry> minimumPrices = new ArrayList<Entry>();
     ArrayList<Entry> averagePrices = new ArrayList<Entry>();
     ArrayList<Entry> cautionPrices = new ArrayList<Entry>();
 
-    LineDataSet limiationsDataSet;
+    LineDataSet limitationsDataSet;
     LineDataSet peopleNumsDataSet;
     LineDataSet minimumPricesDataSet;
     LineDataSet averagePricesDataSet;
@@ -79,7 +79,7 @@ public class ActivityHistoryData extends XActivity {
         historyChart = (LineChart) findViewById(R.id.history_chart);
         switchType = (Spinner) findViewById(R.id.switch_type);
         date = (TextView) findViewById(R.id.date);
-        limiation = (TextView) findViewById(R.id.limiation);
+        limitation = (TextView) findViewById(R.id.limiation);
         peopleNum = (TextView) findViewById(R.id.people_num);
         minPrice = (TextView) findViewById(R.id.min_price);
         averagePrice = (TextView) findViewById(R.id.average_price);
@@ -145,7 +145,7 @@ public class ActivityHistoryData extends XActivity {
             @Override
             public void run() {
                 date.setText(dates.get(index));
-                limiation.setText(String.valueOf((int) limiations.get(index).getVal()));
+                limitation.setText(String.valueOf((int) limitations.get(index).getVal()));
                 peopleNum.setText(String.valueOf((int) peopleNums.get(index).getVal()));
                 minPrice.setText(String.valueOf((int) minimumPrices.get(index).getVal()));
                 averagePrice.setText(String.valueOf((int) averagePrices.get(index).getVal()));
@@ -197,19 +197,19 @@ public class ActivityHistoryData extends XActivity {
             public void run() {
                 LineData data = new LineData();
                 switch (type) {
-                    case SHOWLIMIATIONS:
-                        data = new LineData(dates, limiationsDataSet);
+                    case SHOW_LIMITATIONS:
+                        data = new LineData(dates, limitationsDataSet);
                         break;
-                    case SHOWPEOPLENUM:
+                    case SHOW_PEOPLE_NUM:
                         data = new LineData(dates, peopleNumsDataSet);
                         break;
-                    case SHOWMINIMUMPRICE:
+                    case SHOW_MINIMUM_PRICE:
                         data = new LineData(dates, minimumPricesDataSet);
                         break;
-                    case SHOWAVERAGEPRICE:
+                    case SHOW_AVERAGE_PRICE:
                         data = new LineData(dates, averagePricesDataSet);
                         break;
-                    case SHOWCAUTIONPRICE:
+                    case SHOW_CAUTION_PRICE:
                         data = new LineData(dates, cautionPricesDataSet);
                         break;
                 }
@@ -236,7 +236,7 @@ public class ActivityHistoryData extends XActivity {
             Entry averagePrice = new Entry(oneRow.averagePrice, i);
             Entry cautionPrice = new Entry(oneRow.cautionPrice, i);
 
-            limiations.add(limiation);
+            limitations.add(limiation);
             peopleNums.add(peopleNum);
             minimumPrices.add(minimimPrice);
             averagePrices.add(averagePrice);
@@ -245,7 +245,7 @@ public class ActivityHistoryData extends XActivity {
 
         }
 
-        limiationsDataSet = new LineDataSet(limiations, getString(R.string.limiation));
+        limitationsDataSet = new LineDataSet(limitations, getString(R.string.limiation));
         peopleNumsDataSet = new LineDataSet(peopleNums, getString(R.string.people_num));
         minimumPricesDataSet = new LineDataSet(minimumPrices, getString(R.string.min_price));
         averagePricesDataSet = new LineDataSet(averagePrices, getString(R.string.average_price));
