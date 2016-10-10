@@ -1,9 +1,11 @@
 package com.whoplate.paipable.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -47,6 +49,7 @@ public class ActivityHistoryData extends XActivity {
     TextView minPrice;
     TextView averagePrice;
     TextView cautionPrice;
+    Button priceDetail;
 
     OkHttpClient client;
     Request request;
@@ -84,6 +87,7 @@ public class ActivityHistoryData extends XActivity {
         minPrice = (TextView) findViewById(R.id.min_price);
         averagePrice = (TextView) findViewById(R.id.average_price);
         cautionPrice = (TextView) findViewById(R.id.caution_price);
+        priceDetail = (Button) findViewById(R.id.detail);
 
         title.setText(R.string.history_data);
 
@@ -119,6 +123,13 @@ public class ActivityHistoryData extends XActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        priceDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityHistoryData.this, ActivityDataDetail.class));
             }
         });
     }
