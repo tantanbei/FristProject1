@@ -91,6 +91,10 @@
     </string-array>
 
     <string-array name="dates">
+        <item>201609</item>
+        <item>201608</item>
+        <item>201607</item>
+        <item>201606</item>
         <item>201605</item>
         <item>201604</item>
         <item>201603</item>
