@@ -1,10 +1,13 @@
 package com.whoplate.paipable.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,11 +20,16 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionDetail;
 import com.whoplate.paipable.networkpacket.AuctionDetails;
+import com.whoplate.paipable.networkpacket.base.AuctionDetailDates;
+import com.whoplate.paipable.thread.XThread;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -30,13 +38,10 @@ import okhttp3.Response;
 
 public class ActivityDataDetail extends XActivity {
 
-    Spinner dates;
+    Spinner datesSpinner;
     LineChart detailChart;
 
-    OkHttpClient client;
-    Request request;
-
-    String requestDate;
+    ArrayList<String> dates = new ArrayList<>();
 
     LineDataSet pricesDataSet;
     ArrayList<String> distances = new ArrayList<String>();
@@ -50,7 +55,7 @@ public class ActivityDataDetail extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dates = (Spinner) findViewById(R.id.dates);
+        datesSpinner = (Spinner) findViewById(R.id.dates);
         detailChart = (LineChart) findViewById(R.id.detail_chart);
 
         title.setText(R.string.data_detail);
@@ -60,19 +65,11 @@ public class ActivityDataDetail extends XActivity {
         detailChart.setTouchEnabled(true);
         detailChart.animateX(1000);
 
-        dates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        datesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                requestDate = parent.getItemAtPosition(position).toString();
-                Log.d("tan", "onItemSelected: " + position + " id:" + id + " request date:" + requestDate);
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshData();
-                    }
-                });
-
-                thread.start();
+                final String requestDate = parent.getItemAtPosition(position).toString();
+                showChartRequest(requestDate);
             }
 
             @Override
@@ -81,35 +78,63 @@ public class ActivityDataDetail extends XActivity {
             }
         });
 
-        dates.setSelection(0);
+        datesSpinner.setSelection(0);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        refreshData();
     }
 
     private void refreshData() {
 
-        client = new OkHttpClient();
-        request = new Request.Builder()
-                .url(Const.SERVER_IP + "/auction/detail?date=" + requestDate)
-                .method("GET", null)
-                .build();
+        XThread.RunBackground(new Runnable() {
+            @Override
+            public void run() {
 
-        Call call = client.newCall(request);
-        try {
-            Response response = call.execute();
-            final String str = response.body().string();
-            Log.d("tan", "response str:" + str);
-            AuctionDetails details = LoganSquare.parse(str, AuctionDetails.class);
-            Log.d("tan", "json decode: " + details.ToJsonString());
+                try {
+                    Response response = Http.Get(Const.SERVER_IP + Const.URL_AUCTION_DETAIL_DATES);
+                    AuctionDetailDates datesResult = LoganSquare.parse(response.body().byteStream(), AuctionDetailDates.class);
+                    dates = datesResult.Dates;
 
-            generateDataAdapter(details);
-            Log.d("tan", "refreshData: show chart");
-            showChart();
+                    final mySpinnerAdapter mySpinnerAdapter = new mySpinnerAdapter(dates);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            datesSpinner.setAdapter(mySpinnerAdapter);
+                            datesSpinner.setSelection(dates.size() - 1);
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    private void generateDataAdapter(AuctionDetails details) {
+    private void showChartRequest(final String requestDate) {
+        XThread.RunBackground(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Response response = Http.Get(Const.SERVER_IP + "/auction/detail?date=" + requestDate);
+                    AuctionDetails details = LoganSquare.parse(response.body().byteStream(), AuctionDetails.class);
+
+                    generateDataAdapter(details, requestDate);
+                    showChart();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void generateDataAdapter(AuctionDetails details, String requestDate) {
 
         final int size = details.Details.length;
         distances.clear();
@@ -145,5 +170,37 @@ public class ActivityDataDetail extends XActivity {
                 }
             }
         });
+    }
+
+    class mySpinnerAdapter extends BaseAdapter {
+        private ArrayList<String> dates;
+
+        public mySpinnerAdapter(ArrayList<String> dates) {
+            this.dates = dates;
+        }
+
+        @Override
+        public int getCount() {
+            return dates.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return dates.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView tv = new TextView(ActivityDataDetail.this);
+            tv.setText(dates.get(position));
+            tv.setTextSize(18f);
+            tv.setPadding(20, 10, 20, 10);
+            return tv;
+        }
     }
 }
