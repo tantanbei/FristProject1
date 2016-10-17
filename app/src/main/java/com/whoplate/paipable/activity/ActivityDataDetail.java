@@ -105,7 +105,7 @@ public class ActivityDataDetail extends XActivity {
                         @Override
                         public void run() {
                             datesSpinner.setAdapter(mySpinnerAdapter);
-                            datesSpinner.setSelection(dates.size() - 1);
+                            datesSpinner.setSelection(0);
                         }
                     });
 
@@ -141,10 +141,10 @@ public class ActivityDataDetail extends XActivity {
 
         ArrayList<Entry> prices = new ArrayList<Entry>();
 
-        for (int i = size - 1; i >= 0; i--) {
+        for (int i = 0; i < size; i++) {
             AuctionDetail oneRow = details.Details[i];
 
-            Entry price = new Entry(oneRow.Price, size - i - 1);
+            Entry price = new Entry(oneRow.Price, i);
 
             prices.add(price);
             distances.add(String.valueOf(size - oneRow.Distance));
