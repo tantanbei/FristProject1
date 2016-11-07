@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
+import com.whoplate.paipable.networkpacket.Paper;
+import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.time.XTime;
 
@@ -59,11 +63,10 @@ public class HomeTabFragment extends XFragment {
     private TextView overPrice;
     private TextView historyData;
     private TextView signInEveryDay;
+    private RecyclerView message;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
-
-    private Activity currParent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,6 +86,7 @@ public class HomeTabFragment extends XFragment {
         runningForecast = (TextView) view.findViewById(R.id.running_forecast);
         overPrice = (TextView) view.findViewById(R.id.over_price);
         signInEveryDay = (TextView) view.findViewById(R.id.sign_in_everyday);
+        message = (RecyclerView) view.findViewById(R.id.home_message);
 
         for (int i = 0; i < srcIds.length; i++) {
             ImageView imageView = new ImageView(getContext());
@@ -138,6 +142,8 @@ public class HomeTabFragment extends XFragment {
                 startActivity(new Intent(Parent, ActivitySignIn.class));
             }
         });
+
+        getMessage();
 
         return view;
     }
@@ -244,6 +250,38 @@ public class HomeTabFragment extends XFragment {
         XThread.RunBackground(refreshRunnable, delay);
     }
 
+    private void getMessage() {
+        XThread.RunBackground(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Response response = Http.Get(Const.SERVER_IP + "/paper");
+                    Papers papers = LoganSquare.parse(response.body().byteStream(), Papers.class);
+
+                    Log.d("tan", "papers: " + papers.ToJsonString());
+
+                    generateMessage(papers.Data);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void generateMessage(final ArrayList<Paper> papers) {
+        message.setLayoutManager(new LinearLayoutManager(Parent));
+        message.setAdapter(new MyRecycleViewAdapter(papers));
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (refreshRunnable != null) {
+            XThread.Cancel(refreshRunnable);
+        }
+    }
+
     public class HomeViewPagerAdapter extends PagerAdapter {
 
         @Override
@@ -268,12 +306,44 @@ public class HomeTabFragment extends XFragment {
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.myViewHolder> {
+        ArrayList<Paper> data;
 
-        if (refreshRunnable != null) {
-            XThread.Cancel(refreshRunnable);
+        public MyRecycleViewAdapter(ArrayList<Paper> data) {
+            this.data = data;
+        }
+
+        @Override
+        public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_paper, null);
+            return new myViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(myViewHolder holder, int position) {
+            Log.d("tan", "onBindViewHolder: " + data.get(position).Title);
+            holder.title.setText(data.get(position).Title);
+
+            holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+
+        public class myViewHolder extends RecyclerView.ViewHolder {
+            public ImageView cover;
+            public TextView title;
+            public TextView date;
+
+            public myViewHolder(View itemView) {
+                super(itemView);
+
+                cover = (ImageView) itemView.findViewById(R.id.cover);
+                title = (TextView) itemView.findViewById(R.id.paper_title);
+                date = (TextView) itemView.findViewById(R.id.date);
+            }
         }
     }
 }
