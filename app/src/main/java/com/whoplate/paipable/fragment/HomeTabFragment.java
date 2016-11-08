@@ -28,6 +28,7 @@ import com.whoplate.paipable.activity.ActivityAuctionStrategy;
 import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivitySignIn;
+import com.whoplate.paipable.activity.ActivityWebView;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
@@ -320,11 +321,18 @@ public class HomeTabFragment extends XFragment {
         }
 
         @Override
-        public void onBindViewHolder(myViewHolder holder, int position) {
+        public void onBindViewHolder(myViewHolder holder, final int position) {
             Log.d("tan", "onBindViewHolder: " + data.get(position).Title);
             holder.title.setText(data.get(position).Title);
-
             holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
+            holder.root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Parent,ActivityWebView.class);
+                    intent.putExtra("paperid", data.get(position).PaperId);
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -333,6 +341,7 @@ public class HomeTabFragment extends XFragment {
         }
 
         public class myViewHolder extends RecyclerView.ViewHolder {
+            public View root;
             public ImageView cover;
             public TextView title;
             public TextView date;
@@ -340,6 +349,7 @@ public class HomeTabFragment extends XFragment {
             public myViewHolder(View itemView) {
                 super(itemView);
 
+                root = itemView;
                 cover = (ImageView) itemView.findViewById(R.id.cover);
                 title = (TextView) itemView.findViewById(R.id.paper_title);
                 date = (TextView) itemView.findViewById(R.id.date);

@@ -115,6 +115,12 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity
+            android:name=".activity.ActivityWebView"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name">
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="34a730a1376aefbefce12951a7e221eb41960022" />
