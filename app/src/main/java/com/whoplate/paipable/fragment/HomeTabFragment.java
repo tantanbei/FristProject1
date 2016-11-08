@@ -88,9 +88,9 @@ public class HomeTabFragment extends XFragment {
         signInEveryDay = (TextView) view.findViewById(R.id.sign_in_everyday);
         message = (RecyclerView) view.findViewById(R.id.home_message);
 
-        for (int i = 0; i < srcIds.length; i++) {
+        for (int srcId : srcIds) {
             ImageView imageView = new ImageView(getContext());
-            imageView.setBackgroundResource(srcIds[i]);
+            imageView.setBackgroundResource(srcId);
             ImageArrayList.add(imageView);
         }
 
