@@ -29,6 +29,7 @@ import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.ActivityWebView;
+import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
@@ -38,6 +39,7 @@ import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.time.XTime;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -65,6 +67,7 @@ public class HomeTabFragment extends XFragment {
     private TextView historyData;
     private TextView signInEveryDay;
     private RecyclerView message;
+    private MyRecycleViewAdapter adapter = null;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
@@ -144,7 +147,7 @@ public class HomeTabFragment extends XFragment {
             }
         });
 
-        getMessage();
+        message.setLayoutManager(new LinearLayoutManager(Parent));
 
         return view;
     }
@@ -153,6 +156,10 @@ public class HomeTabFragment extends XFragment {
     public void onStart() {
         super.onStart();
         refreshData(0);
+
+        if (adapter == null) {
+            getMessage();
+        }
     }
 
     private void refreshData(long delay) {
@@ -270,8 +277,8 @@ public class HomeTabFragment extends XFragment {
     }
 
     private void generateMessage(final ArrayList<Paper> papers) {
-        message.setLayoutManager(new LinearLayoutManager(Parent));
-        message.setAdapter(new MyRecycleViewAdapter(papers));
+        adapter = new MyRecycleViewAdapter(Parent, papers);
+        message.setAdapter(adapter);
     }
 
     @Override
@@ -308,15 +315,17 @@ public class HomeTabFragment extends XFragment {
     }
 
     public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.myViewHolder> {
-        ArrayList<Paper> data;
+        private ArrayList<Paper> data;
+        private WeakReference<Activity> a;
 
-        public MyRecycleViewAdapter(ArrayList<Paper> data) {
+        public MyRecycleViewAdapter(Activity a, ArrayList<Paper> data) {
             this.data = data;
+            this.a = new WeakReference<Activity>(a);
         }
 
         @Override
-        public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_paper, null);
+        public myViewHolder onCreateViewHolder(ViewGroup vg, int viewType) {
+            View view = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_paper, vg, false);
             return new myViewHolder(view);
         }
 
@@ -328,7 +337,7 @@ public class HomeTabFragment extends XFragment {
             holder.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Parent,ActivityWebView.class);
+                    Intent intent = new Intent(Parent, ActivityWebView.class);
                     intent.putExtra("paperid", data.get(position).PaperId);
                     startActivity(intent);
                 }
@@ -340,9 +349,8 @@ public class HomeTabFragment extends XFragment {
             return data.size();
         }
 
-        public class myViewHolder extends RecyclerView.ViewHolder {
+        class myViewHolder extends RecyclerView.ViewHolder {
             public View root;
-            public ImageView cover;
             public TextView title;
             public TextView date;
 
@@ -350,7 +358,6 @@ public class HomeTabFragment extends XFragment {
                 super(itemView);
 
                 root = itemView;
-                cover = (ImageView) itemView.findViewById(R.id.cover);
                 title = (TextView) itemView.findViewById(R.id.paper_title);
                 date = (TextView) itemView.findViewById(R.id.date);
             }
