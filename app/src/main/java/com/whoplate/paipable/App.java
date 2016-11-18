@@ -11,6 +11,11 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.IoniconsModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.TypiconsModule;
+import com.whoplate.paipable.http.SSLSocketFactoryEx;
+import com.whoplate.paipable.http.XRandom;
+
+import javax.net.ssl.SSLSocketFactory;
+
 import io.fabric.sdk.android.Fabric;
 
 public class App extends Application{
@@ -21,12 +26,20 @@ public class App extends Application{
 
     public static String AppDbDirectory;
 
+    public static SSLSocketFactory SetSslSocketFactory;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
 
         INSTANCE = this;
+
+        try {
+//            SetSslSocketFactory = new SSLSocketFactoryEx(null, XRandom.Get());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         initIconify();
 

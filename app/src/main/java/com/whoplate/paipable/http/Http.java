@@ -1,7 +1,5 @@
 package com.whoplate.paipable.http;
 
-import android.content.Context;
-
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.db.Pref;
 import com.whoplate.paipable.networkpacket.base.JsonBase;
@@ -21,7 +19,12 @@ public class Http {
 
     final public static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    static OkHttpClient client = new OkHttpClient();
+    static OkHttpClient client ;
+
+    static {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        client = builder.build();
+    }
 
     static public Response Get(final String url) {
         try {
