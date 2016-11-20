@@ -1,12 +1,15 @@
 package com.whoplate.paipable.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,28 +23,32 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.fragment.HomeTabFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionDetail;
 import com.whoplate.paipable.networkpacket.AuctionDetails;
+import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.base.AuctionDetailDates;
+import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.time.XTime;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 public class ActivityDataDetail extends XActivity {
 
-    Spinner datesSpinner;
-    LineChart detailChart;
+    private Spinner datesSpinner;
+    private LineChart detailChart;
+    private RecyclerView messages;
+    private TextView empty;
 
     ArrayList<String> dates = new ArrayList<>();
+
+    private MyRecycleViewAdapter adapter = null;
 
     LineDataSet pricesDataSet;
     ArrayList<String> distances = new ArrayList<String>();
@@ -57,6 +64,8 @@ public class ActivityDataDetail extends XActivity {
 
         datesSpinner = (Spinner) findViewById(R.id.dates);
         detailChart = (LineChart) findViewById(R.id.detail_chart);
+        messages = (RecyclerView) findViewById(R.id.messages);
+        empty = (TextView) findViewById(R.id.empty);
 
         title.setText(R.string.data_detail);
 
@@ -127,6 +136,24 @@ public class ActivityDataDetail extends XActivity {
                     generateDataAdapter(details, requestDate);
                     showChart();
 
+                    Response responseMessage = Http.Get(Const.SERVER_IP + "/paper/get/filter?filter=" + Const.DataKeywords.indexOf(requestDate));
+                    final Papers papers = LoganSquare.parse(responseMessage.body().byteStream(), Papers.class);
+
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (papers == null) {
+                                showEmpty();
+                                return;
+                            }else {
+                                hideEmpty();
+
+                                adapter = new MyRecycleViewAdapter(ActivityDataDetail.this, papers.Data);
+                                messages.setAdapter(adapter);
+                            }
+                        }
+                    });
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -172,6 +199,16 @@ public class ActivityDataDetail extends XActivity {
         });
     }
 
+    private void showEmpty() {
+        empty.setVisibility(View.VISIBLE);
+        messages.setVisibility(View.GONE);
+    }
+
+    private void hideEmpty() {
+        messages.setVisibility(View.VISIBLE);
+        empty.setVisibility(View.GONE);
+    }
+
     class mySpinnerAdapter extends BaseAdapter {
         private ArrayList<String> dates;
 
@@ -201,6 +238,56 @@ public class ActivityDataDetail extends XActivity {
             tv.setTextSize(18f);
             tv.setPadding(20, 10, 20, 10);
             return tv;
+        }
+    }
+
+    public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.myViewHolder> {
+        private ArrayList<Paper> data;
+        private WeakReference<Activity> a;
+
+        public MyRecycleViewAdapter(Activity a, ArrayList<Paper> data) {
+            this.data = data;
+            this.a = new WeakReference<Activity>(a);
+        }
+
+        @Override
+        public MyRecycleViewAdapter.myViewHolder onCreateViewHolder(ViewGroup vg, int viewType) {
+            View view = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_paper, vg, false);
+            return new MyRecycleViewAdapter.myViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(MyRecycleViewAdapter.myViewHolder holder, final int position) {
+            Log.d("tan", "onBindViewHolder: " + data.get(position).Title);
+            holder.title.setText(data.get(position).Title);
+            holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
+            holder.root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ActivityDataDetail.this, ActivityWebView.class);
+                    intent.putExtra("paperid", data.get(position).PaperId);
+                    startActivity(intent);
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+
+        class myViewHolder extends RecyclerView.ViewHolder {
+            public View root;
+            public TextView title;
+            public TextView date;
+
+            public myViewHolder(View itemView) {
+                super(itemView);
+
+                root = itemView;
+                title = (TextView) itemView.findViewById(R.id.paper_title);
+                date = (TextView) itemView.findViewById(R.id.date);
+            }
         }
     }
 }

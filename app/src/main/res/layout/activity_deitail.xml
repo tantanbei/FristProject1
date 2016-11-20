@@ -48,6 +48,19 @@
                 android:padding="10dp"
                 android:text="@string/announcement"
                 android:textSize="18sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/messages"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="3dp"/>
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="没有发现记录"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
