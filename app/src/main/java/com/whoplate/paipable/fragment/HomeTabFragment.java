@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -67,6 +68,7 @@ public class HomeTabFragment extends XFragment {
     private TextView historyData;
     private TextView signInEveryDay;
     private RecyclerView message;
+    private ScrollView scrollView;
     private MyRecycleViewAdapter adapter = null;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
@@ -78,6 +80,7 @@ public class HomeTabFragment extends XFragment {
 
         homeMenu = (IconTextView) view.findViewById(R.id.home_menu);
         homeCustomerService = (IconTextView) view.findViewById(R.id.home_customer_service);
+        scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
         auctionReady = (LinearLayout) view.findViewById(R.id.auction_ready);
         auctionIdle = (LinearLayout) view.findViewById(R.id.auction_idle);
@@ -279,6 +282,12 @@ public class HomeTabFragment extends XFragment {
     private void generateMessage(final ArrayList<Paper> papers) {
         adapter = new MyRecycleViewAdapter(Parent, papers);
         message.setAdapter(adapter);
+        App.Uihandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.scrollTo(0, 0);
+            }
+        }, 100);
     }
 
     @Override
