@@ -26,6 +26,7 @@ public class Const {
     static final public ArrayList<String> DataKeywords = new ArrayList<>();
 
     static {
+        DataKeywords.add(0,"");
         DataKeywords.add(1,"201501");
         DataKeywords.add(2,"201502");
         DataKeywords.add(3,"201503");

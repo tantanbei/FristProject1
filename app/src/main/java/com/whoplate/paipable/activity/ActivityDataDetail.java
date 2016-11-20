@@ -3,7 +3,7 @@ package com.whoplate.paipable.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,11 +23,11 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
-import com.whoplate.paipable.fragment.HomeTabFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionDetail;
 import com.whoplate.paipable.networkpacket.AuctionDetails;
 import com.whoplate.paipable.networkpacket.Paper;
+import com.whoplate.paipable.networkpacket.PaperFilter;
 import com.whoplate.paipable.networkpacket.base.AuctionDetailDates;
 import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
@@ -88,6 +88,8 @@ public class ActivityDataDetail extends XActivity {
         });
 
         datesSpinner.setSelection(0);
+
+        messages.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -136,7 +138,12 @@ public class ActivityDataDetail extends XActivity {
                     generateDataAdapter(details, requestDate);
                     showChart();
 
-                    Response responseMessage = Http.Get(Const.SERVER_IP + "/paper/get/filter?filter=" + Const.DataKeywords.indexOf(requestDate));
+                    PaperFilter filter = new PaperFilter();
+                    Log.d("tan", "run: "+Const.DataKeywords);
+                    filter.KeywordIds.add(Const.DataKeywords.indexOf(requestDate));
+
+                    Log.d("tan", "run: " + filter.KeywordIds);
+                    Response responseMessage = Http.Post(Const.SERVER_IP + "/paper/get/filter" ,LoganSquare.serialize(filter));
                     final Papers papers = LoganSquare.parse(responseMessage.body().byteStream(), Papers.class);
 
                     App.Uihandler.post(new Runnable() {
@@ -145,7 +152,7 @@ public class ActivityDataDetail extends XActivity {
                             if (papers == null) {
                                 showEmpty();
                                 return;
-                            }else {
+                            } else {
                                 hideEmpty();
 
                                 adapter = new MyRecycleViewAdapter(ActivityDataDetail.this, papers.Data);
