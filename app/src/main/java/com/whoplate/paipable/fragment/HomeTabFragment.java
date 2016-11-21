@@ -1,11 +1,9 @@
 package com.whoplate.paipable.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +28,6 @@ import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.ActivityWebView;
-import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
@@ -43,11 +40,7 @@ import com.whoplate.paipable.util.XDebug;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Date;
 
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 public class HomeTabFragment extends XFragment {
@@ -73,7 +66,7 @@ public class HomeTabFragment extends XFragment {
     private MyRecycleViewAdapter adapter = null;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
-    private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
+    private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
