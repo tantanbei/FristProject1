@@ -25,8 +25,8 @@ import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
 
 public class ActivityHome extends AppCompatActivity {
-    private int HOMEFRAGMENT = 0;
-    private int MINEFRAGMENT = 1;
+    private static final int HOMEFRAGMENT = 0;
+    private static final int MINEFRAGMENT = 1;
 
     private DrawerLayout homeDrawerLayout;
     private LinearLayout tabHome;
@@ -43,7 +43,7 @@ public class ActivityHome extends AppCompatActivity {
 
     final private String[] strs = new String[]{"{md-headset-mic}  联系客服"
             , "{entypo-new-message}  意见反馈"
-            , "{md-info-outline}  关于我们"
+            , "{md-info-outline}  关于拍牌宝"
             , "{fa-gear}  设置"};
 
     @Override
@@ -119,6 +119,11 @@ public class ActivityHome extends AppCompatActivity {
                         break;
                     case 1:
                         intent = new Intent(ActivityHome.this, ActivityFeedback.class);
+                        homeDrawerLayout.closeDrawers();
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        intent = new Intent(ActivityHome.this, ActivityAbout.class);
                         homeDrawerLayout.closeDrawers();
                         startActivity(intent);
                         break;
