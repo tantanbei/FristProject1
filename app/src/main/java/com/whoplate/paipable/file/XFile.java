@@ -1,5 +1,7 @@
 package com.whoplate.paipable.file;
 
+import com.whoplate.paipable.util.XDebug;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,7 +26,7 @@ public class XFile {
             try {
                 inputStream.close();
             } catch (Exception ee) {
-                eXDebug.Handle(e);
+                XDebug.Handle(e);
             }
             return null;
         }

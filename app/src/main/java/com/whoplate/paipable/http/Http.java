@@ -4,6 +4,7 @@ import com.whoplate.paipable.R;
 import com.whoplate.paipable.db.Pref;
 import com.whoplate.paipable.networkpacket.base.JsonBase;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.util.ArrayList;

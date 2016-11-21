@@ -5,6 +5,7 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.file.XFile;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
