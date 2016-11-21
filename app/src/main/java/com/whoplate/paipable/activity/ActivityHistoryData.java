@@ -23,6 +23,7 @@ import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.networkpacket.AuctionHistoryResult;
 import com.whoplate.paipable.networkpacket.AuctionHistoryResults;
 import com.whoplate.paipable.networkpacket.RequestAuctionHistoryPacket;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -198,7 +199,7 @@ public class ActivityHistoryData extends XActivity {
             showDetailByIndex(dates.size() - 1);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
         }
     }
 

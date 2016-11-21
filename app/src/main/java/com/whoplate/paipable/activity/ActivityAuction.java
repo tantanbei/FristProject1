@@ -10,6 +10,7 @@ import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.networkpacket.CurrentPacket;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -130,7 +131,7 @@ public class ActivityAuction extends XActivity {
                 }
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
 
             XToast.Show(R.string.request_fails);
 

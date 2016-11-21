@@ -14,6 +14,7 @@ import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.StrategyPacket;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.util.XDebug;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -108,7 +109,7 @@ public class ActivityAuctionStrategy extends XActivity implements View.OnClickLi
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    XDebug.Handle(e);
                     timer.cancel();
                 }
             }

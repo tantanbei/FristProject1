@@ -87,13 +87,13 @@ public class Pref {
             out.write(outBytes);
             out.flush();
         } catch (Exception e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
         } finally {
             //close file..
             try {
                 out.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                XDebug.Handle(e);
             }
 
             //pending write complete
@@ -132,7 +132,7 @@ public class Pref {
             PREF_DATA = LoganSquare.parse(new ByteArrayInputStream(bytes), PrefPacket.class);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
 
             //need to remove json file if corrupted...JsonPrefModel
             DeleteAll();
@@ -167,7 +167,7 @@ public class Pref {
                 return (ArrayList) LoganSquare.parseList(r, Integer.class);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             return def;
         }
 
@@ -183,7 +183,7 @@ public class Pref {
         try {
             PREF_DATA.Data.put(key, LoganSquare.serialize(v, Integer.class));
         } catch (Exception e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
         }
     }
 

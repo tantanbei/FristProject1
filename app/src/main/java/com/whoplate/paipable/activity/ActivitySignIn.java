@@ -17,6 +17,7 @@ import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 
@@ -70,7 +71,7 @@ public class ActivitySignIn extends XActivity {
                             });
                         } catch (IOException e) {
                             XToast.Show(R.string.request_fails);
-                            e.printStackTrace();
+                            XDebug.Handle(e);
                         }
                     }
                 });
@@ -107,7 +108,7 @@ public class ActivitySignIn extends XActivity {
 
                     Log.d("tan", "pointStatus:" + pointStatus.ToJsonString());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    XDebug.Handle(e);
                     XToast.Show(R.string.request_fails);
                 }
             }

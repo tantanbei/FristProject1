@@ -32,6 +32,7 @@ import com.whoplate.paipable.networkpacket.base.AuctionDetailDates;
 import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.time.XTime;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -121,7 +122,7 @@ public class ActivityDataDetail extends XActivity {
                     });
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    XDebug.Handle(e);
                 }
             }
         });
@@ -162,7 +163,7 @@ public class ActivityDataDetail extends XActivity {
                     });
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    XDebug.Handle(e);
                 }
             }
         });

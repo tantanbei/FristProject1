@@ -10,7 +10,7 @@ public class JsonBase {
         try {
             return LoganSquare.serialize(this);
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
         }
 
         return null;

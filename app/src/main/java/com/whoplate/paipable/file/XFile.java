@@ -20,11 +20,11 @@ public class XFile {
             inputStream = new FileInputStream(f);
             length = inputStream.available();
         } catch (Exception e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             try {
                 inputStream.close();
             } catch (Exception ee) {
-                ee.printStackTrace();
+                eXDebug.Handle(e);
             }
             return null;
         }
@@ -34,13 +34,13 @@ public class XFile {
         try {
             inputStream.read(bytes);
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             return null;
         } finally {
             try {
                 inputStream.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                XDebug.Handle(e);
             }
         }
 

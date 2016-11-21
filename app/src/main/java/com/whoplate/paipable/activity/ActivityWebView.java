@@ -13,6 +13,7 @@ import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.OkPacket;
 import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.util.XDebug;
 
 import okhttp3.Response;
 
@@ -60,7 +61,7 @@ public class ActivityWebView extends XActivity {
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    XDebug.Handle(e);
                 }
             }
         });

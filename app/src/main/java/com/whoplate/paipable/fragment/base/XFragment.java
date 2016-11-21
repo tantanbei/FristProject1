@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.whoplate.paipable.util.XDebug;
+
 public class XFragment extends Fragment {
 
     public Activity Parent;
@@ -16,7 +18,7 @@ public class XFragment extends Fragment {
 
             Parent = (Activity) context;
         } catch (Exception e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
         }
 
     }

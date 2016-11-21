@@ -38,6 +38,7 @@ import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.time.XTime;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -252,7 +253,7 @@ public class HomeTabFragment extends XFragment {
                             }
                         });
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        XDebug.Handle(e);
                     }
                 }
             };
@@ -273,7 +274,7 @@ public class HomeTabFragment extends XFragment {
 
                     generateMessage(papers.Data);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    XDebug.Handle(e);
                 }
             }
         });

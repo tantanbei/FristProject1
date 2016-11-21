@@ -41,7 +41,7 @@ public class Http {
             return response;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             XToast.Show(R.string.request_fails);
         }
 
@@ -66,7 +66,7 @@ public class Http {
             return response;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             XToast.Show(R.string.request_fails);
         }
 
@@ -92,7 +92,7 @@ public class Http {
             return response;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             XToast.Show(R.string.request_fails);
         }
 
@@ -124,7 +124,7 @@ public class Http {
             return response;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             XToast.Show(R.string.request_fails);
         }
 
@@ -146,7 +146,7 @@ public class Http {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             XToast.Show(R.string.request_fails);
         }
 
@@ -171,7 +171,7 @@ public class Http {
 
             return response;
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             XToast.Show(R.string.request_fails);
         }
 
@@ -204,7 +204,7 @@ public class Http {
             return response;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
             XToast.Show(R.string.request_fails);
         }
 

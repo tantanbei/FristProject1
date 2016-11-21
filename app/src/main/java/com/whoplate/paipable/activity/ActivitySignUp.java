@@ -20,6 +20,7 @@ import com.whoplate.paipable.networkpacket.User;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.util.Random;
@@ -145,7 +146,7 @@ public class ActivitySignUp extends XActivity {
                             }
                         } catch (IOException e) {
                             XToast.Show(R.string.request_fails);
-                            e.printStackTrace();
+                            XDebug.Handle(e);
                         }
                     }
                 });
@@ -202,7 +203,7 @@ public class ActivitySignUp extends XActivity {
                             }
                         } catch (IOException e) {
                             XToast.Show(R.string.request_fails);
-                            e.printStackTrace();
+                            XDebug.Handle(e);
                         }
 
                     }
