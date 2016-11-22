@@ -43,8 +43,8 @@ public class ActivityHome extends AppCompatActivity {
 
     final private String[] strs = new String[]{"{md-headset-mic}  联系客服"
             , "{entypo-new-message}  意见反馈"
-            , "{md-info-outline}  关于拍牌宝"
-            , "{fa-gear}  设置"};
+            , "{md-info-outline}  关于拍牌宝"};
+//            , "{fa-gear}  设置"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
