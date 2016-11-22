@@ -18,14 +18,15 @@ import com.whoplate.paipable.util.XDebug;
 import okhttp3.Response;
 
 public class ActivityWebView extends XActivity {
-    static private String htmlHead = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"/></head>";
-    static private String htmlBodyStart = "<body>";
-    static private String htmlBodyEnd = "</body>";
-    static private String htmlStart = "<html lang=\"en\">";
-    static private String htmlEnd = "</html>";
+    final static private String htmlHead = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"/></head>";
+    final static private String htmlBodyStart = "<body>";
+    final static private String htmlBodyEnd = "</body>";
+    final static private String htmlStart = "<html lang=\"en\">";
+    final static private String htmlEnd = "</html>";
     private WebView webView;
 
     private int paperId;
+    private String titleStr;
 
     @Override
     public int GetContentView() {
@@ -40,6 +41,8 @@ public class ActivityWebView extends XActivity {
 
         Intent intent = getIntent();
         paperId = intent.getIntExtra("paperid", 0);
+        titleStr = intent.getStringExtra("title");
+        title.setText(titleStr);
 
         if (paperId == 0) {
             return;

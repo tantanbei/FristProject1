@@ -68,11 +68,17 @@ public class ActivityMessage extends XActivity {
             public void run() {
                 try {
                     Response response = Http.Get(Const.SERVER_IP + "/paper");
-                    Papers papers = LoganSquare.parse(response.body().byteStream(), Papers.class);
+                    final Papers papers = LoganSquare.parse(response.body().byteStream(), Papers.class);
 
                     Log.d("tan", "papers: " + papers.ToJsonString());
 
-                    generateMessage(papers.Data);
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            generateMessage(papers.Data);
+                        }
+                    });
+
                 } catch (IOException e) {
                     XDebug.Handle(e);
                 }
@@ -83,6 +89,7 @@ public class ActivityMessage extends XActivity {
     private void generateMessage(final ArrayList<Paper> papers) {
         adapter = new MyRecycleViewAdapter(this, papers);
         message.setAdapter(adapter);
+        message.notify();
     }
 
     public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.myViewHolder> {
@@ -110,6 +117,7 @@ public class ActivityMessage extends XActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(ActivityMessage.this, ActivityWebView.class);
                     intent.putExtra("paperid", data.get(position).PaperId);
+                    intent.putExtra("title", data.get(position).Title);
                     startActivity(intent);
                 }
             });

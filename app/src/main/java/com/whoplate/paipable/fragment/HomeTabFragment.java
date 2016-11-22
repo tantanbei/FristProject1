@@ -266,11 +266,16 @@ public class HomeTabFragment extends XFragment {
             public void run() {
                 try {
                     Response response = Http.Get(Const.SERVER_IP + "/paper");
-                    Papers papers = LoganSquare.parse(response.body().byteStream(), Papers.class);
+                    final Papers papers = LoganSquare.parse(response.body().byteStream(), Papers.class);
 
                     Log.d("tan", "papers: " + papers.ToJsonString());
 
-                    generateMessage(papers.Data);
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            generateMessage(papers.Data);
+                        }
+                    });
                 } catch (IOException e) {
                     XDebug.Handle(e);
                 }
@@ -346,6 +351,7 @@ public class HomeTabFragment extends XFragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Parent, ActivityWebView.class);
+                    intent.putExtra("title", data.get(position).Title);
                     intent.putExtra("paperid", data.get(position).PaperId);
                     startActivity(intent);
                 }

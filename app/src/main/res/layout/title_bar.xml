@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginBottom="1dp"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginBottom="1dp"
     android:background="@color/home_title_background">
 
     <com.joanzapata.iconify.widget.IconTextView
@@ -8,38 +10,41 @@
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:gravity="center_vertical"
-        android:textColor="@color/white"
         android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
         android:text="{ion-chevron-left}"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
         android:gravity="center"
-        android:textColor="@color/white"
         android:text="@string/app_name"
+        android:textColor="@color/white"
         android:textSize="20dp" />
 
     <TextView
         android:id="@+id/right_button"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:maxWidth="100dp"
         android:layout_gravity="right"
+        android:layout_marginRight="15dp"
         android:gravity="center_vertical"
+        android:maxWidth="100dp"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:layout_marginRight="15dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/title_bar_bottom_line"
-        android:layout_gravity="bottom"/>
+        android:layout_gravity="bottom"
+        android:background="@color/title_bar_bottom_line" />
 
 </FrameLayout>

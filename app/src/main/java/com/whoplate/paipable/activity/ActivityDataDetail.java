@@ -274,6 +274,7 @@ public class ActivityDataDetail extends XActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(ActivityDataDetail.this, ActivityWebView.class);
                     intent.putExtra("paperid", data.get(position).PaperId);
+                    intent.putExtra("title", data.get(position).Title);
                     startActivity(intent);
                 }
             });
