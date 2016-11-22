@@ -22,7 +22,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
-import com.whoplate.paipable.activity.ActivityAuctionIdle;
+import com.whoplate.paipable.activity.ActivityMessage;
 import com.whoplate.paipable.activity.ActivityAuctionStrategy;
 import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
@@ -30,7 +30,6 @@ import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.ActivityWebView;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
-import com.whoplate.paipable.layoutManager.FullyLinearLayoutManager;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
 import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.base.Papers;
@@ -116,7 +115,7 @@ public class HomeTabFragment extends XFragment {
         auctionIdle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Parent, ActivityAuctionIdle.class));
+                startActivity(new Intent(Parent, ActivityMessage.class));
             }
         });
 
@@ -129,7 +128,12 @@ public class HomeTabFragment extends XFragment {
 
         auctionReady.setOnClickListener(listener);
         auctionRunning.setOnClickListener(listener);
-        auctionOver.setOnClickListener(listener);
+        auctionOver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Parent, ActivityMessage.class));
+            }
+        });
 
         historyData.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,9 +5,9 @@
 
     <include layout="@layout/title_bar"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/acution_idle_view_page"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/all_messages"
         android:layout_width="match_parent"
-        android:layout_height="120dp"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
