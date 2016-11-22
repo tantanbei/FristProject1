@@ -30,6 +30,7 @@ import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.ActivityWebView;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.layoutManager.FullyLinearLayoutManager;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
 import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.base.Papers;
