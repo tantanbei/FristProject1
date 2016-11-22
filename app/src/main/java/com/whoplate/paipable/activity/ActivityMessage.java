@@ -89,7 +89,6 @@ public class ActivityMessage extends XActivity {
     private void generateMessage(final ArrayList<Paper> papers) {
         adapter = new MyRecycleViewAdapter(this, papers);
         message.setAdapter(adapter);
-        message.notify();
     }
 
     public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.myViewHolder> {
