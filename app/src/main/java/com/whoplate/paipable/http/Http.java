@@ -16,11 +16,19 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Http {
-    final private static String SUCCEED = "succeed";//0:mean is failed; 1: mean is succeed
+    final private static String HEADER_SUCCEED = "succeed";//0:mean is failed; 1: mean is succeed
+    final private static String FAILED = "0";
+    final private static String SUCCEED = "1";
+
+    final private static String HEADER_TOKEN = "t_tokenid";
+    final private static String HEADER_ERROR = "t_error_code";
+
+    final private static String ERR_CODE_AUTH_FAILED = "0";
+    final private static String ERR_CODE_FAIL_DATA = "1";
 
     final public static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    static OkHttpClient client ;
+    static OkHttpClient client;
 
     static {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -213,7 +221,7 @@ public class Http {
     }
 
     static private boolean checkIsSucceed(Response response) {
-        if (response == null || response.header(SUCCEED, "0").equals("0")) {
+        if (response == null || !response.header(HEADER_SUCCEED, FAILED).equals(SUCCEED)) {
             return false;
         } else {
             return true;
