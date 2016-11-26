@@ -1,5 +1,10 @@
 package com.whoplate.paipable.http;
 
+import android.util.Log;
+
+import com.bluelinelabs.logansquare.LoganSquare;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.db.Pref;
 import com.whoplate.paipable.networkpacket.base.JsonBase;
@@ -8,6 +13,7 @@ import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -38,8 +44,9 @@ public class Http {
     static public Response Get(final String url) {
         try {
             Request request = new Request.Builder()
-                    .url(url)
+                    .url(Const.SERVER_IP + url)
                     .get()
+                    .addHeader(HEADER_TOKEN, Pref.Get(Pref.TOKENID, ""))
                     .build();
 
             Response response = client.newCall(request).execute();
@@ -57,94 +64,15 @@ public class Http {
         return null;
     }
 
-    static public Response Get(final String url, final boolean withSession) {
-        try {
-            int userId = Pref.Get(Pref.USERID, 0);
-
-            Request request = new Request.Builder()
-                    .url(url)
-                    .header("userid", String.valueOf(userId))
-                    .get()
-                    .build();
-
-            Response response = client.newCall(request).execute();
-            if (!checkIsSucceed(response)) {
-                throw new IOException();
-            }
-
-            return response;
-
-        } catch (IOException e) {
-            XDebug.Handle(e);
-            XToast.Show(R.string.request_fails);
-        }
-
-        return null;
-    }
-
-    static public Response Get(final String url, final String heads, final String values) {
+    static public Response Post(final String url, final Object packet) {
         try {
 
-            Request.Builder builder = new Request.Builder()
-                    .url(url)
-                    .get();
+            String json = LoganSquare.serialize(packet);
 
-            builder.header(heads, values);
-
-            Request request = builder.build();
-
-            Response response = client.newCall(request).execute();
-            if (!checkIsSucceed(response)) {
-                throw new IOException();
-            }
-
-            return response;
-
-        } catch (IOException e) {
-            XDebug.Handle(e);
-            XToast.Show(R.string.request_fails);
-        }
-
-        return null;
-    }
-
-    static public Response Get(final String url, final ArrayList<String> heads, final ArrayList<String> values) {
-        try {
-
-            if (heads.size() != values.size()) {
-                throw new RuntimeException("heads size is not equal value size!!!");
-            }
-
-            Request.Builder builder = new Request.Builder()
-                    .url(url)
-                    .get();
-
-            for (int i = 0; i < heads.size(); i++) {
-                builder.header(heads.get(i), values.get(i));
-            }
-
-            Request request = builder.build();
-
-            Response response = client.newCall(request).execute();
-            if (!checkIsSucceed(response)) {
-                throw new IOException();
-            }
-
-            return response;
-
-        } catch (IOException e) {
-            XDebug.Handle(e);
-            XToast.Show(R.string.request_fails);
-        }
-
-        return null;
-    }
-
-    static public Response Post(final String url, final String json) {
-        try {
             RequestBody body = RequestBody.create(JSON, json);
             Request request = new Request.Builder()
-                    .url(url)
+                    .url(Const.SERVER_IP + url)
+                    .header(HEADER_TOKEN, Pref.Get(Pref.TOKENID, ""))
                     .post(body)
                     .build();
 
@@ -154,64 +82,6 @@ public class Http {
             }
 
             return response;
-        } catch (Exception e) {
-            XDebug.Handle(e);
-            XToast.Show(R.string.request_fails);
-        }
-
-        return null;
-    }
-
-    static public Response Post(final String url, final JsonBase packet) {
-        try {
-
-            String json = packet.ToJsonString();
-
-            RequestBody body = RequestBody.create(JSON, json);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .build();
-
-            Response response = client.newCall(request).execute();
-            if (!checkIsSucceed(response)) {
-                throw new IOException();
-            }
-
-            return response;
-        } catch (IOException e) {
-            XDebug.Handle(e);
-            XToast.Show(R.string.request_fails);
-        }
-
-        return null;
-    }
-
-    static public Response Post(final String url, final JsonBase packet, final boolean withSession) {
-        if (!withSession) {
-            return Post(url, packet);
-        }
-
-        try {
-
-            int userId = Pref.Get(Pref.USERID, 0);
-
-            String json = packet.ToJsonString();
-
-            RequestBody body = RequestBody.create(JSON, json);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .header("userid", String.valueOf(userId))
-                    .post(body)
-                    .build();
-
-            Response response = client.newCall(request).execute();
-            if (!checkIsSucceed(response)) {
-                throw new IOException();
-            }
-
-            return response;
-
         } catch (IOException e) {
             XDebug.Handle(e);
             XToast.Show(R.string.request_fails);

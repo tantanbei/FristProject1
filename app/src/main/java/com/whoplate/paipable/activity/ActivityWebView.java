@@ -56,7 +56,7 @@ public class ActivityWebView extends XActivity {
             @Override
             public void run() {
                 try {
-                    Response response = Http.Get(Const.SERVER_IP + Const.URL_PAPER_CONTENT + "?paperid=" + paperId);
+                    Response response = Http.Get(Const.URL_APN + Const.URL_PAPER_CONTENT + "?paperid=" + paperId);
 
                     final OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
                     if (packet.Ok) {

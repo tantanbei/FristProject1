@@ -54,7 +54,7 @@ public class ActivitySignIn extends XActivity {
                     public void run() {
                         try {
 
-                            Response response = Http.Get(Const.SERVER_IP + Const.URL_SIGN_IN, true);
+                            Response response = Http.Get(Const.URL_APN + Const.URL_SIGN_IN);
                             final SignInBack packet = LoganSquare.parse(response.body().byteStream(), SignInBack.class);
 
                             App.Uihandler.post(new Runnable() {
@@ -92,7 +92,7 @@ public class ActivitySignIn extends XActivity {
             @Override
             public void run() {
                 try {
-                    Response response = Http.Get(Const.SERVER_IP + Const.URL_POINT_STATUS, true);
+                    Response response = Http.Get(Const.URL_API + Const.URL_POINT_STATUS);
                     final PointStatus pointStatus = LoganSquare.parse(response.body().byteStream(), PointStatus.class);
 
                     App.Uihandler.post(new Runnable() {

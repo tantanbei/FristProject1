@@ -20,9 +20,11 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionHistoryResult;
 import com.whoplate.paipable.networkpacket.AuctionHistoryResults;
 import com.whoplate.paipable.networkpacket.RequestAuctionHistoryPacket;
+import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
@@ -51,9 +53,6 @@ public class ActivityHistoryData extends XActivity {
     TextView averagePrice;
     TextView cautionPrice;
     Button priceDetail;
-
-    OkHttpClient client;
-    Request request;
 
     AuctionHistoryResults allHistoryCache;
     boolean forceToRefreshData;
@@ -138,14 +137,12 @@ public class ActivityHistoryData extends XActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Thread thread = new Thread(new Runnable() {
+        XThread.RunBackground(new Runnable() {
             @Override
             public void run() {
                 refreshData();
             }
         });
-
-        thread.start();
     }
 
     private void showDetailByIndex(final int index) {
@@ -175,15 +172,10 @@ public class ActivityHistoryData extends XActivity {
 
         RequestAuctionHistoryPacket requestAuctionHistoryPacket = new RequestAuctionHistoryPacket(true, true, true, true, true, true);
         Log.d("tan", "refreshData: " + requestAuctionHistoryPacket.ToJsonString());
-        client = new OkHttpClient();
-        request = new Request.Builder()
-                .url(Const.SERVER_IP + "/auction/history?request=" + requestAuctionHistoryPacket.ToJsonString())
-                .method("GET", null)
-                .build();
 
-        Call call = client.newCall(request);
         try {
-            Response response = call.execute();
+
+            Response response = Http.Get(Const.URL_APN + "/auction/history?request=" + requestAuctionHistoryPacket.ToJsonString());
             final String str = response.body().string();
             if (str == null || str.length() == 0) {
                 return;

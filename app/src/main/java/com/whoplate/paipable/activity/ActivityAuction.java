@@ -55,7 +55,7 @@ public class ActivityAuction extends XActivity {
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                getCurrentPrice(Const.SERVER_IP + "/auction/price");
+                getCurrentPrice(Const.URL_API + "/auction/price");
             }
         };
 

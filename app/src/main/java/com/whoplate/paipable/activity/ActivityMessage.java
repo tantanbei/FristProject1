@@ -67,7 +67,7 @@ public class ActivityMessage extends XActivity {
             @Override
             public void run() {
                 try {
-                    Response response = Http.Get(Const.SERVER_IP + "/paper");
+                    Response response = Http.Get(Const.URL_APN + Const.URL_PAPER);
                     final Papers papers = LoganSquare.parse(response.body().byteStream(), Papers.class);
 
                     Log.d("tan", "papers: " + papers.ToJsonString());

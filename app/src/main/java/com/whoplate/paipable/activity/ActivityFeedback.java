@@ -55,7 +55,7 @@ public class ActivityFeedback extends XActivity {
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Response response = Http.Post(Const.SERVER_IP + Const.URL_FEEDBACK, packet, true);
+                        Response response = Http.Post(Const.URL_API + Const.URL_FEEDBACK, packet);
 
                         if (response != null) {
                             XToast.Show(R.string.send_success);

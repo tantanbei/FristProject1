@@ -89,7 +89,7 @@ public class ActivityPurchaseIntent extends XActivity {
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Http.Post(Const.SERVER_IP + Const.URL_PURCHASE_INTENT, packet, true);
+                        Http.Post(Const.URL_API + Const.URL_PURCHASE_INTENT, packet);
                         finish();
                     }
                 });

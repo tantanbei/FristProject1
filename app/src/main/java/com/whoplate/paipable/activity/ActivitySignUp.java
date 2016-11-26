@@ -113,12 +113,12 @@ public class ActivitySignUp extends XActivity {
                             final Response response;
                             switch (activityType) {
                                 case SIGN_UP:
-                                    response = Http.Post(Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, false, verificationCode));
+                                    response = Http.Post(Const.URL_APN + Const.URL_GET_CODE, new GetCode(phoneNumber, false, verificationCode));
                                     break;
 
                                 case RESET_PASSWORD:
                                 case MODIFY_PASSWORD:
-                                    response = Http.Post(Const.SERVER_IP + Const.URL_GET_CODE, new GetCode(phoneNumber, true, verificationCode));
+                                    response = Http.Post(Const.URL_APN + Const.URL_GET_CODE, new GetCode(phoneNumber, true, verificationCode));
                                     break;
 
                                 default:
@@ -179,7 +179,7 @@ public class ActivitySignUp extends XActivity {
                     @Override
                     public void run() {
                         try {
-                            Response response = Http.Post(Const.SERVER_IP + Const.URL_SING_UP, new SignUpInPacket(phoneNumber, passwordStr));
+                            Response response = Http.Post(Const.URL_APN + Const.URL_SING_UP, new SignUpInPacket(phoneNumber, passwordStr));
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
                             if (!packet.Ok) {

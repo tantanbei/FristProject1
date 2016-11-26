@@ -48,7 +48,7 @@ public class ActivityInitUserInfo extends XActivity {
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Response response = Http.Post(Const.SERVER_IP + Const.URL_CHANGE_USERNAME, new ChangeUsername(newUsername), true);
+                        Response response = Http.Post(Const.URL_API + Const.URL_CHANGE_USERNAME, new ChangeUsername(newUsername));
                         if (response == null) {
                             return;
                         }
