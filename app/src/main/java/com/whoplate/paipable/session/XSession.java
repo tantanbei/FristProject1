@@ -14,6 +14,7 @@ public class XSession {
         Pref.Set(Pref.USERID, 0);
         Pref.Set(Pref.USERNAME, "");
         Pref.Set(Pref.USERPHONE, "");
+        Pref.Set(Pref.TOKENID, "");
         Pref.Save();
     }
 }

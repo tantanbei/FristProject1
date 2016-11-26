@@ -24,6 +24,7 @@ public class Pref {
     public static String USERID = "USERID";
     public static String USERNAME = "USERNAME";
     public static String USERPHONE = "USERPHONE";
+    public static String TOKENID = "TOKENID";
 
     //path of pref file...each system might have diff path
     private static String path;

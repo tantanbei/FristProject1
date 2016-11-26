@@ -14,6 +14,9 @@ public class User {
     @JsonField
     public String UserName;
 
+    @JsonField
+    public String TokenId;
+
     public User() {
 
     }

@@ -76,11 +76,12 @@ public class ActivityLogIn extends XActivity {
                                 XToast.Show(R.string.login_success);
 
                                 User user = LoganSquare.parse(packet.Data, User.class);
-                                Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone);
+                                Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone+" tokenid:"+user.TokenId);
 
                                 Pref.Set(Pref.USERID, user.UserId);
                                 Pref.Set(Pref.USERNAME, user.UserName);
                                 Pref.Set(Pref.USERPHONE, user.UserPhone);
+                                Pref.Set(Pref.TOKENID, user.TokenId);
                                 Pref.Save();
 
                                 finish();
