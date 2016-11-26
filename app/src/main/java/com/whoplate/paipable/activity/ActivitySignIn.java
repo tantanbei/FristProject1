@@ -54,7 +54,7 @@ public class ActivitySignIn extends XActivity {
                     public void run() {
                         try {
 
-                            Response response = Http.Get(Const.URL_APN + Const.URL_SIGN_IN);
+                            Response response = Http.Get(Const.URL_API + Const.URL_SIGN_IN);
                             final SignInBack packet = LoganSquare.parse(response.body().byteStream(), SignInBack.class);
 
                             App.Uihandler.post(new Runnable() {

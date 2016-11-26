@@ -107,7 +107,7 @@ public class ActivityDataDetail extends XActivity {
             public void run() {
 
                 try {
-                    Response response = Http.Get(Const.URL_API + Const.URL_AUCTION_DETAIL_DATES);
+                    Response response = Http.Get(Const.URL_APN + Const.URL_AUCTION_DETAIL_DATES);
                     AuctionDetailDates datesResult = LoganSquare.parse(response.body().byteStream(), AuctionDetailDates.class);
                     dates = datesResult.Dates;
 
@@ -133,18 +133,18 @@ public class ActivityDataDetail extends XActivity {
             @Override
             public void run() {
                 try {
-                    Response response = Http.Get(Const.URL_API + "/auction/detail?date=" + requestDate);
+                    Response response = Http.Get(Const.URL_APN + Const.URL_AUCTION_DETAIL + "?date=" + requestDate);
                     AuctionDetails details = LoganSquare.parse(response.body().byteStream(), AuctionDetails.class);
 
                     generateDataAdapter(details, requestDate);
                     showChart();
 
                     PaperFilter filter = new PaperFilter();
-                    Log.d("tan", "run: "+Const.DataKeywords);
+                    Log.d("tan", "run: " + Const.DataKeywords);
                     filter.KeywordIds.add(Const.DataKeywords.indexOf(requestDate));
 
                     Log.d("tan", "run: " + filter.KeywordIds);
-                    Response responseMessage = Http.Post(Const.URL_APN + "/paper/get/filter" ,filter);
+                    Response responseMessage = Http.Post(Const.URL_APN + "/paper/get/filter", filter);
                     final Papers papers = LoganSquare.parse(responseMessage.body().byteStream(), Papers.class);
 
                     App.Uihandler.post(new Runnable() {

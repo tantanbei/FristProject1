@@ -173,7 +173,7 @@ public class HomeTabFragment extends XFragment {
 
                     try {
 
-                        final Response response = Http.Get(Const.URL_API + Const.URL_AUCTION_STATUS);
+                        final Response response = Http.Get(Const.URL_APN + Const.URL_AUCTION_STATUS);
                         final String str = response.body().string();
                         Log.d("tan", "refreshData: " + str);
 
