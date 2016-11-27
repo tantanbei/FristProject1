@@ -15,7 +15,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="3dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/logo" />
 
         <TextView
             android:id="@+id/version"
