@@ -1,13 +1,18 @@
 package com.whoplate.paipable.http;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
+import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
+import com.whoplate.paipable.activity.ActivityLogIn;
 import com.whoplate.paipable.db.Pref;
 import com.whoplate.paipable.networkpacket.base.JsonBase;
+import com.whoplate.paipable.session.XSession;
+import com.whoplate.paipable.stack.XStack;
 import com.whoplate.paipable.toast.XToast;
 import com.whoplate.paipable.util.XDebug;
 
@@ -51,6 +56,13 @@ public class Http {
 
             Response response = client.newCall(request).execute();
             if (!checkIsSucceed(response)) {
+                if (response == null || response.header(HEADER_ERROR, "").equals(ERR_CODE_AUTH_FAILED)) {
+                    XSession.Logout();
+                    Intent intent = new Intent(XStack.GetLastAliveActivity(), ActivityLogIn.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    XStack.GetLastAliveActivity().startActivity(intent);
+                    return null;
+                }
                 throw new IOException();
             }
 
@@ -78,6 +90,13 @@ public class Http {
 
             Response response = client.newCall(request).execute();
             if (!checkIsSucceed(response)) {
+                if (response == null || response.header(HEADER_ERROR, "").equals(ERR_CODE_AUTH_FAILED)) {
+                    XSession.Logout();
+                    Intent intent = new Intent(XStack.GetLastAliveActivity(), ActivityLogIn.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    XStack.GetLastAliveActivity().startActivity(intent);
+                    return null;
+                }
                 throw new IOException();
             }
 
