@@ -28,6 +28,7 @@ import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.ActivityWebView;
+import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
@@ -63,7 +64,7 @@ public class HomeTabFragment extends XFragment {
     private TextView signInEveryDay;
     private RecyclerView message;
     private ScrollView scrollView;
-    private MyRecycleViewAdapter adapter = null;
+    private PaperListRecycleViewAdapter adapter = null;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
     private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager};
@@ -284,7 +285,7 @@ public class HomeTabFragment extends XFragment {
     }
 
     private void generateMessage(final ArrayList<Paper> papers) {
-        adapter = new MyRecycleViewAdapter(Parent, papers);
+        adapter = new PaperListRecycleViewAdapter(Parent, papers);
         message.setAdapter(adapter);
         App.Uihandler.postDelayed(new Runnable() {
             @Override
@@ -324,57 +325,6 @@ public class HomeTabFragment extends XFragment {
         public Object instantiateItem(ViewGroup container, int position) {
             container.addView(ImageArrayList.get(position % ImageArrayList.size()), 0);
             return ImageArrayList.get(position % ImageArrayList.size());
-        }
-    }
-
-    public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.myViewHolder> {
-        private ArrayList<Paper> data;
-        private WeakReference<Activity> a;
-
-        public MyRecycleViewAdapter(Activity a, ArrayList<Paper> data) {
-            this.data = data;
-            this.a = new WeakReference<Activity>(a);
-        }
-
-        @Override
-        public myViewHolder onCreateViewHolder(ViewGroup vg, int viewType) {
-            View view = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_paper, vg, false);
-            return new myViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(myViewHolder holder, final int position) {
-            Log.d("tan", "onBindViewHolder: " + data.get(position).Title);
-            holder.title.setText(data.get(position).Title);
-            holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
-            holder.root.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Parent, ActivityWebView.class);
-                    intent.putExtra("title", data.get(position).Title);
-                    intent.putExtra("paperid", data.get(position).PaperId);
-                    startActivity(intent);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return data.size();
-        }
-
-        class myViewHolder extends RecyclerView.ViewHolder {
-            public View root;
-            public TextView title;
-            public TextView date;
-
-            public myViewHolder(View itemView) {
-                super(itemView);
-
-                root = itemView;
-                title = (TextView) itemView.findViewById(R.id.paper_title);
-                date = (TextView) itemView.findViewById(R.id.date);
-            }
         }
     }
 }

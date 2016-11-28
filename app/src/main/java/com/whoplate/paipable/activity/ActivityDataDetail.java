@@ -23,6 +23,7 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.AuctionDetail;
 import com.whoplate.paipable.networkpacket.AuctionDetails;
@@ -49,7 +50,7 @@ public class ActivityDataDetail extends XActivity {
 
     ArrayList<String> dates = new ArrayList<>();
 
-    private MyRecycleViewAdapter adapter = null;
+    private PaperListRecycleViewAdapter adapter = null;
 
     LineDataSet pricesDataSet;
     ArrayList<String> distances = new ArrayList<String>();
@@ -156,7 +157,7 @@ public class ActivityDataDetail extends XActivity {
                             } else {
                                 hideEmpty();
 
-                                adapter = new MyRecycleViewAdapter(ActivityDataDetail.this, papers.Data);
+                                adapter = new PaperListRecycleViewAdapter(ActivityDataDetail.this, papers.Data);
                                 messages.setAdapter(adapter);
                             }
                         }
@@ -246,57 +247,6 @@ public class ActivityDataDetail extends XActivity {
             tv.setTextSize(18f);
             tv.setPadding(20, 10, 20, 10);
             return tv;
-        }
-    }
-
-    public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.myViewHolder> {
-        private ArrayList<Paper> data;
-        private WeakReference<Activity> a;
-
-        public MyRecycleViewAdapter(Activity a, ArrayList<Paper> data) {
-            this.data = data;
-            this.a = new WeakReference<Activity>(a);
-        }
-
-        @Override
-        public MyRecycleViewAdapter.myViewHolder onCreateViewHolder(ViewGroup vg, int viewType) {
-            View view = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_paper, vg, false);
-            return new MyRecycleViewAdapter.myViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(MyRecycleViewAdapter.myViewHolder holder, final int position) {
-            Log.d("tan", "onBindViewHolder: " + data.get(position).Title);
-            holder.title.setText(data.get(position).Title);
-            holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
-            holder.root.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ActivityDataDetail.this, ActivityWebView.class);
-                    intent.putExtra("paperid", data.get(position).PaperId);
-                    intent.putExtra("title", data.get(position).Title);
-                    startActivity(intent);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return data.size();
-        }
-
-        class myViewHolder extends RecyclerView.ViewHolder {
-            public View root;
-            public TextView title;
-            public TextView date;
-
-            public myViewHolder(View itemView) {
-                super(itemView);
-
-                root = itemView;
-                title = (TextView) itemView.findViewById(R.id.paper_title);
-                date = (TextView) itemView.findViewById(R.id.date);
-            }
         }
     }
 }
