@@ -14,4 +14,6 @@
     <color name="sign_in_everyday">#ff8a31</color>
 
     <color name="button_unClickable">#909090</color>
+
+    <color name="divider">#e0e0e0</color>
 </resources>

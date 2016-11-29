@@ -31,6 +31,7 @@ import com.whoplate.paipable.activity.ActivityWebView;
 import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.itemDecoration.LinearLayoutColorDivider;
 import com.whoplate.paipable.networkpacket.AuctionStatus;
 import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.base.Papers;
@@ -151,6 +152,7 @@ public class HomeTabFragment extends XFragment {
         });
 
         message.setLayoutManager(new LinearLayoutManager(Parent));
+        message.addItemDecoration(new LinearLayoutColorDivider());
 
         return view;
     }

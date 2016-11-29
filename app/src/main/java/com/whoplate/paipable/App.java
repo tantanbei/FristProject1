@@ -1,8 +1,10 @@
 package com.whoplate.paipable;
 
 import android.app.Application;
+import android.content.res.Resources;
 import android.os.Looper;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 
 import com.crashlytics.android.Crashlytics;
 import com.joanzapata.iconify.Iconify;
@@ -19,6 +21,10 @@ import javax.net.ssl.SSLSocketFactory;
 import io.fabric.sdk.android.Fabric;
 
 public class App extends Application{
+
+    //app resources
+    @Nullable
+    private static Resources RESOURCES;
 
     static public Handler Uihandler = new Handler(Looper.getMainLooper());
 
@@ -51,5 +57,13 @@ public class App extends Application{
         Iconify.with(new EntypoModule());
         Iconify.with(new MaterialModule());
         Iconify.with(new IoniconsModule());
+    }
+
+    public static Resources GetResources() {
+        if (RESOURCES == null) {
+            RESOURCES = App.INSTANCE.getResources();
+        }
+
+        return RESOURCES;
     }
 }

@@ -8,7 +8,7 @@ public class XTime {
 
     public static String TimeStampToDate(long timeStamp){
         Date date = new Date(timeStamp);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dateStr = simpleDateFormat.format(date);
         return dateStr;
     }

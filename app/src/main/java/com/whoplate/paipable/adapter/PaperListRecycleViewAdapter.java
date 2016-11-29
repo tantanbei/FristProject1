@@ -7,11 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.ActivityWebView;
-import com.whoplate.paipable.fragment.HomeTabFragment;
 import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.time.XTime;
 import com.whoplate.paipable.viewHolder.PaperListViewHolder;

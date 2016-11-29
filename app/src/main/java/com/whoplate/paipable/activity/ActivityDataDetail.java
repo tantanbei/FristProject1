@@ -25,6 +25,7 @@ import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.itemDecoration.LinearLayoutColorDivider;
 import com.whoplate.paipable.networkpacket.AuctionDetail;
 import com.whoplate.paipable.networkpacket.AuctionDetails;
 import com.whoplate.paipable.networkpacket.Paper;
@@ -92,6 +93,7 @@ public class ActivityDataDetail extends XActivity {
         datesSpinner.setSelection(0);
 
         messages.setLayoutManager(new LinearLayoutManager(this));
+        messages.addItemDecoration(new LinearLayoutColorDivider());
     }
 
     @Override

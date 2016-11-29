@@ -1,18 +1,9 @@
 package com.whoplate.paipable.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.whoplate.paipable.App;
@@ -20,16 +11,14 @@ import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
-import com.whoplate.paipable.fragment.HomeTabFragment;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.itemDecoration.LinearLayoutColorDivider;
 import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
-import com.whoplate.paipable.time.XTime;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import okhttp3.Response;
@@ -51,7 +40,7 @@ public class ActivityMessage extends XActivity {
 
         message = (RecyclerView) findViewById(R.id.all_messages);
         message.setLayoutManager(new LinearLayoutManager(this));
-
+        message.addItemDecoration(new LinearLayoutColorDivider());
     }
 
     @Override
