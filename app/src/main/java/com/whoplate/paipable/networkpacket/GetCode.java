@@ -11,8 +11,9 @@ public class GetCode extends JsonBase {
     @JsonField
     public String Phone;
 
+    //the phone must be registered
     @JsonField
-    public boolean MustExist;
+    public boolean MustRegistered;
 
     @JsonField
     public String Code;
@@ -20,9 +21,9 @@ public class GetCode extends JsonBase {
     public GetCode() {
     }
 
-    public GetCode(String Phone, boolean MustExist, String Code) {
+    public GetCode(String Phone, boolean MustRegistered, String Code) {
         this.Phone = Phone;
-        this.MustExist = MustExist;
+        this.MustRegistered = MustRegistered;
         this.Code = Code;
     }
 }

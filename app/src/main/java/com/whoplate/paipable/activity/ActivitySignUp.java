@@ -84,7 +84,7 @@ public class ActivitySignUp extends XActivity {
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phoneNumber = phone.getText().toString();
+                phoneNumber = phone.getText().toString().trim();
 
                 if (XString.IsEmpty(phoneNumber) || phoneNumber.length() != 11) {
                     XToast.Show(R.string.warning_phone_number);
