@@ -56,8 +56,8 @@ public class ActivityLogIn extends XActivity {
                 final String phoneNum = phone.getText().toString();
                 if (phoneNum.length() != 11) {
                     XToast.Show(R.string.warning_phone_number);
+                    return;
                 }
-
 
                 XThread.RunBackground(new Runnable() {
                     @Override
@@ -76,7 +76,7 @@ public class ActivityLogIn extends XActivity {
                                 XToast.Show(R.string.login_success);
 
                                 User user = LoganSquare.parse(packet.Data, User.class);
-                                Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone+" tokenid:"+user.TokenId);
+                                Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone + " tokenid:" + user.TokenId);
 
                                 Pref.Set(Pref.USERID, user.UserId);
                                 Pref.Set(Pref.USERNAME, user.UserName);
