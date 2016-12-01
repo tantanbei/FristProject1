@@ -53,9 +53,15 @@ public class ActivityLogIn extends XActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phoneNum = phone.getText().toString();
+                final String phoneNum = phone.getText().toString().trim();
+                final String passwordContent = password.getText().toString().trim();
                 if (phoneNum.length() != 11) {
                     XToast.Show(R.string.warning_phone_number);
+                    return;
+                }
+
+                if (passwordContent.length() < 6 || passwordContent.length() > 20) {
+                    XToast.Show(R.string.input_password);
                     return;
                 }
 
@@ -73,7 +79,6 @@ public class ActivityLogIn extends XActivity {
                                     XToast.Show(R.string.request_fails);
                                 }
                             } else {
-                                XToast.Show(R.string.login_success);
 
                                 User user = LoganSquare.parse(packet.Data, User.class);
                                 Log.d("tan", "user info name:" + user.UserName + " id:" + user.UserId + " phone:" + user.UserPhone + " tokenid:" + user.TokenId);
@@ -83,6 +88,8 @@ public class ActivityLogIn extends XActivity {
                                 Pref.Set(Pref.USERPHONE, user.UserPhone);
                                 Pref.Set(Pref.TOKENID, user.TokenId);
                                 Pref.Save();
+
+                                XToast.Show(R.string.login_success);
 
                                 finish();
                             }
@@ -111,7 +118,7 @@ public class ActivityLogIn extends XActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityLogIn.this, ActivitySignUp.class);
-                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.RESET_PASSWORD);
+                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.MODIFY_PASSWORD);
                 startActivity(intent);
             }
         });
