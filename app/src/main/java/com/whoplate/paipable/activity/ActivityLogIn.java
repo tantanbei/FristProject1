@@ -19,6 +19,7 @@ import com.whoplate.paipable.networkpacket.SignUpInPacket;
 import com.whoplate.paipable.networkpacket.User;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.util.Goto;
 import com.whoplate.paipable.util.XDebug;
 
 import okhttp3.Response;
@@ -89,7 +90,7 @@ public class ActivityLogIn extends XActivity {
 
                                 XToast.Show(R.string.login_success);
 
-                                finish();
+                                Goto.Home();
                             }
 
                         } catch (Exception e) {

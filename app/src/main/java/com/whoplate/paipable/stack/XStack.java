@@ -94,4 +94,19 @@ public class XStack {
         }
     }
 
+    public static synchronized void Clear() {
+        if (history == null || history.isEmpty()) {
+            return;
+        }
+
+        for (WeakReference<XActivity> a : history) {
+            XActivity realA = a.get();
+            if (realA != null && !realA.isDestroyed()) {
+                realA.finish();
+            }
+        }
+
+        history.clear();
+    }
+
 }
