@@ -30,7 +30,7 @@ import okhttp3.Response;
 public class ActivitySignUp extends XActivity {
     public static final String ACTIVITY_TYPE = "ACTIVITY_TYPE";
     public static final int SIGN_UP = 0;
-    public static final int MODIFY_PASSWORD = 1;
+    public static final int RESET_PASSWORD = 1;
 
     EditText phone;
     EditText code;
@@ -56,6 +56,13 @@ public class ActivitySignUp extends XActivity {
         Intent intent = getIntent();
         activityType = intent.getIntExtra(ACTIVITY_TYPE, SIGN_UP);
 
+        phone = (EditText) findViewById(R.id.phone);
+        code = (EditText) findViewById(R.id.code);
+        password = (EditText) findViewById(R.id.password);
+        confirmPassword = (EditText) findViewById(R.id.confirm_password);
+        getCode = (Button) findViewById(R.id.get_verification_code);
+        signUp = (Button) findViewById(R.id.sign_up);
+
         switch (activityType) {
             case SIGN_UP:
 
@@ -66,21 +73,16 @@ public class ActivitySignUp extends XActivity {
                 title.setText(R.string.register);
                 break;
 
-            case MODIFY_PASSWORD:
+            case RESET_PASSWORD:
 
-                title.setText(R.string.modify_password);
+                title.setText(R.string.reset_password);
+                signUp.setText(R.string.reset_password);
+
                 break;
 
             default:
                 throw new RuntimeException("unknow activity type! check code!");
         }
-
-        phone = (EditText) findViewById(R.id.phone);
-        code = (EditText) findViewById(R.id.code);
-        password = (EditText) findViewById(R.id.password);
-        confirmPassword = (EditText) findViewById(R.id.confirm_password);
-        getCode = (Button) findViewById(R.id.get_verification_code);
-        signUp = (Button) findViewById(R.id.sign_up);
 
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +113,7 @@ public class ActivitySignUp extends XActivity {
                                     response = Http.Post(Const.URL_APN + Const.URL_GET_CODE, new GetCode(phoneNumber, false, verificationCode));
                                     break;
 
-                                case MODIFY_PASSWORD:
+                                case RESET_PASSWORD:
                                     response = Http.Post(Const.URL_APN + Const.URL_GET_CODE, new GetCode(phoneNumber, true, verificationCode));
                                     break;
 
@@ -176,28 +178,57 @@ public class ActivitySignUp extends XActivity {
                     @Override
                     public void run() {
                         try {
-                            Response response = Http.Post(Const.URL_APN + Const.URL_SING_UP, new SignUpInPacket(phoneNumber, passwordStr));
+                            Response response = null;
+
+                            switch (activityType) {
+                                case SIGN_UP:
+                                    response = Http.Post(Const.URL_APN + Const.URL_SING_UP, new SignUpInPacket(phoneNumber, passwordStr));
+                                    break;
+                                case RESET_PASSWORD:
+                                    response = Http.Post(Const.URL_APN + Const.URL_RESET_PASSWORD, new SignUpInPacket(phoneNumber, passwordStr));
+                                    break;
+                                default:
+                                    throw new RuntimeException("unknow activityType: " + activityType + " check code!!");
+                            }
+
                             OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
 
-                            if (!packet.Ok) {
-                                if (packet.Data.equals("0")) {
-                                    XToast.Show(R.string.warning_registered);
-                                } else {
-                                    XToast.Show(R.string.request_fails);
-                                }
-                            } else {
-                                XToast.Show(R.string.register_success);
+                            switch (activityType) {
+                                case SIGN_UP:
+                                    if (!packet.Ok) {
+                                        if (packet.Data.equals("0")) {
+                                            XToast.Show(R.string.warning_registered);
+                                        } else {
+                                            XToast.Show(R.string.request_fails);
+                                        }
+                                    } else {
+                                        XToast.Show(R.string.register_success);
 
-                                User user = LoganSquare.parse(packet.Data, User.class);
-                                Pref.Set(Pref.USERID, user.UserId);
-                                Pref.Set(Pref.USERNAME, user.UserName);
-                                Pref.Set(Pref.USERPHONE, user.UserPhone);
-                                Pref.Save();
-                                Log.d("tan", "sign up user:" + user.UserId);
+                                        User user = LoganSquare.parse(packet.Data, User.class);
+                                        Pref.Set(Pref.USERID, user.UserId);
+                                        Pref.Set(Pref.USERNAME, user.UserName);
+                                        Pref.Set(Pref.USERPHONE, user.UserPhone);
+                                        Pref.Save();
+                                        Log.d("tan", "sign up user:" + user.UserId);
 
-                                startActivity(new Intent(ActivitySignUp.this, ActivityInitUserInfo.class));
-                                finish();
+                                        startActivity(new Intent(ActivitySignUp.this, ActivityInitUserInfo.class));
+                                        finish();
+                                    }
+                                    break;
+                                case RESET_PASSWORD:
+                                    if (!packet.Ok) {
+                                        if (packet.Data.equals("0")) {
+                                            XToast.Show(R.string.warning_have_not_registered);
+                                        } else {
+                                            XToast.Show(R.string.request_fails);
+                                        }
+                                    } else {
+                                        XToast.Show(R.string.reset_password_success);
+
+                                        finish();
+                                    }
                             }
+
                         } catch (IOException e) {
                             XToast.Show(R.string.request_fails);
                             XDebug.Handle(e);

@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
+import com.whoplate.paipable.App;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivityLogIn;
 import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
+import com.whoplate.paipable.util.Goto;
 
 public abstract class XActivity extends AppCompatActivity {
 
@@ -24,8 +26,6 @@ public abstract class XActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        XStack.Push(this);
 
         setContentView(GetContentView());
 
@@ -41,6 +41,12 @@ public abstract class XActivity extends AppCompatActivity {
                     onBackPressed();
                 }
             });
+        }
+
+        XStack.Push(this);
+
+        if (!XSession.IsValid()) {
+            Goto.Login();
         }
     }
 

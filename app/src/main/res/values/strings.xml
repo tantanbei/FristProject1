@@ -42,6 +42,7 @@
     <string name="confirm_password_error">两次密码输入不相同</string>
     <string name="warning_phone_number">请输入11位手机号码</string>
     <string name="warning_registered">此手机号码已经被注册</string>
+    <string name="warning_have_not_registered">此手机号码未被注册</string>
     <string name="warning_get_verification_code">您获取验证码过于频繁，请过会再试</string>
     <string name="password_invalid">密码不合法</string>
     <string name="send_success">发送成功</string>
@@ -49,7 +50,8 @@
     <string name="register">注册</string>
     <string name="login">登录</string>
     <string name="forget_password">忘记密码？</string>
-    <string name="modify_password">重置密码</string>
+    <string name="reset_password">重置密码</string>
+    <string name="reset_password_success">重置密码成功</string>
     <string name="have_car_question">您现在有车吗？</string>
     <string name="have_car">有车</string>
     <string name="no_car">没有车</string>

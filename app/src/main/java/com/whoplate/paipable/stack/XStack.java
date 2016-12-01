@@ -1,8 +1,12 @@
 package com.whoplate.paipable.stack;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.util.Log;
+
+import com.whoplate.paipable.App;
+import com.whoplate.paipable.activity.base.XActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -12,7 +16,7 @@ public class XStack {
     //max history size...
     public static final int MAX_HISTORY_SIZE;
 
-    private static ArrayList<WeakReference<Activity>> history = new ArrayList<>();
+    private static ArrayList<WeakReference<XActivity>> history = new ArrayList<>();
 
     static {
         //reduce stacksize for < 4.4 devices which are extremely buggy...
@@ -29,7 +33,7 @@ public class XStack {
         }
     }
 
-    public static int Size(){
+    public static int Size() {
         return history.size();
     }
 
@@ -40,7 +44,7 @@ public class XStack {
         }
 
         for (int i = 0; i < history.size(); i++) {
-            Activity a = history.get(i).get();
+            XActivity a = history.get(i).get();
             if (a == null || a.isDestroyed()) {
                 history.remove(0);
                 i--;
@@ -48,7 +52,7 @@ public class XStack {
         }
     }
 
-    public static void Push(Activity a) {
+    public static void Push(XActivity a) {
 
         gc();
 
@@ -58,12 +62,12 @@ public class XStack {
 
             //do not push duplicate item
             if (lastA != a) {
-                history.add(new WeakReference<Activity>(a));
+                history.add(new WeakReference<XActivity>(a));
             }
         }
     }
 
-    public static Activity GetLastAliveActivity() {
+    public static XActivity GetLastAliveActivity() {
         gc();
 
         if (history == null || history.isEmpty()) {
@@ -72,6 +76,22 @@ public class XStack {
         }
 
         return history.get(history.size() - 1).get();
+    }
+
+    public static Context GetLastAliveActivityOrAppInstance() {
+        gc();
+
+        if (history == null || history.isEmpty()) {
+            Log.e("tan", "no alive avtivity on stack");
+            return App.INSTANCE;
+        }
+
+        XActivity a = history.get(history.size() - 1).get();
+        if (a != null) {
+            return a;
+        } else {
+            return App.INSTANCE;
+        }
     }
 
 }

@@ -38,8 +38,6 @@ public class ActivityLogIn extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        needSession = false;
-
         goBack.setVisibility(View.GONE);
         title.setText(R.string.login);
         rigthBtn.setVisibility(View.VISIBLE);
@@ -118,7 +116,7 @@ public class ActivityLogIn extends XActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityLogIn.this, ActivitySignUp.class);
-                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.MODIFY_PASSWORD);
+                intent.putExtra(ActivitySignUp.ACTIVITY_TYPE, ActivitySignUp.RESET_PASSWORD);
                 startActivity(intent);
             }
         });
