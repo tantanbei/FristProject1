@@ -9,6 +9,7 @@ import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.db.Pref;
 import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.string.XString;
+import com.whoplate.paipable.util.Goto;
 
 
 public class ActivityUserInfo extends XActivity {
@@ -35,7 +36,7 @@ public class ActivityUserInfo extends XActivity {
             @Override
             public void onClick(View v) {
                 XSession.Logout();
-                ActivityUserInfo.this.finish();
+                Goto.Login();
             }
         });
     }
