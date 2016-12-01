@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
+import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.color.XColor;
 import com.whoplate.paipable.fragment.HomeTabFragment;
 import com.whoplate.paipable.fragment.MineTabFragment;
@@ -27,7 +28,7 @@ import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
 import com.whoplate.paipable.ui.XIconDrawable;
 
-public class ActivityHome extends AppCompatActivity {
+public class ActivityHome extends XActivity {
     private static final int HOMEFRAGMENT = 0;
     private static final int MINEFRAGMENT = 1;
 
@@ -47,13 +48,15 @@ public class ActivityHome extends AppCompatActivity {
             , "{md-info-outline}  关于拍牌宝"};
 //            , "{fa-gear}  设置"};
 
+
+    @Override
+    public int GetContentView() {
+        return R.layout.activity_home;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        XStack.Push(this);
-
-        setContentView(R.layout.activity_home);
 
         homeDrawerLayout = (DrawerLayout) findViewById(R.id.home_drawer_layout);
         tabHome = (TextView) findViewById(R.id.tab_home);
