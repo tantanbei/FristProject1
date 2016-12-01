@@ -18,30 +18,16 @@
             android:layout_gravity="bottom"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/tab_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:id="@+id/tab_home_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text=" {typcn-home} "
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/tab_home"
-                    android:textSize="10sp" />
-            </LinearLayout>
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:paddingBottom="3dp"
+                android:text="@string/tab_home"
+                android:textSize="14sp" />
 
             <!--<LinearLayout-->
             <!--android:id="@+id/tab_favourable"-->
@@ -89,31 +75,16 @@
             <!--android:text="@string/tab_discover" />-->
             <!--</LinearLayout>-->
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/tab_mine"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:id="@+id/tab_mine_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text=" {typcn-user-outline} "
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/tab_mine"
-                    android:textSize="10sp" />
-            </LinearLayout>
-
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:paddingBottom="3dp"
+                android:text="@string/tab_mine"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <FrameLayout
@@ -131,10 +102,10 @@
         android:layout_width="260dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/white"
         android:choiceMode="singleChoice"
         android:divider="@color/title_bar_bottom_line"
         android:dividerHeight="1dp"
-        android:paddingTop="50dp"
-        android:background="@color/white"/>
+        android:paddingTop="50dp" />
 
 </android.support.v4.widget.DrawerLayout>

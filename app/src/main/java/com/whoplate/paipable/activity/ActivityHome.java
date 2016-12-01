@@ -15,24 +15,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
+import com.whoplate.paipable.color.XColor;
 import com.whoplate.paipable.fragment.HomeTabFragment;
 import com.whoplate.paipable.fragment.MineTabFragment;
 import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
+import com.whoplate.paipable.ui.XIconDrawable;
 
 public class ActivityHome extends AppCompatActivity {
     private static final int HOMEFRAGMENT = 0;
     private static final int MINEFRAGMENT = 1;
 
     private DrawerLayout homeDrawerLayout;
-    private LinearLayout tabHome;
-    private LinearLayout tabMine;
-    private IconTextView tabHomeIcon;
-    private IconTextView tabMineIcon;
+    private TextView tabHome;
+    private TextView tabMine;
     private ListView homeDrawer;
 
     private View.OnClickListener tagClickListener;
@@ -55,10 +56,8 @@ public class ActivityHome extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         homeDrawerLayout = (DrawerLayout) findViewById(R.id.home_drawer_layout);
-        tabHome = (LinearLayout) findViewById(R.id.tab_home);
-        tabMine = (LinearLayout) findViewById(R.id.tab_mine);
-        tabHomeIcon = (IconTextView) findViewById(R.id.tab_home_icon);
-        tabMineIcon = (IconTextView) findViewById(R.id.tab_mine_icon);
+        tabHome = (TextView) findViewById(R.id.tab_home);
+        tabMine = (TextView) findViewById(R.id.tab_mine);
         homeDrawer = (ListView) findViewById(R.id.home_drawer);
 
         tagClickListener = new View.OnClickListener() {
@@ -74,9 +73,10 @@ public class ActivityHome extends AppCompatActivity {
                             return;
                         }
 
-                        tabHomeIcon.setText("{typcn-home}");
-                        tabMineIcon.setText("{typcn-user-outline}");
-
+                        tabHome.setTextColor(XColor.Get(R.color.colorPrimary));
+                        tabMine.setTextColor(XColor.Get(R.color.black));
+                        tabHome.setCompoundDrawables(null, XIconDrawable.HOME_FOCUSED, null, null);
+                        tabMine.setCompoundDrawables(null, XIconDrawable.MINE_UNFOCUSED, null, null);
 
                         HomeTabFragment homeTabFragment = new HomeTabFragment();
                         transaction.replace(R.id.home_frame_layout, homeTabFragment, "HomeTabFragment");
@@ -89,8 +89,10 @@ public class ActivityHome extends AppCompatActivity {
                             return;
                         }
 
-                        tabHomeIcon.setText("{typcn-home-outline}");
-                        tabMineIcon.setText("{typcn-user}");
+                        tabHome.setTextColor(XColor.Get(R.color.black));
+                        tabMine.setTextColor(XColor.Get(R.color.colorPrimary));
+                        tabHome.setCompoundDrawables(null, XIconDrawable.HOME_UNFOCUSED, null, null);
+                        tabMine.setCompoundDrawables(null, XIconDrawable.MINE_FOCUSED, null, null);
 
                         MineTabFragment mineTabFragment = new MineTabFragment();
                         transaction.replace(R.id.home_frame_layout, mineTabFragment, "HomeTabFragment");
@@ -130,6 +132,11 @@ public class ActivityHome extends AppCompatActivity {
                 }
             }
         });
+
+        tabHome.setTextColor(XColor.Get(R.color.colorPrimary));
+        tabMine.setTextColor(XColor.Get(R.color.black));
+        tabHome.setCompoundDrawables(null, XIconDrawable.HOME_FOCUSED, null, null);
+        tabMine.setCompoundDrawables(null, XIconDrawable.MINE_UNFOCUSED, null, null);
 
         //manage the fragment
         FM = getSupportFragmentManager();
