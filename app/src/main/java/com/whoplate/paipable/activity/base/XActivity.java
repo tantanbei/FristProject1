@@ -16,7 +16,6 @@ import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
 
 public abstract class XActivity extends AppCompatActivity {
-    public boolean needSession = true;
 
     public IconTextView goBack;
     public TextView title;
@@ -52,13 +51,6 @@ public abstract class XActivity extends AppCompatActivity {
         super.onStart();
 
         XStack.Push(this);
-
-        //check the session
-        if (!XSession.IsValid() && needSession) {
-            Log.d("tan", "onClick: go to sign in");
-            startActivity(new Intent(this, ActivityLogIn.class));
-            finish();
-        }
     }
 
     @Override

@@ -159,19 +159,12 @@ public class ActivityHome extends XActivity {
         super.onStart();
 
         XStack.Push(this);
-
-        //check the session
-        if (!XSession.IsValid()) {
-            Log.d("tan", "onClick: go to sign in");
-            startActivity(new Intent(this, ActivityLogIn.class));
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         XStack.Push(this);
-        Log.d("tan", "onResume: xstack size:" + XStack.Size());
     }
 
     @Override

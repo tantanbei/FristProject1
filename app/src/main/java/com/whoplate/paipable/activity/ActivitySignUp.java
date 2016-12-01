@@ -29,8 +29,7 @@ import okhttp3.Response;
 public class ActivitySignUp extends XActivity {
     public static final String ACTIVITY_TYPE = "ACTIVITY_TYPE";
     public static final int SIGN_UP = 0;
-    public static final int RESET_PASSWORD = 1;
-    public static final int MODIFY_PASSWORD = 2;
+    public static final int MODIFY_PASSWORD = 1;
 
     EditText phone;
     EditText code;
@@ -58,7 +57,6 @@ public class ActivitySignUp extends XActivity {
 
         switch (activityType) {
             case SIGN_UP:
-                needSession = false;
 
                 goBack.setVisibility(View.GONE);
                 rigthBtn.setVisibility(View.VISIBLE);
@@ -67,13 +65,9 @@ public class ActivitySignUp extends XActivity {
                 title.setText(R.string.register);
                 break;
 
-            case RESET_PASSWORD:
-                needSession = false;
-
-                title.setText(R.string.reset_password);
-                break;
-
             case MODIFY_PASSWORD:
+
+                title.setText(R.string.modify_password);
                 break;
 
             default:
@@ -116,7 +110,6 @@ public class ActivitySignUp extends XActivity {
                                     response = Http.Post(Const.URL_APN + Const.URL_GET_CODE, new GetCode(phoneNumber, false, verificationCode));
                                     break;
 
-                                case RESET_PASSWORD:
                                 case MODIFY_PASSWORD:
                                     response = Http.Post(Const.URL_APN + Const.URL_GET_CODE, new GetCode(phoneNumber, true, verificationCode));
                                     break;

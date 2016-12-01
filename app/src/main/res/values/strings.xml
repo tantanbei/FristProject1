@@ -49,7 +49,7 @@
     <string name="register">注册</string>
     <string name="login">登录</string>
     <string name="forget_password">忘记密码？</string>
-    <string name="reset_password">重置密码</string>
+    <string name="modify_password">重置密码</string>
     <string name="have_car_question">您现在有车吗？</string>
     <string name="have_car">有车</string>
     <string name="no_car">没有车</string>
