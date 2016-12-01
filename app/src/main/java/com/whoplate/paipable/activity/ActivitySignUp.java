@@ -24,6 +24,7 @@ import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
 import java.util.Random;
+
 import okhttp3.Response;
 
 public class ActivitySignUp extends XActivity {
@@ -149,18 +150,21 @@ public class ActivitySignUp extends XActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (XString.IsEmpty(code.getText().toString())) {
+
+                final String inputCode = code.getText().toString().trim();
+
+                if (XString.IsEmpty(inputCode)) {
                     XToast.Show(R.string.input_verification_code);
                     return;
                 }
 
-                if (!code.getText().toString().equals(verificationCode)) {
+                if (!inputCode.equals(verificationCode)) {
                     XToast.Show(R.string.verification_error);
                     return;
                 }
 
-                final String passwordStr = password.getText().toString();
-                final String confirmStr = confirmPassword.getText().toString();
+                final String passwordStr = password.getText().toString().trim();
+                final String confirmStr = confirmPassword.getText().toString().trim();
 
                 if (confirmStr.length() < 6 || confirmStr.length() > 20 || passwordStr.length() < 6 || passwordStr.length() > 20 || !passwordStr.equals(confirmStr)) {
                     XToast.Show(R.string.password_invalid);
