@@ -15,6 +15,8 @@ import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.TypiconsModule;
 import com.whoplate.paipable.http.SSLSocketFactoryEx;
 import com.whoplate.paipable.http.XRandom;
+import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.util.XFabric;
 
 import javax.net.ssl.SSLSocketFactory;
 
@@ -37,7 +39,6 @@ public class App extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
 
         INSTANCE = this;
 

@@ -15,7 +15,9 @@ import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivityLogIn;
 import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
+import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.util.Goto;
+import com.whoplate.paipable.util.XFabric;
 
 public abstract class XActivity extends AppCompatActivity {
 
@@ -26,6 +28,14 @@ public abstract class XActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //init the fabric
+        XThread.RunBackground(new Runnable() {
+            @Override
+            public void run() {
+                XFabric.Load();
+            }
+        });
 
         setContentView(GetContentView());
 
