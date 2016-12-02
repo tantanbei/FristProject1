@@ -208,6 +208,7 @@ public class ActivitySignUp extends XActivity {
                                         Pref.Set(Pref.USERID, user.UserId);
                                         Pref.Set(Pref.USERNAME, user.UserName);
                                         Pref.Set(Pref.USERPHONE, user.UserPhone);
+                                        Pref.Set(Pref.TOKENID, user.TokenId);
                                         Pref.Save();
                                         Log.d("tan", "sign up user:" + user.UserId);
 
