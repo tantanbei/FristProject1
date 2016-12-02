@@ -210,7 +210,7 @@ public class ActivitySignUp extends XActivity {
                                         Pref.Set(Pref.USERPHONE, user.UserPhone);
                                         Pref.Set(Pref.TOKENID, user.TokenId);
                                         Pref.Save();
-                                        Log.d("tan", "sign up user:" + user.UserId);
+                                        Log.d("tan", "sign up user:" + user.UserId + " tokenid:" + user.TokenId);
 
                                         startActivity(new Intent(ActivitySignUp.this, ActivityInitUserInfo.class));
                                         finish();

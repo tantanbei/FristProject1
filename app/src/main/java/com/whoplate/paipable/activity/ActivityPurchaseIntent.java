@@ -16,6 +16,7 @@ import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.PurchaseIntentCar;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.util.Goto;
 
 import java.util.ArrayList;
 
@@ -90,7 +91,7 @@ public class ActivityPurchaseIntent extends XActivity {
                     @Override
                     public void run() {
                         Http.Post(Const.URL_API + Const.URL_PURCHASE_INTENT, packet);
-                        finish();
+                        Goto.Home();
                     }
                 });
 
@@ -100,7 +101,7 @@ public class ActivityPurchaseIntent extends XActivity {
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoMine();
+                Goto.Home();
             }
         });
     }
@@ -152,9 +153,5 @@ public class ActivityPurchaseIntent extends XActivity {
             }
         });
         addCarRoot.addView(addView);
-    }
-
-    private void gotoMine() {
-        finish();
     }
 }
