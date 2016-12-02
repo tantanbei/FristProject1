@@ -16,7 +16,7 @@ import com.whoplate.paipable.toast.XToast;
 
 import okhttp3.Response;
 
-public class ActivityInitUserInfo extends XActivity {
+public class ActivityChangeUserInfo extends XActivity {
 
     EditText username;
 
@@ -59,7 +59,7 @@ public class ActivityInitUserInfo extends XActivity {
                             Pref.Save();
                         }
 
-                        startActivity(new Intent(ActivityInitUserInfo.this, ActivityPurchaseIntent.class));
+                        startActivity(new Intent(ActivityChangeUserInfo.this, ActivityPurchaseIntent.class));
                         finish();
                     }
                 });
