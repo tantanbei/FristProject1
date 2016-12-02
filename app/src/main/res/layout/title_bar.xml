@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_marginBottom="1dp"
-    android:background="@color/home_title_background">
+    android:background="@color/colorPrimary">
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/goBack"

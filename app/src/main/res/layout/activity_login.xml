@@ -43,7 +43,7 @@
         android:layout_marginRight="15dp"
         android:gravity="right"
         android:textSize="10sp"
-        android:textColor="@color/home_title_background"
+        android:textColor="@color/colorPrimary"
         android:text="@string/forget_password"/>
 
 </LinearLayout>
