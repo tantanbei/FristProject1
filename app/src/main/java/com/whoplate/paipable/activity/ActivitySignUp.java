@@ -20,6 +20,7 @@ import com.whoplate.paipable.networkpacket.User;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
@@ -66,8 +67,8 @@ public class ActivitySignUp extends XActivity {
         switch (activityType) {
             case SIGN_UP:
 
-                goBack.setVisibility(View.GONE);
-                rigthBtn.setVisibility(View.VISIBLE);
+                XView.Hide(goBack);
+                XView.Show(rigthBtn);
                 rigthBtn.setText(R.string.login);
 
                 title.setText(R.string.register);

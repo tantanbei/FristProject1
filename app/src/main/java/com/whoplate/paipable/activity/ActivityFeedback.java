@@ -15,6 +15,7 @@ import com.whoplate.paipable.networkpacket.FeedbackPacket;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.ui.XView;
 
 import okhttp3.Response;
 
@@ -36,7 +37,7 @@ public class ActivityFeedback extends XActivity {
 
         title.setText(R.string.feedback);
         rigthBtn.setText(R.string.submit);
-        rigthBtn.setVisibility(View.VISIBLE);
+        XView.Show(rigthBtn);
 
         content = (EditText) findViewById(R.id.content);
 

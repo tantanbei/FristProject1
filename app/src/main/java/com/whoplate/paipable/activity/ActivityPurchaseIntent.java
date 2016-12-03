@@ -16,6 +16,7 @@ import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.PurchaseIntentCar;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.Goto;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ActivityPurchaseIntent extends XActivity {
 
         title.setText(R.string.purchase_info);
 
-        rigthBtn.setVisibility(View.VISIBLE);
+        XView.Show(rigthBtn);
         rigthBtn.setText(R.string.skip);
 
         textAddCar = (TextView) findViewById(R.id.text_add_car);
@@ -107,16 +108,16 @@ public class ActivityPurchaseIntent extends XActivity {
     }
 
     private void selectNoCar() {
-        textAddCar.setVisibility(View.GONE);
-        addCarRoot.setVisibility(View.GONE);
+        XView.Hide(textAddCar);
+        XView.Hide(addCarRoot);
         addCarRoot.removeAllViews();
         haveCarAges.clear();
         haveCarStyles.clear();
     }
 
     private void selectHaveCar() {
-        textAddCar.setVisibility(View.VISIBLE);
-        addCarRoot.setVisibility(View.VISIBLE);
+        XView.Show(textAddCar);
+        XView.Show(addCarRoot);
 
         //add the first addCarView
         final LinearLayout addView = (LinearLayout) getLayoutInflater().inflate(R.layout.add_car, null);
@@ -126,9 +127,9 @@ public class ActivityPurchaseIntent extends XActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (carStyle.getVisibility() == View.GONE) {
-                    carStyle.setVisibility(View.VISIBLE);
-                    carAge.setVisibility(View.VISIBLE);
+                if (!XView.IsVisible(carStyle)) {
+                    XView.Show(carStyle);
+                    XView.Show(carAge);
                     add.setText(R.string.confirm);
                 } else {
                     if (add.getText().equals(XString.GetString(R.string.confirm))) {
@@ -139,8 +140,8 @@ public class ActivityPurchaseIntent extends XActivity {
                         carAge.setEnabled(false);
                         add.setText(R.string.delete);
                     } else {
-                        carStyle.setVisibility(View.GONE);
-                        carAge.setVisibility(View.GONE);
+                        XView.Hide(carStyle);
+                        XView.Hide(carAge);
                         carStyle.setEnabled(true);
                         carAge.setEnabled(true);
                         carStyle.setSelection(0);

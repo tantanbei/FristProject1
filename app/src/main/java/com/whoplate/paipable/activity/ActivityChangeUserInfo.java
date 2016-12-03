@@ -13,6 +13,7 @@ import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.ChangeUsername;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.ui.XView;
 
 import okhttp3.Response;
 
@@ -31,7 +32,7 @@ public class ActivityChangeUserInfo extends XActivity {
 
         title.setText("设置用户信息");
         rigthBtn.setText("下一步");
-        rigthBtn.setVisibility(View.VISIBLE);
+        XView.Show(rigthBtn);
 
         username = (EditText) findViewById(R.id.new_username);
 

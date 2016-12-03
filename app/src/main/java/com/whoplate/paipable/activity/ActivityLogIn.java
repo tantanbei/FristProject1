@@ -19,6 +19,7 @@ import com.whoplate.paipable.networkpacket.SignUpInPacket;
 import com.whoplate.paipable.networkpacket.User;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.Goto;
 import com.whoplate.paipable.util.XDebug;
 
@@ -39,10 +40,10 @@ public class ActivityLogIn extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        goBack.setVisibility(View.GONE);
         title.setText(R.string.login);
-        rigthBtn.setVisibility(View.VISIBLE);
         rigthBtn.setText(R.string.sign_up);
+        XView.Hide(goBack);
+        XView.Show(rigthBtn);
 
         phone = (EditText) findViewById(R.id.phone);
         password = (EditText) findViewById(R.id.password);

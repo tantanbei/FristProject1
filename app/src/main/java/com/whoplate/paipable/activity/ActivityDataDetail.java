@@ -34,6 +34,7 @@ import com.whoplate.paipable.networkpacket.base.AuctionDetailDates;
 import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.time.XTime;
+import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
@@ -211,13 +212,13 @@ public class ActivityDataDetail extends XActivity {
     }
 
     private void showEmpty() {
-        empty.setVisibility(View.VISIBLE);
-        messages.setVisibility(View.GONE);
+        XView.Show(empty);
+        XView.Hide(messages);
     }
 
     private void hideEmpty() {
-        messages.setVisibility(View.VISIBLE);
-        empty.setVisibility(View.GONE);
+        XView.Show(messages);
+        XView.Hide(empty);
     }
 
     class mySpinnerAdapter extends BaseAdapter {

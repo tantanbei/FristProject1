@@ -17,6 +17,7 @@ import com.whoplate.paipable.activity.ActivityUserInfo;
 import com.whoplate.paipable.db.Pref;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.string.XString;
+import com.whoplate.paipable.ui.XView;
 
 public class MineTabFragment extends XFragment {
 
@@ -36,7 +37,7 @@ public class MineTabFragment extends XFragment {
         IconTextView back = (IconTextView) view.findViewById(R.id.goBack);
         TextView title = (TextView) view.findViewById(R.id.title);
 
-        back.setVisibility(View.GONE);
+        XView.Hide(back);
         title.setText(R.string.user_info);
 
         userInfo = (LinearLayout) view.findViewById(R.id.user_info);

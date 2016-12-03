@@ -37,6 +37,7 @@ import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.time.XTime;
+import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
@@ -187,10 +188,10 @@ public class HomeTabFragment extends XFragment {
                             public void run() {
                                 switch (status.Id) {
                                     case 0:
-                                        auctionIdle.setVisibility(View.VISIBLE);
-                                        auctionReady.setVisibility(View.GONE);
-                                        auctionRunning.setVisibility(View.GONE);
-                                        auctionOver.setVisibility(View.GONE);
+                                        XView.Show(auctionIdle);
+                                        XView.Hide(auctionReady);
+                                        XView.Hide(auctionRunning);
+                                        XView.Hide(auctionOver);
                                         if (status.Data.length == 1) {
                                             long time = status.Data[0];
                                             int day = XTime.GetDayByTimeStamp(time);
@@ -199,10 +200,10 @@ public class HomeTabFragment extends XFragment {
                                         }
                                         break;
                                     case 1:
-                                        auctionIdle.setVisibility(View.GONE);
-                                        auctionReady.setVisibility(View.VISIBLE);
-                                        auctionRunning.setVisibility(View.GONE);
-                                        auctionOver.setVisibility(View.GONE);
+                                        XView.Hide(auctionIdle);
+                                        XView.Show(auctionReady);
+                                        XView.Hide(auctionRunning);
+                                        XView.Hide(auctionOver);
                                         if (status.Data.length == 2) {
                                             long time = status.Data[0];
                                             int timeGap = (int) ((time - System.currentTimeMillis()));
@@ -233,19 +234,19 @@ public class HomeTabFragment extends XFragment {
                                         }
                                         break;
                                     case 2:
-                                        auctionIdle.setVisibility(View.GONE);
-                                        auctionReady.setVisibility(View.GONE);
-                                        auctionRunning.setVisibility(View.VISIBLE);
-                                        auctionOver.setVisibility(View.GONE);
+                                        XView.Hide(auctionIdle);
+                                        XView.Hide(auctionReady);
+                                        XView.Show(auctionRunning);
+                                        XView.Hide(auctionOver);
                                         if (status.Data.length == 1) {
                                             runningForecast.setText(String.valueOf(status.Data[0]));
                                         }
                                         break;
                                     case 3:
-                                        auctionIdle.setVisibility(View.GONE);
-                                        auctionReady.setVisibility(View.GONE);
-                                        auctionRunning.setVisibility(View.GONE);
-                                        auctionOver.setVisibility(View.VISIBLE);
+                                        XView.Hide(auctionIdle);
+                                        XView.Hide(auctionReady);
+                                        XView.Hide(auctionRunning);
+                                        XView.Show(auctionOver);
                                         if (status.Data.length == 1) {
                                             overPrice.setText(String.valueOf(status.Data[0]));
                                         }
