@@ -9,53 +9,79 @@ import com.whoplate.paipable.thread.XThread;
 
 public class XToast {
 
+    static private Toast currToast;
+
     static public void Show(final String str) {
-        if (XThread.IsUIThread()){
-            Toast.makeText(XStack.GetLastAliveActivity(), str, Toast.LENGTH_SHORT).show();
-        }else {
+        if (currToast != null) {
+            currToast.cancel();
+        }
+
+        currToast = Toast.makeText(XStack.GetLastAliveActivity(), str, Toast.LENGTH_SHORT);
+
+        if (XThread.IsUIThread()) {
+            currToast.show();
+        } else {
             App.Uihandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(XStack.GetLastAliveActivity(), str, Toast.LENGTH_SHORT).show();
+                    currToast.show();
                 }
             });
         }
     }
 
     static public void Show(@StringRes final int resId) {
-        if (XThread.IsUIThread()){
-            Toast.makeText(XStack.GetLastAliveActivity(), resId, Toast.LENGTH_SHORT).show();
-        }else {
+        if (currToast != null) {
+            currToast.cancel();
+        }
+
+        currToast = Toast.makeText(XStack.GetLastAliveActivity(), resId, Toast.LENGTH_SHORT);
+
+        if (XThread.IsUIThread()) {
+            currToast.show();
+        } else {
             App.Uihandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(XStack.GetLastAliveActivity(), resId, Toast.LENGTH_SHORT).show();
+                    currToast.show();
                 }
             });
         }
     }
 
     static public void ShowLong(final String str) {
-        if (XThread.IsUIThread()){
-            Toast.makeText(XStack.GetLastAliveActivity(), str, Toast.LENGTH_LONG).show();
-        }else {
+        if (currToast != null) {
+            currToast.cancel();
+        }
+
+        currToast = Toast.makeText(XStack.GetLastAliveActivity(), str, Toast.LENGTH_LONG);
+
+        if (XThread.IsUIThread()) {
+            currToast.show();
+        } else {
             App.Uihandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(XStack.GetLastAliveActivity(), str, Toast.LENGTH_LONG).show();
+                    currToast.show();
                 }
             });
         }
     }
 
     static public void ShowLong(@StringRes final int resId) {
-        if (XThread.IsUIThread()){
-            Toast.makeText(XStack.GetLastAliveActivity(), resId, Toast.LENGTH_LONG).show();
-        }else {
+        if (currToast != null) {
+            currToast.cancel();
+        }
+
+        currToast = Toast.makeText(XStack.GetLastAliveActivity(), resId, Toast.LENGTH_LONG);
+
+        if (XThread.IsUIThread()) {
+            currToast.show();
+        } else {
             App.Uihandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(XStack.GetLastAliveActivity(), resId, Toast.LENGTH_LONG).show();
+                    currToast.show();
                 }
             });
         }
