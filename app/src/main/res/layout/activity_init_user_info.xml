@@ -12,13 +12,20 @@
         android:layout_gravity="center_horizontal"
         android:src="@mipmap/ic_launcher"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"
+        android:text="@string/user_name"
+        android:layout_gravity="center_horizontal"/>
+
     <EditText
         android:id="@+id/new_username"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp"
-        android:hint="设置用户名，默认为注册手机号"
+        android:layout_marginTop="10dp"
         android:gravity="center"/>
 
 </LinearLayout>

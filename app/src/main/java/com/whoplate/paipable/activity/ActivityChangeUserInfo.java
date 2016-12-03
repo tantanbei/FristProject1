@@ -18,6 +18,11 @@ import com.whoplate.paipable.ui.XView;
 import okhttp3.Response;
 
 public class ActivityChangeUserInfo extends XActivity {
+    public static final String TYPE = "type";
+    public static final int INIT = 0;
+    public static final int CHANGE = 1;
+
+    private int loadType;
 
     EditText username;
 
@@ -30,19 +35,29 @@ public class ActivityChangeUserInfo extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        title.setText("设置用户信息");
-        rigthBtn.setText("下一步");
+        Intent intent = getIntent();
+        loadType = intent.getIntExtra(TYPE, 0);
+
+        rigthBtn.setText(R.string.done);
         XView.Show(rigthBtn);
 
+        title.setText(R.string.set_user_info);
+
         username = (EditText) findViewById(R.id.new_username);
+        username.setText(Pref.Get(Pref.USERNAME, ""));
 
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final String newUsername = username.getText().toString().trim();
+                if (newUsername.equals("")){
+                    XToast.Show(R.string.warning_input_empty);
+                    return;
+                }
+
                 if (newUsername.equals(Pref.Get(Pref.USERNAME, ""))) {
-                    XToast.Show("用户名无改变");
+                    XToast.Show(R.string.warning_no_change);
                     return;
                 }
 
@@ -60,7 +75,10 @@ public class ActivityChangeUserInfo extends XActivity {
                             Pref.Save();
                         }
 
-                        startActivity(new Intent(ActivityChangeUserInfo.this, ActivityPurchaseIntent.class));
+                        //if sign up the user, it loadType is INIT
+                        if (loadType == INIT) {
+                            startActivity(new Intent(ActivityChangeUserInfo.this, ActivityPurchaseIntent.class));
+                        }
                         finish();
                     }
                 });

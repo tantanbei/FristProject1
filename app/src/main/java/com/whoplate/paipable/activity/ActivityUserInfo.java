@@ -1,5 +1,6 @@
 package com.whoplate.paipable.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -30,6 +31,15 @@ public class ActivityUserInfo extends XActivity {
 
         userName.setText(Pref.Get(Pref.USERNAME, XString.GetString(R.string.app_name)));
         phoneNum.setText(Pref.Get(Pref.USERPHONE, ""));
+
+        userName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityUserInfo.this, ActivityChangeUserInfo.class);
+                intent.putExtra(ActivityChangeUserInfo.TYPE, ActivityChangeUserInfo.CHANGE);
+                startActivity(intent);
+            }
+        });
 
         TextView logout = (TextView) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {

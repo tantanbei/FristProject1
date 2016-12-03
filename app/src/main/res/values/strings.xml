@@ -83,6 +83,11 @@
     <string name="feedback">意见反馈</string>
     <string name="sign_in_tip">今日已成功签到，获得%1$d积分，明天签到可获得%2$d积分</string>
     <string name="price_detail">详细价格变化</string>
+    <string name="user_name">用户名</string>
+    <string name="done">完成</string>
+    <string name="set_user_info">设置用户信息</string>
+    <string name="warning_input_empty">输入不能为空</string>
+    <string name="warning_no_change">未发现变化</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
