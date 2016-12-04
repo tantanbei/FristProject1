@@ -30,9 +30,7 @@ public class XFabric {
     public static synchronized void Load() {
         //crash report
         if (!Fabric.isInitialized()) {
-            Log.d("xing", "fabric");
             Fabric.with(App.INSTANCE, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().build()).build());
-            Log.d("xing", "fabric end");
         }
     }
 
