@@ -70,7 +70,7 @@ public class Http {
 
         } catch (IOException e) {
             XToast.Show(R.string.request_fails);
-            XDebug.Handle(e);
+//            XDebug.Handle(e);
         }
 
         return null;
@@ -103,7 +103,7 @@ public class Http {
             return response;
         } catch (IOException e) {
             XToast.Show(R.string.request_fails);
-            XDebug.Handle(e);
+//            XDebug.Handle(e);
         }
 
         return null;
