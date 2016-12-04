@@ -44,15 +44,23 @@ public class ActivityChangeUserInfo extends XActivity {
         title.setText(R.string.set_user_info);
 
         username = (EditText) findViewById(R.id.new_username);
-        username.setText(Pref.Get(Pref.USERNAME, ""));
+        if (loadType == INIT) {
+            username.setHint("默认用户名为您的手机号");
+        } else {
+            username.setText(Pref.Get(Pref.USERNAME, ""));
+        }
 
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final String newUsername = username.getText().toString().trim();
-                if (newUsername.equals("")){
-                    XToast.Show(R.string.warning_input_empty);
+                if (newUsername.equals("")) {
+                    if (loadType == INIT) {
+                        startActivity(new Intent(ActivityChangeUserInfo.this, ActivityPurchaseIntent.class));
+                    } else {
+                        XToast.Show(R.string.warning_input_empty);
+                    }
                     return;
                 }
 
