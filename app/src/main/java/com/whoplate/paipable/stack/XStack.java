@@ -33,11 +33,11 @@ public class XStack {
         }
     }
 
-    public static int Size() {
+    public static synchronized int Size() {
         return history.size();
     }
 
-    private static void gc() {
+    private static synchronized void gc() {
         if (history == null) {
             history = new ArrayList<>();
             return;
@@ -52,7 +52,7 @@ public class XStack {
         }
     }
 
-    public static void Push(XActivity a) {
+    public static synchronized void Push(XActivity a) {
 
         gc();
 
@@ -67,7 +67,7 @@ public class XStack {
         }
     }
 
-    public static XActivity GetLastAliveActivity() {
+    public static synchronized XActivity GetLastAliveActivity() {
         gc();
 
         if (history == null || history.isEmpty()) {
@@ -78,7 +78,7 @@ public class XStack {
         return history.get(history.size() - 1).get();
     }
 
-    public static Context GetLastAliveActivityOrAppInstance() {
+    public static synchronized Context GetLastAliveActivityOrAppInstance() {
         gc();
 
         if (history == null || history.isEmpty()) {
