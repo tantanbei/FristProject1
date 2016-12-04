@@ -213,7 +213,9 @@ public class ActivitySignUp extends XActivity {
                                         Pref.Save();
                                         Log.d("tan", "sign up user:" + user.UserId + " tokenid:" + user.TokenId);
 
-                                        startActivity(new Intent(ActivitySignUp.this, ActivityChangeUserInfo.class));
+                                        Intent intent = new Intent(ActivitySignUp.this, ActivityChangeUserInfo.class);
+                                        intent.putExtra(ActivityChangeUserInfo.TYPE, ActivityChangeUserInfo.CHANGE);
+                                        startActivity(intent);
                                         finish();
                                     }
                                     break;
