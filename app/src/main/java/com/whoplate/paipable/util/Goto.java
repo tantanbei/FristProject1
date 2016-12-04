@@ -42,7 +42,7 @@ public class Goto {
     public static synchronized void DialCustomer(){
         try{
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
-            App.INSTANCE.startActivity(intent);
+            XStack.GetLastAliveActivity().startActivity(intent);
         }catch (Exception e){
             //do nothing
             XToast.Show(R.string.warning_unsupport_feature);
