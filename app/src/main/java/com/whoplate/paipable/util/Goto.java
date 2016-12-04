@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
+import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivityLogIn;
 import com.whoplate.paipable.activity.ActivitySignUp;
@@ -44,7 +45,7 @@ public class Goto {
             App.INSTANCE.startActivity(intent);
         }catch (Exception e){
             //do nothing
-            XToast.Show("您的设备不支持这项功能");
+            XToast.Show(R.string.warning_unsupport_feature);
         }
     }
 }

@@ -88,6 +88,7 @@
     <string name="set_user_info">设置用户信息</string>
     <string name="warning_input_empty">输入不能为空</string>
     <string name="warning_no_change">未发现变化</string>
+    <string name="warning_unsupport_feature">您的设备不支持这项功能</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
