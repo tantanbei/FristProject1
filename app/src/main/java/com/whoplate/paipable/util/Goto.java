@@ -2,12 +2,15 @@ package com.whoplate.paipable.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.whoplate.paipable.App;
+import com.whoplate.paipable.Const;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivityLogIn;
 import com.whoplate.paipable.activity.ActivitySignUp;
 import com.whoplate.paipable.stack.XStack;
+import com.whoplate.paipable.toast.XToast;
 
 public class Goto {
 
@@ -33,5 +36,15 @@ public class Goto {
         XStack.Clear();
 
         App.INSTANCE.startActivity(intent);
+    }
+
+    public static synchronized void DialCustomer(){
+        try{
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
+            App.INSTANCE.startActivity(intent);
+        }catch (Exception e){
+            //do nothing
+            XToast.Show("您的设备不支持这项功能");
+        }
     }
 }

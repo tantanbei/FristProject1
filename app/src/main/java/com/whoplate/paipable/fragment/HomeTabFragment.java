@@ -38,6 +38,7 @@ import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.time.XTime;
 import com.whoplate.paipable.ui.XView;
+import com.whoplate.paipable.util.Goto;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
@@ -108,8 +109,7 @@ public class HomeTabFragment extends XFragment {
         homeCustomerService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
-                startActivity(intent);
+                Goto.DialCustomer();
             }
         });
 

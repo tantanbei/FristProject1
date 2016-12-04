@@ -27,6 +27,7 @@ import com.whoplate.paipable.fragment.MineTabFragment;
 import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.stack.XStack;
 import com.whoplate.paipable.ui.XIconDrawable;
+import com.whoplate.paipable.util.Goto;
 
 public class ActivityHome extends XActivity {
     private static final int HOMEFRAGMENT = 0;
@@ -118,9 +119,8 @@ public class ActivityHome extends XActivity {
                 Intent intent;
                 switch (position) {
                     case 0:
-                        intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Const.CUSTOMER_SERVICE_PHONE));
                         homeDrawerLayout.closeDrawers();
-                        startActivity(intent);
+                        Goto.DialCustomer();
                         break;
                     case 1:
                         intent = new Intent(ActivityHome.this, ActivityFeedback.class);
