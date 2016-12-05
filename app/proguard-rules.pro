@@ -25,3 +25,22 @@
 -keep class com.bluelinelabs.logansquare.** { *; }
 -keep @com.bluelinelabs.logansquare.annotation.JsonObject class *
 -keep class **$$JsonObjectMapper { *; }
+
+-assumenosideeffects class android.util.Log {
+   public static boolean isLoggable(java.lang.String, int);
+   public static int v(...);
+   public static int i(...);
+   public static int w(...);
+   public static int d(...);
+   public static int e(...);
+   public static java.lang.String getStackTraceString(java.lang.Throwable);
+}
+
+-assumenosideeffects class java.lang.Exception {
+    public void printStackTrace();
+}
+
+-printseeds release-seeds.txt
+-printusage release-unused.txt
+-printmapping release-mapping.txt
+-printconfiguration release-out_dexconfig.txt
