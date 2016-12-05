@@ -12,9 +12,16 @@
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
 # class:
--keepclassmembers class fqcn.of.javascript.interface.for.webview {
-   public *;
-}
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+#forece reload of config files
+-forceprocessing
+
+-optimizations !class/merging/*,!field/removal/writeonly
+#anything more than 3 is waste of time...each pass takes about 1 minute
+-optimizationpasses 3
 
 -keep class com.github.mikephil.charting.** { *; }
 -dontwarn io.realm.**
