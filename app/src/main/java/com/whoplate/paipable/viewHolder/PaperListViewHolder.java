@@ -6,10 +6,13 @@ import android.widget.TextView;
 
 import com.whoplate.paipable.R;
 
+import org.w3c.dom.Text;
+
 public class PaperListViewHolder extends RecyclerView.ViewHolder {
     public View root;
     public TextView title;
     public TextView date;
+    public TextView reprint;
 
     public PaperListViewHolder(View itemView) {
         super(itemView);
@@ -17,5 +20,6 @@ public class PaperListViewHolder extends RecyclerView.ViewHolder {
         root = itemView;
         title = (TextView) itemView.findViewById(R.id.paper_title);
         date = (TextView) itemView.findViewById(R.id.date);
+        reprint = (TextView) itemView.findViewById(R.id.reprint);
     }
 }

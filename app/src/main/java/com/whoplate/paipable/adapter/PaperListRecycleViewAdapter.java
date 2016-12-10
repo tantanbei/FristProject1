@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.ActivityWebView;
 import com.whoplate.paipable.networkpacket.Paper;
@@ -38,6 +39,15 @@ public class PaperListRecycleViewAdapter extends RecyclerView.Adapter<PaperListV
         Log.d("tan", "onBindViewHolder: " + data.get(position).Title);
         holder.title.setText(data.get(position).Title);
         holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
+
+        final int reprintId = data.get(position).ReprintId;
+        final String reprintText;
+        if (reprintId >= Const.Reprints.size() || reprintId == 0) {
+            reprintText = "转载";
+        } else {
+            reprintText = Const.Reprints.get(reprintId);
+        }
+        holder.reprint.setText(reprintText);
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
