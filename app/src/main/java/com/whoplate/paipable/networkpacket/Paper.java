@@ -20,6 +20,8 @@ public class Paper {
     @JsonField
     public int KeywordId4;
     @JsonField
+    public int ReprintId;
+    @JsonField
     public long DateSubmit;
 
     public Paper() {
