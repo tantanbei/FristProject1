@@ -65,6 +65,7 @@ public class HomeTabFragment extends XFragment {
     private TextView overPrice;
     private TextView historyData;
     private TextView signInEveryDay;
+    private TextView more;
     private RecyclerView message;
     private ScrollView scrollView;
     private PaperListRecycleViewAdapter adapter = null;
@@ -91,6 +92,7 @@ public class HomeTabFragment extends XFragment {
         runningForecast = (TextView) view.findViewById(R.id.running_forecast);
         overPrice = (TextView) view.findViewById(R.id.over_price);
         signInEveryDay = (TextView) view.findViewById(R.id.sign_in_everyday);
+        more = (TextView) view.findViewById(R.id.more);
         message = (RecyclerView) view.findViewById(R.id.home_message);
 
         for (int srcId : srcIds) {
@@ -149,6 +151,13 @@ public class HomeTabFragment extends XFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Parent, ActivitySignIn.class));
+            }
+        });
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Parent, ActivityMessage.class));
             }
         });
 

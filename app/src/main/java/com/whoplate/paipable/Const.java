@@ -31,6 +31,7 @@ public class Const {
 
 
     static final public ArrayList<String> DataKeywords = new ArrayList<>();
+    static final public ArrayList<String> Reprints = new ArrayList<>();
 
     static {
         DataKeywords.add(0,"");
@@ -58,5 +59,11 @@ public class Const {
         DataKeywords.add(22,"201610");
         DataKeywords.add(23,"201611");
         DataKeywords.add(24,"201612");
+
+        Reprints.add(0,"");
+        Reprints.add(1,"拍牌宝");
+        Reprints.add(2,"国拍网");
+        Reprints.add(3,"51沪牌");
+
     }
 }

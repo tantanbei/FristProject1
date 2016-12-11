@@ -32,6 +32,7 @@
     <string name="auction_unstart">拍牌未开始</string>
     <string name="request_fails">请求失败</string>
     <string name="announcement">信息公告</string>
+    <string name="more">更多</string>
     <string name="get_verification_code">获取验证码</string>
     <string name="input_phone">请输入您的手机号码</string>
     <string name="input_verification_code">请输入您的验证码</string>
