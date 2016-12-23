@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -67,7 +68,7 @@ public class HomeTabFragment extends XFragment {
     private TextView signInEveryDay;
     private TextView more;
     private RecyclerView message;
-    private ScrollView scrollView;
+    private NestedScrollView scrollView;
     private PaperListRecycleViewAdapter adapter = null;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
@@ -79,7 +80,7 @@ public class HomeTabFragment extends XFragment {
 
         homeMenu = (IconTextView) view.findViewById(R.id.home_menu);
         homeCustomerService = (IconTextView) view.findViewById(R.id.home_customer_service);
-        scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
+        scrollView = (NestedScrollView) view.findViewById(R.id.scroll_view);
         homeViewPager = (ViewPager) view.findViewById(R.id.home_view_pager);
         auctionReady = (LinearLayout) view.findViewById(R.id.auction_ready);
         auctionIdle = (LinearLayout) view.findViewById(R.id.auction_idle);
