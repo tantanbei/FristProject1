@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.ActivityWebView;
@@ -39,6 +40,8 @@ public class PaperListRecycleViewAdapter extends RecyclerView.Adapter<PaperListV
         Log.d("tan", "onBindViewHolder: " + data.get(position).Title);
         holder.title.setText(data.get(position).Title);
         holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
+
+        Glide.with(a.get()).load("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png").centerCrop().into(holder.image);
 
         final int reprintId = data.get(position).ReprintId;
         final String reprintText;
