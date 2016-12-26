@@ -135,6 +135,7 @@ public class ActivitySignUp extends XActivity {
                                         break;
                                     case "2":
                                         XToast.Show(R.string.has_not_registered);
+                                        break;
                                     default:
                                         XToast.Show(R.string.request_fails);
                                 }
