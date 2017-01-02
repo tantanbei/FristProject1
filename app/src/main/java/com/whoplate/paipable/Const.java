@@ -28,6 +28,7 @@ public class Const {
     static final public String URL_FEEDBACK = "/feedback/add";
     static final public String URL_PAPER_CONTENT = "/paper/content";
     static final public String URL_PAPER = "/paper";
+    static final public String URL_GET_IMAGE = "/image/get";
 
 
     static final public ArrayList<String> DataKeywords = new ArrayList<>();

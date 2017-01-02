@@ -23,6 +23,8 @@ public class Paper {
     public int ReprintId;
     @JsonField
     public long DateSubmit;
+    @JsonField
+    public int ImageId;
 
     public Paper() {
     }

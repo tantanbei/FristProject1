@@ -14,6 +14,7 @@ import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.ActivityWebView;
 import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.time.XTime;
+import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.viewHolder.PaperListViewHolder;
 
 import java.lang.ref.WeakReference;
@@ -41,7 +42,12 @@ public class PaperListRecycleViewAdapter extends RecyclerView.Adapter<PaperListV
         holder.title.setText(data.get(position).Title);
         holder.date.setText(XTime.TimeStampToDate(data.get(position).DateSubmit * 1000L));
 
-        Glide.with(a.get()).load("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png").centerCrop().into(holder.image);
+        int imageId = data.get(position).ImageId;
+        if (imageId != 0) {
+            Glide.with(a.get()).load(Const.SERVER_IP + Const.URL_APN + Const.URL_GET_IMAGE + "?imagetype=0&imageid=" + imageId).centerCrop().into(holder.image);
+        } else {
+            XView.Hide(holder.image);
+        }
 
         final int reprintId = data.get(position).ReprintId;
         final String reprintText;
