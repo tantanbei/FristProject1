@@ -52,7 +52,6 @@
   **[] $VALUES;
   public *;
 }
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
 -printseeds release-seeds.txt
 -printusage release-unused.txt
