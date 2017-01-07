@@ -32,7 +32,7 @@ public class PaperListRecycleViewAdapter extends RecyclerView.Adapter<PaperListV
 
     @Override
     public PaperListViewHolder onCreateViewHolder(ViewGroup vg, int viewType) {
-        View view = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_paper, vg, false);
+        View view = LayoutInflater.from(a.get()).inflate(R.layout.row_paper, vg, false);
         return new PaperListViewHolder(view);
     }
 

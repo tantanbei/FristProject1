@@ -12,6 +12,6 @@ public class ExchangeListViewHolder extends RecyclerView.ViewHolder{
     public ExchangeListViewHolder(View itemView) {
         super(itemView);
 
-        exchange = (TextView) itemView.findViewById(R.id.exchange);
+        exchange = (TextView) itemView.findViewById(R.id.title);
     }
 }
