@@ -74,4 +74,9 @@
         android:layout_marginStart="5dp"
         android:text="积分商城，敬请期待～"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/exchange"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

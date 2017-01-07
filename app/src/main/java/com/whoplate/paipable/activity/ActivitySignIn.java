@@ -1,6 +1,7 @@
 package com.whoplate.paipable.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class ActivitySignIn extends XActivity {
     TextView myPoint;
     TextView myKeepDays;
     TextView signIn;
+    RecyclerView exchange;
 
     @Override
     public int GetContentView() {
@@ -45,6 +47,7 @@ public class ActivitySignIn extends XActivity {
         myPoint = (TextView) findViewById(R.id.point);
         myKeepDays = (TextView) findViewById(R.id.keep_sign_in_day);
         signIn = (TextView) findViewById(R.id.sign_in);
+        exchange = (RecyclerView) findViewById(R.id.exchange);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
