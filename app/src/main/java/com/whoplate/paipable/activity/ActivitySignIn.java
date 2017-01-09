@@ -14,17 +14,15 @@ import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.adapter.ExchangeListRecycleViewAdapter;
 import com.whoplate.paipable.http.Http;
-import com.whoplate.paipable.networkpacket.PointExchangeProduce;
 import com.whoplate.paipable.networkpacket.PointStatus;
+import com.whoplate.paipable.networkpacket.Products;
 import com.whoplate.paipable.networkpacket.SignInBack;
-import com.whoplate.paipable.session.XSession;
 import com.whoplate.paipable.string.XString;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.Response;
 
@@ -54,18 +52,6 @@ public class ActivitySignIn extends XActivity {
         exchange = (RecyclerView) findViewById(R.id.exchange);
 
         exchange.setLayoutManager(new GridLayoutManager(this, 2));
-
-        ArrayList<PointExchangeProduce> data = new ArrayList<>();
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        data.add(new PointExchangeProduce());
-        exchange.setAdapter(new ExchangeListRecycleViewAdapter(this, data));
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +114,26 @@ public class ActivitySignIn extends XActivity {
                     });
 
                     Log.d("tan", "pointStatus:" + pointStatus.ToJsonString());
+                } catch (IOException e) {
+                    XDebug.Handle(e);
+                    XToast.Show(R.string.request_fails);
+                }
+            }
+        });
+
+        XThread.RunBackground(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Response response = Http.Get(Const.URL_API + Const.URL_ALL_PRODUCTS);
+                    final Products products = LoganSquare.parse(response.body().byteStream(), Products.class);
+
+                    App.Uihandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            exchange.setAdapter(new ExchangeListRecycleViewAdapter(ActivitySignIn.this, products.Data));
+                        }
+                    });
                 } catch (IOException e) {
                     XDebug.Handle(e);
                     XToast.Show(R.string.request_fails);

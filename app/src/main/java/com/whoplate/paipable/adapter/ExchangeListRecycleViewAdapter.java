@@ -7,18 +7,17 @@ import android.view.ViewGroup;
 
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
-import com.whoplate.paipable.networkpacket.PointExchangeProduce;
+import com.whoplate.paipable.networkpacket.Product;
 import com.whoplate.paipable.viewHolder.ExchangeListViewHolder;
 
-import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class ExchangeListRecycleViewAdapter extends RecyclerView.Adapter<ExchangeListViewHolder> {
     private WeakReference<XActivity> a;
-    private ArrayList<PointExchangeProduce> data;
+    private ArrayList<Product> data;
 
-    public ExchangeListRecycleViewAdapter(XActivity a, ArrayList<PointExchangeProduce> data) {
+    public ExchangeListRecycleViewAdapter(XActivity a, ArrayList<Product> data) {
         this.a = new WeakReference<XActivity>(a);
         this.data = data;
     }
@@ -31,7 +30,8 @@ public class ExchangeListRecycleViewAdapter extends RecyclerView.Adapter<Exchang
 
     @Override
     public void onBindViewHolder(ExchangeListViewHolder holder, int position) {
-        //// TODO: 07/01/2017  
+        holder.title.setText(data.get(position).Title);
+        holder.point.setText("消耗积分：" + data.get(position).Point);
     }
 
     @Override

@@ -7,11 +7,16 @@ import android.widget.TextView;
 import com.whoplate.paipable.R;
 
 public class ExchangeListViewHolder extends RecyclerView.ViewHolder{
-    public TextView exchange;
+    public TextView title;
+    public TextView point;
+
+    public String value;
+    public int productId;
 
     public ExchangeListViewHolder(View itemView) {
         super(itemView);
 
-        exchange = (TextView) itemView.findViewById(R.id.title);
+        title = (TextView) itemView.findViewById(R.id.title);
+        point = (TextView) itemView.findViewById(R.id.point);
     }
 }
