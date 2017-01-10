@@ -9,6 +9,7 @@ import com.whoplate.paipable.R;
 public class ExchangeListViewHolder extends RecyclerView.ViewHolder{
     public TextView title;
     public TextView point;
+    public TextView submit;
 
     public String value;
     public int productId;
@@ -18,5 +19,6 @@ public class ExchangeListViewHolder extends RecyclerView.ViewHolder{
 
         title = (TextView) itemView.findViewById(R.id.title);
         point = (TextView) itemView.findViewById(R.id.point);
+        submit = (TextView) itemView.findViewById(R.id.submit);
     }
 }

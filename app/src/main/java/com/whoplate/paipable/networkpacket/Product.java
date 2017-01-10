@@ -6,13 +6,13 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 @JsonObject
 public class Product {
     @JsonField
-    public int ProduceId;
+    public int ProductId;
     @JsonField
     public String Title;
     @JsonField
     public int Point;
     @JsonField
-    public int ProduceType;
+    public int ProductType;
     @JsonField
     public String Value;
     @JsonField

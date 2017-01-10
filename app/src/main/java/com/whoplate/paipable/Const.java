@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Const {
 
-        static final public String SERVER_IP = "http://192.168.1.5";
-//    static final public String SERVER_IP = "http://114.55.174.165";
+//        static final public String SERVER_IP = "http://192.168.1.5";
+    static final public String SERVER_IP = "http://114.55.174.165";
 
     static final public String CUSTOMER_SERVICE_PHONE = "18117541072";
 
@@ -25,7 +25,7 @@ public class Const {
     static final public String URL_AUCTION_DETAIL_DATES = "/auction/detail/dates";
     static final public String URL_POINT_STATUS = "/point/get";
     static final public String URL_ALL_PRODUCTS = "/product/get";
-    static final public String URL_EXCHANGE = "/product/title";
+    static final public String URL_EXCHANGE = "/product/exchange";
     static final public String URL_SIGN_IN = "/signin";
     static final public String URL_FEEDBACK = "/feedback/add";
     static final public String URL_PAPER_CONTENT = "/paper/content";

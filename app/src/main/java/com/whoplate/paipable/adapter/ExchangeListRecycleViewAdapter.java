@@ -5,13 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bluelinelabs.logansquare.LoganSquare;
+import com.whoplate.paipable.App;
+import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.networkpacket.OkPacket;
 import com.whoplate.paipable.networkpacket.Product;
+import com.whoplate.paipable.networkpacket.SignInBack;
+import com.whoplate.paipable.string.XString;
+import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.util.XDebug;
 import com.whoplate.paipable.viewHolder.ExchangeListViewHolder;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import okhttp3.Response;
 
 public class ExchangeListRecycleViewAdapter extends RecyclerView.Adapter<ExchangeListViewHolder> {
     private WeakReference<XActivity> a;
@@ -29,9 +42,45 @@ public class ExchangeListRecycleViewAdapter extends RecyclerView.Adapter<Exchang
     }
 
     @Override
-    public void onBindViewHolder(ExchangeListViewHolder holder, int position) {
+    public void onBindViewHolder(final ExchangeListViewHolder holder, final int position) {
         holder.title.setText(data.get(position).Title);
         holder.point.setText("消耗积分：" + data.get(position).Point);
+        holder.productId = data.get(position).ProductId;
+        holder.submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            Response response = Http.Get(Const.URL_API + Const.URL_EXCHANGE + "?productid=" + holder.productId);
+                            final OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
+
+                            App.Uihandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!packet.Ok) {
+                                        switch (packet.Data) {
+                                            case "0":
+                                                XToast.Show("积分不足");
+                                                break;
+                                            default:
+                                                XToast.Show("兑换失败");
+                                        }
+                                    } else {
+                                        XToast.Show("兑换成功");
+                                    }
+                                }
+                            });
+                        } catch (IOException e) {
+                            XToast.Show(R.string.request_fails);
+                            XDebug.Handle(e);
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override
