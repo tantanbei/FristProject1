@@ -69,14 +69,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:text="积分商城，敬请期待～"/>
+        android:textSize="15sp"
+        android:text="积分兑换"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/exchange"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/grey"/>
 
 </LinearLayout>

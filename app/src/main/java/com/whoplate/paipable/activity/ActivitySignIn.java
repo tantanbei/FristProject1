@@ -14,6 +14,7 @@ import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.adapter.ExchangeListRecycleViewAdapter;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.itemDecoration.GridLayoutDivider;
 import com.whoplate.paipable.networkpacket.PointStatus;
 import com.whoplate.paipable.networkpacket.Products;
 import com.whoplate.paipable.networkpacket.SignInBack;
@@ -52,6 +53,7 @@ public class ActivitySignIn extends XActivity {
         exchange = (RecyclerView) findViewById(R.id.exchange);
 
         exchange.setLayoutManager(new GridLayoutManager(this, 2));
+        exchange.addItemDecoration(new GridLayoutDivider());
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
