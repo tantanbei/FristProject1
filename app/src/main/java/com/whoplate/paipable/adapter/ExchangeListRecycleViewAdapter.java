@@ -38,7 +38,7 @@ public class ExchangeListRecycleViewAdapter extends RecyclerView.Adapter<Exchang
     @Override
     public ExchangeListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(a.get()).inflate(R.layout.row_exchange, parent, false);
-        return new ExchangeListViewHolder(view);
+        return new ExchangeListViewHolder(view, a.get());
     }
 
     @Override
@@ -46,41 +46,8 @@ public class ExchangeListRecycleViewAdapter extends RecyclerView.Adapter<Exchang
         holder.title.setText(data.get(position).Title);
         holder.point.setText("消耗积分：" + data.get(position).Point);
         holder.productId = data.get(position).ProductId;
-        holder.submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                XThread.RunBackground(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
 
-                            Response response = Http.Get(Const.URL_API + Const.URL_EXCHANGE + "?productid=" + holder.productId);
-                            final OkPacket packet = LoganSquare.parse(response.body().byteStream(), OkPacket.class);
-
-                            App.Uihandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (!packet.Ok) {
-                                        switch (packet.Data) {
-                                            case "0":
-                                                XToast.Show("积分不足");
-                                                break;
-                                            default:
-                                                XToast.Show("兑换失败");
-                                        }
-                                    } else {
-                                        XToast.Show("兑换成功");
-                                    }
-                                }
-                            });
-                        } catch (IOException e) {
-                            XToast.Show(R.string.request_fails);
-                            XDebug.Handle(e);
-                        }
-                    }
-                });
-            }
-        });
+        holder.value = data.get(position).Value;
     }
 
     @Override
