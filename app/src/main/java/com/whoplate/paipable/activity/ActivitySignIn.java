@@ -90,10 +90,10 @@ public class ActivitySignIn extends XActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        refreshData();
+        RefreshData();
     }
 
-    private void refreshData() {
+    public void RefreshData() {
 
         XThread.RunBackground(new Runnable() {
             @Override

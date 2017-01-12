@@ -10,6 +10,7 @@ import com.bluelinelabs.logansquare.LoganSquare;
 import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
+import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.OkPacket;
@@ -89,6 +90,10 @@ public class ExchangeListViewHolder extends RecyclerView.ViewHolder {
                         }
                     } else {
                         XToast.Show("兑换成功");
+
+                        if (a.get() instanceof ActivitySignIn) {
+                            ((ActivitySignIn) a.get()).RefreshData();
+                        }
                     }
                 }
             });
