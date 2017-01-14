@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @JsonObject
 public class Products {
     @JsonField
-    public ArrayList<Product> Data;
+    public ArrayList<ProductWithImage> Data;
 
     public Products() {
     }

@@ -4,7 +4,7 @@ import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 @JsonObject
-public class Product {
+public class ProductWithImage {
     @JsonField
     public int ProductId;
     @JsonField
@@ -19,9 +19,9 @@ public class Product {
     public int Stock;
     @JsonField
     public long ExpiryDate;
-//    @JsonField
-//    public int ImageId;
+    @JsonField
+    public int ImageId;
 
-    public Product() {
+    public ProductWithImage() {
     }
 }

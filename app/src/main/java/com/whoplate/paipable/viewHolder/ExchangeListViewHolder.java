@@ -1,9 +1,11 @@
 package com.whoplate.paipable.viewHolder;
 
 import android.content.DialogInterface;
+import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -29,6 +31,7 @@ public class ExchangeListViewHolder extends RecyclerView.ViewHolder {
     public TextView title;
     public TextView point;
     public TextView submit;
+    public ImageView cover;
 
     public String value;
     public int productId;
@@ -42,6 +45,7 @@ public class ExchangeListViewHolder extends RecyclerView.ViewHolder {
         title = (TextView) itemView.findViewById(R.id.title);
         point = (TextView) itemView.findViewById(R.id.point);
         submit = (TextView) itemView.findViewById(R.id.submit);
+        cover = (ImageView) itemView.findViewById(R.id.cover);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
