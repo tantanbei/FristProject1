@@ -2,7 +2,6 @@ package com.whoplate.paipable.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -28,7 +26,6 @@ import com.whoplate.paipable.activity.ActivityAuctionStrategy;
 import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivitySignIn;
-import com.whoplate.paipable.activity.ActivityWebView;
 import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
@@ -43,7 +40,6 @@ import com.whoplate.paipable.util.Goto;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import okhttp3.Response;
@@ -72,7 +68,7 @@ public class HomeTabFragment extends XFragment {
     private PaperListRecycleViewAdapter adapter = null;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
-    private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager};
+    private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,6 +95,12 @@ public class HomeTabFragment extends XFragment {
         for (int srcId : srcIds) {
             ImageView imageView = new ImageView(getContext());
             imageView.setBackgroundResource(srcId);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Parent, ActivitySignIn.class));
+                }
+            });
             ImageArrayList.add(imageView);
         }
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Const {
 
-        static final public String SERVER_IP = "http://192.168.1.3";
-//    static final public String SERVER_IP = "http://114.55.174.165";
+//        static final public String SERVER_IP = "http://192.168.1.3";
+    static final public String SERVER_IP = "http://114.55.174.165";
 
     static final public String CUSTOMER_SERVICE_PHONE = "18117541072";
 
@@ -62,6 +62,19 @@ public class Const {
         DataKeywords.add(22,"201610");
         DataKeywords.add(23,"201611");
         DataKeywords.add(24,"201612");
+        DataKeywords.add(25,"201701");
+        DataKeywords.add(26,"201702");
+        DataKeywords.add(27,"201703");
+        DataKeywords.add(28,"201704");
+        DataKeywords.add(29,"201705");
+        DataKeywords.add(30,"201706");
+        DataKeywords.add(31,"201707");
+        DataKeywords.add(32,"201708");
+        DataKeywords.add(33,"201709");
+        DataKeywords.add(34,"201710");
+        DataKeywords.add(35,"201711");
+        DataKeywords.add(36,"201712");
+        DataKeywords.add(37,"201801");
 
         Reprints.add(0,"");
         Reprints.add(1,"拍牌宝");

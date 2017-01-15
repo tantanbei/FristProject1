@@ -4,29 +4,30 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:background="@color/white"
-    android:paddingTop="3dp"
-    android:paddingBottom="3dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/cover"
         android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_height="140dp"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:text="三网10元话费" />
 
     <TextView
         android:id="@+id/point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="消耗积分：300积分"/>
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/submit"
