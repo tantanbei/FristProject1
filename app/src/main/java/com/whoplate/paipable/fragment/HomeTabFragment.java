@@ -25,6 +25,7 @@ import com.whoplate.paipable.activity.ActivityMessage;
 import com.whoplate.paipable.activity.ActivityAuctionStrategy;
 import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
+import com.whoplate.paipable.activity.ActivityRecorder;
 import com.whoplate.paipable.activity.ActivitySignIn;
 import com.whoplate.paipable.activity.ActivityVideoList;
 import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
@@ -64,6 +65,7 @@ public class HomeTabFragment extends XFragment {
     private TextView historyData;
     private TextView signInEveryDay;
     private TextView breakRule;
+    private TextView videoRecord;
     private TextView more;
     private RecyclerView message;
     private NestedScrollView scrollView;
@@ -92,6 +94,7 @@ public class HomeTabFragment extends XFragment {
         overPrice = (TextView) view.findViewById(R.id.over_price);
         signInEveryDay = (TextView) view.findViewById(R.id.sign_in_everyday);
         breakRule = (TextView) view.findViewById(R.id.break_rule);
+        videoRecord = (TextView) view.findViewById(R.id.video_record);
         more = (TextView) view.findViewById(R.id.more);
         message = (RecyclerView) view.findViewById(R.id.home_message);
 
@@ -164,6 +167,13 @@ public class HomeTabFragment extends XFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Parent, ActivityVideoList.class));
+            }
+        });
+
+        videoRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Parent, ActivityRecorder.class));
             }
         });
 
