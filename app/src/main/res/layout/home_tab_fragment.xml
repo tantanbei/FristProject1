@@ -261,6 +261,17 @@
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
+                <TextView
+                    android:id="@+id/break_rule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@color/sign_in_everyday"
+                    android:padding="5dp"
+                    android:text="违章视频"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
             </LinearLayout>
 
             <LinearLayout

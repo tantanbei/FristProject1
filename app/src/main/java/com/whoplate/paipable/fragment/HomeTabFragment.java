@@ -26,6 +26,7 @@ import com.whoplate.paipable.activity.ActivityAuctionStrategy;
 import com.whoplate.paipable.activity.ActivityHistoryData;
 import com.whoplate.paipable.activity.ActivityHome;
 import com.whoplate.paipable.activity.ActivitySignIn;
+import com.whoplate.paipable.activity.ActivityVideoList;
 import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
 import com.whoplate.paipable.fragment.base.XFragment;
 import com.whoplate.paipable.http.Http;
@@ -62,6 +63,7 @@ public class HomeTabFragment extends XFragment {
     private TextView overPrice;
     private TextView historyData;
     private TextView signInEveryDay;
+    private TextView breakRule;
     private TextView more;
     private RecyclerView message;
     private NestedScrollView scrollView;
@@ -89,6 +91,7 @@ public class HomeTabFragment extends XFragment {
         runningForecast = (TextView) view.findViewById(R.id.running_forecast);
         overPrice = (TextView) view.findViewById(R.id.over_price);
         signInEveryDay = (TextView) view.findViewById(R.id.sign_in_everyday);
+        breakRule = (TextView) view.findViewById(R.id.break_rule);
         more = (TextView) view.findViewById(R.id.more);
         message = (RecyclerView) view.findViewById(R.id.home_message);
 
@@ -154,6 +157,13 @@ public class HomeTabFragment extends XFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Parent, ActivitySignIn.class));
+            }
+        });
+
+        breakRule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Parent, ActivityVideoList.class));
             }
         });
 
