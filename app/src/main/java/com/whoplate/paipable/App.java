@@ -17,6 +17,7 @@ import com.whoplate.paipable.http.SSLSocketFactoryEx;
 import com.whoplate.paipable.http.XRandom;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.util.XFabric;
+import com.whoplate.paipable.util.XFile;
 
 import javax.net.ssl.SSLSocketFactory;
 
@@ -33,6 +34,7 @@ public class App extends Application{
     public static App INSTANCE ;
 
     public static String AppDbDirectory;
+    private static String FileCacheDir;
 
     public static SSLSocketFactory SetSslSocketFactory;
 
@@ -66,5 +68,15 @@ public class App extends Application{
         }
 
         return RESOURCES;
+    }
+
+    public static synchronized String GetFileCacheDir() {
+        if (FileCacheDir == null) {
+            FileCacheDir = XFile.GetExternalCachePath("/cache_files/");
+        }
+
+        XFile.EnsureDirExists(FileCacheDir);
+
+        return FileCacheDir;
     }
 }

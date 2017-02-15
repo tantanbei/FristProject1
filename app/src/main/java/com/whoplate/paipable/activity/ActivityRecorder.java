@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.whoplate.paipable.App;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.util.XDebug;
 
 import java.io.File;
 import java.io.IOException;
@@ -354,8 +355,8 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
 
             recorder.setCamera(camera);
             // 这两项需要放在setOutputFormat之前
-            recorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
-            recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
             // Set output file format，输出格式
             recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 
@@ -364,7 +365,7 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
             recorder.setVideoSize(SIZE_1, SIZE_2);//这个大小就够了
 
             // 这两项需要放在setOutputFormat之后
-            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             recorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
 
             recorder.setVideoEncodingBitRate(3 * SIZE_1 * SIZE_2);//第一个数字越大，清晰度就越高，考虑文件大小的缘故，就调整为1
@@ -587,16 +588,14 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
     }
 
     public String videoDir() {
-        File sampleDir = new File(App.AppDbDirectory);
-        if (!sampleDir.exists()) {
-            sampleDir.mkdirs();
-        }
-        File vecordDir = sampleDir;
+        String cacheDir = App.GetFileCacheDir();
+
+        File dir = new File(cacheDir);
         // 创建文件
         try {
-            videoFile = File.createTempFile("recording", ".mp4", vecordDir);
+            videoFile = File.createTempFile("recording", ".mp4", dir);
         } catch (IOException e) {
-            e.printStackTrace();
+            XDebug.Handle(e);
         }
 
         return null;
