@@ -72,7 +72,7 @@ public class HomeTabFragment extends XFragment {
     private PaperListRecycleViewAdapter adapter = null;
 
     private ArrayList<View> ImageArrayList = new ArrayList<View>();
-    private int[] srcIds = {R.mipmap.home_first_pager, R.mipmap.home_second_pager, R.mipmap.home_third_pager};
+    private int[] srcIds = {R.drawable.home_first_pager, R.drawable.home_second_pager, R.drawable.home_third_pager};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
