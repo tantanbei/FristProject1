@@ -1,17 +1,21 @@
 package com.whoplate.paipable.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.ThumbnailUtils;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.toast.XToast;
 import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XFile;
 
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 public class ActivityEditVideo extends XActivity {
@@ -20,7 +24,7 @@ public class ActivityEditVideo extends XActivity {
     JCVideoPlayerStandard videoPlayer;
     TextView emptyVideo;
     String videoPath;
-    String thumbPath;
+    Bitmap thumbBmp;
 
     @Override
     public int GetContentView() {
@@ -59,13 +63,21 @@ public class ActivityEditVideo extends XActivity {
 
         videoPath = data.getStringExtra(ActivityRecorder.VIDEO_PATH);
 
-        if (!XFile.Exists(videoPath)){
+        if (!XFile.Exists(videoPath)) {
             XToast.Show("录制视频失败");
             return;
         }
 
         XView.Show(videoPlayer);
         XView.Hide(emptyVideo);
+        thumbBmp = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Images.Thumbnails.MINI_KIND);
         videoPlayer.setUp(videoPath, JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "");
+        videoPlayer.thumbImageView.setBackground(new BitmapDrawable(null, thumbBmp));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
     }
 }

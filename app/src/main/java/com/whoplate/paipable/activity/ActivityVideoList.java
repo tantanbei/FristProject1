@@ -32,6 +32,7 @@ public class ActivityVideoList extends XActivity{
         }
         super.onBackPressed();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
