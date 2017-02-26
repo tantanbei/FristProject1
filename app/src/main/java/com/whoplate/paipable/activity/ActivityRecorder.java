@@ -28,12 +28,16 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.util.XDebug;
+import com.whoplate.paipable.util.XFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 public class ActivityRecorder extends XActivity implements SurfaceHolder.Callback {
+
+    public final static int RESULT_RECORDER = 100;
+    public final static String VIDEO_PATH = "VIDEO_PATH";
 
     public final static int SIZE_1 = 640;
     public final static int SIZE_2 = 480;
@@ -135,6 +139,13 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
             onPause();
             return;
         }
+
+        Intent intent = new Intent();
+        if (videoFile != null && XFile.Exists(videoFile.getPath())) {
+            intent.putExtra(VIDEO_PATH, videoFile.getPath());
+        }
+        setResult(RESULT_RECORDER, intent);
+
         super.onBackPressed();
     }
 
@@ -153,12 +164,6 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
     public void surfaceDestroyed(SurfaceHolder holder) {
         endRecord();
         releaseCamera();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        endRecordUI();
     }
 
     private void initView() {
@@ -212,6 +217,7 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
             }
         } else {
             endRecord();
+            onBackPressed();
         }
     }
 

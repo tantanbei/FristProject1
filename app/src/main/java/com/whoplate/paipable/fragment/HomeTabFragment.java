@@ -21,6 +21,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
+import com.whoplate.paipable.activity.ActivityEditVideo;
 import com.whoplate.paipable.activity.ActivityMessage;
 import com.whoplate.paipable.activity.ActivityAuctionStrategy;
 import com.whoplate.paipable.activity.ActivityHistoryData;
@@ -173,7 +174,7 @@ public class HomeTabFragment extends XFragment {
         videoRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Parent, ActivityRecorder.class));
+                startActivity(new Intent(Parent, ActivityEditVideo.class));
             }
         });
 

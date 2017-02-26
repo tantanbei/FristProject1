@@ -127,6 +127,11 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity
+            android:name=".activity.ActivityEditVideo"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name">
+        </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title_bar"/>
+
+    <TextView
+        android:id="@+id/empty_video"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:textSize="16sp"
+        android:text="添加视频"
+        android:background="@color/grey"
+        android:gravity="center"/>
+
+    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:id="@+id/video_player"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:hint="输入标题"
+        android:layout_marginTop="3dp"/>
+
+</LinearLayout>
