@@ -80,4 +80,14 @@ public class ActivityEditVideo extends XActivity {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        videoPlayer = null;
+        emptyVideo = null;
+        videoPath = null;
+        thumbBmp = null;
+    }
 }
