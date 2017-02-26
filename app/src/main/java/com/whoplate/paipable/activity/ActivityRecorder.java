@@ -150,6 +150,25 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        orientationEventListener.disable();
+        orientationEventListener = null;
+        cameraShowView = null;
+        videoFlashLight = null;
+        videoTime = null;
+        switchCamera = null;
+        recordButton = null;
+
+        recorder = null;
+
+        surfaceHolder = null;
+
+        camera = null;
+    }
+
+    @Override
     public void surfaceCreated(SurfaceHolder holder) {
         surfaceHolder = holder;
         initCamera(cameraType, false);
