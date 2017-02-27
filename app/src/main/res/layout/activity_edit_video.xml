@@ -21,10 +21,19 @@
         android:visibility="gone"/>
 
     <EditText
+        android:id="@+id/video_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:hint="输入标题"
+        android:layout_marginTop="3dp"/>
+
+    <EditText
+        android:id="@+id/video_summary"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:textSize="20sp"
+        android:hint="输入简介"
         android:layout_marginTop="3dp"/>
 
 </LinearLayout>

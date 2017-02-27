@@ -7,22 +7,33 @@ import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.networkpacket.UploadVideo;
+import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
 import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XFile;
 
+import java.io.ByteArrayOutputStream;
+
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+import okhttp3.Response;
 
 public class ActivityEditVideo extends XActivity {
     static public final int REQUEST_RECORDER = 1;
 
     JCVideoPlayerStandard videoPlayer;
     TextView emptyVideo;
+    EditText titleEditor;
+    EditText summaryEditor;
+
     String videoPath;
     Bitmap thumbBmp;
 
@@ -41,12 +52,29 @@ public class ActivityEditVideo extends XActivity {
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 25/02/2017
+                final UploadVideo uploadVideo = new UploadVideo();
+                uploadVideo.Title = titleEditor.getText().toString();
+                uploadVideo.Summary = summaryEditor.getText().toString();
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                thumbBmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                uploadVideo.Thumbnail = stream.toByteArray();
+
+                uploadVideo.Video = XFile.GetBytesFromPath(videoPath);
+
+                XThread.RunBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        Response response = Http.Post(Const.URL_API + "/video/upload", uploadVideo);
+                    }
+                });
             }
         });
 
         emptyVideo = (TextView) findViewById(R.id.empty_video);
         videoPlayer = (JCVideoPlayerStandard) findViewById(R.id.video_player);
+        titleEditor = (EditText) findViewById(R.id.video_title);
+        summaryEditor = (EditText) findViewById(R.id.video_summary);
 
         emptyVideo.setOnClickListener(new View.OnClickListener() {
             @Override
