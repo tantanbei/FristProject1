@@ -80,9 +80,6 @@ public class Http {
     static public Response Post(final String url, final Object packet) {
         try {
 
-            final MultipartBody.Builder multiBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-            multiBuilder.addFormDataPart("file", "abc", MultipartBody.create(null, request.ByteArrayAttachment));
-
             String json = LoganSquare.serialize(packet);
 
             RequestBody body = RequestBody.create(JSON, json);
