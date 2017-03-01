@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -79,9 +80,54 @@ public class Http {
     static public Response Post(final String url, final Object packet) {
         try {
 
+            final MultipartBody.Builder multiBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            multiBuilder.addFormDataPart("file", "abc", MultipartBody.create(null, request.ByteArrayAttachment));
+
             String json = LoganSquare.serialize(packet);
 
             RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(Const.SERVER_IP + url)
+                    .header(HEADER_TOKEN, Pref.Get(Pref.TOKENID, ""))
+                    .post(body)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            if (!checkIsSucceed(response)) {
+                if (response == null || response.header(HEADER_ERROR, "").equals(ERR_CODE_AUTH_FAILED)) {
+                    XSession.Logout();
+                    Intent intent = new Intent(XStack.GetLastAliveActivity(), ActivityLogIn.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    XStack.GetLastAliveActivity().startActivity(intent);
+                    return null;
+                }
+                throw new IOException();
+            }
+
+            return response;
+        } catch (IOException e) {
+            XToast.Show(R.string.request_fails);
+//            XDebug.Handle(e);
+        }
+
+        return null;
+    }
+
+    static public Response Post(final String url, final ArrayList<String> keys, final ArrayList<byte[]> values) {
+        if (keys.size() != values.size()) {
+            return null;
+        }
+
+        try {
+
+            final MultipartBody.Builder multiBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+            for (int i = 0; i < keys.size(); i++) {
+                multiBuilder.addFormDataPart(keys.get(i), "", MultipartBody.create(null, values.get(i)));
+            }
+
+            MultipartBody body = multiBuilder.build();
+
             Request request = new Request.Builder()
                     .url(Const.SERVER_IP + url)
                     .header(HEADER_TOKEN, Pref.Get(Pref.TOKENID, ""))
