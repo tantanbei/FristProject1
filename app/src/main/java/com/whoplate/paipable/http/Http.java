@@ -120,7 +120,7 @@ public class Http {
             final MultipartBody.Builder multiBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
             for (int i = 0; i < keys.size(); i++) {
-                multiBuilder.addFormDataPart(keys.get(i), "", MultipartBody.create(null, values.get(i)));
+                multiBuilder.addFormDataPart(keys.get(i), "abc", MultipartBody.create(null, values.get(i)));
             }
 
             MultipartBody body = multiBuilder.build();
