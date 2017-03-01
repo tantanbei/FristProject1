@@ -21,6 +21,7 @@ import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XFile;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
@@ -52,20 +53,26 @@ public class ActivityEditVideo extends XActivity {
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final UploadVideo uploadVideo = new UploadVideo();
-                uploadVideo.Title = titleEditor.getText().toString();
-                uploadVideo.Summary = summaryEditor.getText().toString();
+                final ArrayList<String> keys = new ArrayList<String>();
+                final ArrayList<byte[]> values = new ArrayList<byte[]>();
+                keys.add("title");
+                values.add(titleEditor.getText().toString().getBytes());
+
+                keys.add("summary");
+                values.add(summaryEditor.getText().toString().getBytes());
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 thumbBmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                uploadVideo.Thumbnail = stream.toByteArray();
+                keys.add("thumbnail");
+                values.add(stream.toByteArray());
 
-                uploadVideo.Video = XFile.GetBytesFromPath(videoPath);
+                keys.add("video");
+                values.add(XFile.GetBytesFromPath(videoPath));
 
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Response response = Http.Post(Const.URL_API + "/video/upload", uploadVideo);
+                        Response response = Http.Post(Const.URL_API + "/video/upload", keys, values);
                     }
                 });
             }
