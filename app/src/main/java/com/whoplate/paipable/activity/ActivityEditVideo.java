@@ -72,7 +72,8 @@ public class ActivityEditVideo extends XActivity {
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Response response = Http.Post(Const.URL_API + "/video/upload", keys, values);
+                        Response response = Http.Post(Const.URL_API + Const.URL_UPLOAD_VIDEO, keys, values);
+                        //// TODO: 05/03/2017  
                     }
                 });
             }
