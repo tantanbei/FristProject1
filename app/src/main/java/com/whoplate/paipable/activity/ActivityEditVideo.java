@@ -10,17 +10,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.networkpacket.OkPacket2;
 import com.whoplate.paipable.networkpacket.UploadVideo;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
+import com.whoplate.paipable.ui.XUI;
 import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XFile;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -72,8 +76,22 @@ public class ActivityEditVideo extends XActivity {
                 XThread.RunBackground(new Runnable() {
                     @Override
                     public void run() {
-                        Response response = Http.Post(Const.URL_API + Const.URL_UPLOAD_VIDEO, keys, values);
-                        //// TODO: 05/03/2017  
+                        try {
+                            Response response = Http.Post(Const.URL_API + Const.URL_UPLOAD_VIDEO, keys, values);
+                            OkPacket2 okPacket2 = LoganSquare.parse(response.body().byteStream(), OkPacket2.class);
+                            switch (okPacket2.Code) {
+                                case 0:
+                                    XToast.Show(R.string.upload_succeed);
+                                    finish();
+                                    break;
+                                default:
+                                    XToast.Show(okPacket2.Data);
+                                    break;
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }

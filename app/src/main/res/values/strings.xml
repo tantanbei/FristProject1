@@ -95,6 +95,7 @@
     <string name="upload">上传</string>
     <string name="edit_video">编辑视频</string>
     <string name="record_video_failed">录制视频失败</string>
+    <string name="upload_succeed">上传成功</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
