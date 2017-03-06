@@ -47,8 +47,8 @@ public class ActivityEditVideo extends XActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        title.setText("编辑视频");
-        rigthBtn.setText("上传");
+        title.setText(R.string.edit_video);
+        rigthBtn.setText(R.string.upload);
         XView.Show(rigthBtn);
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +100,7 @@ public class ActivityEditVideo extends XActivity {
         videoPath = data.getStringExtra(ActivityRecorder.VIDEO_PATH);
 
         if (!XFile.Exists(videoPath)) {
-            XToast.Show("录制视频失败");
+            XToast.Show(R.string.record_video_failed);
             return;
         }
 

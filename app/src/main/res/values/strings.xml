@@ -92,6 +92,9 @@
     <string name="warning_unsupport_feature">您的设备不支持这项功能</string>
     <string name="break_rule_video">违章视频(beta)</string>
     <string name="record_break_rule">录制违章</string>
+    <string name="upload">上传</string>
+    <string name="edit_video">编辑视频</string>
+    <string name="record_video_failed">录制视频失败</string>
 
     <string-array name="history_type">
         <item>投放额度</item>
