@@ -90,6 +90,8 @@
     <string name="warning_input_empty">输入不能为空</string>
     <string name="warning_no_change">未发现变化</string>
     <string name="warning_unsupport_feature">您的设备不支持这项功能</string>
+    <string name="break_rule_video">违章视频(beta)</string>
+    <string name="record_break_rule">录制违章</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

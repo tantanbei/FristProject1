@@ -125,5 +125,7 @@ public class ActivityEditVideo extends XActivity {
         emptyVideo = null;
         videoPath = null;
         thumbBmp = null;
+        titleEditor = null;
+        summaryEditor = null;
     }
 }

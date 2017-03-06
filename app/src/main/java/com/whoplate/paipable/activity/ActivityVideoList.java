@@ -1,9 +1,11 @@
 package com.whoplate.paipable.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.whoplate.paipable.App;
@@ -19,6 +21,7 @@ import com.whoplate.paipable.networkpacket.VideoInfo;
 import com.whoplate.paipable.networkpacket.VideoInfos;
 import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
+import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XDebug;
 
 import java.io.IOException;
@@ -37,12 +40,31 @@ public class ActivityVideoList extends XActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        videoList = null;
+        adapter = null;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        title.setText(R.string.break_rule_video);
+        XView.Show(rigthBtn);
+        rigthBtn.setText("录制");
 
         videoList = (RecyclerView) findViewById(R.id.all_messages);
         videoList.setLayoutManager(new LinearLayoutManager(this));
         videoList.addItemDecoration(new LinearLayoutColorDivider());
+
+        rigthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityVideoList.this, ActivityEditVideo.class));
+            }
+        });
     }
 
     @Override
@@ -94,4 +116,6 @@ public class ActivityVideoList extends XActivity {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
     }
+
+
 }
