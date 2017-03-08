@@ -16,11 +16,10 @@ import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.networkpacket.OkPacket2;
-import com.whoplate.paipable.networkpacket.UploadVideo;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
-import com.whoplate.paipable.ui.XUI;
 import com.whoplate.paipable.ui.XView;
+import com.whoplate.paipable.util.XDebug;
 import com.whoplate.paipable.util.XFile;
 
 import java.io.ByteArrayOutputStream;
@@ -90,7 +89,7 @@ public class ActivityEditVideo extends XActivity {
                             }
 
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            XDebug.Handle(e);
                         }
                     }
                 });

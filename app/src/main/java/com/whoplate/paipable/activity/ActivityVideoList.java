@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -12,14 +11,11 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
-import com.whoplate.paipable.adapter.PaperListRecycleViewAdapter;
 import com.whoplate.paipable.adapter.VideoListAdapter;
 import com.whoplate.paipable.http.Http;
 import com.whoplate.paipable.itemDecoration.LinearLayoutColorDivider;
-import com.whoplate.paipable.networkpacket.Paper;
 import com.whoplate.paipable.networkpacket.VideoInfo;
 import com.whoplate.paipable.networkpacket.VideoInfos;
-import com.whoplate.paipable.networkpacket.base.Papers;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XDebug;
@@ -87,7 +83,7 @@ public class ActivityVideoList extends XActivity {
                     App.Uihandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            generateMessage(videoInfos.Data);
+                            generateVideo(videoInfos.Data);
                         }
                     });
 
@@ -98,7 +94,7 @@ public class ActivityVideoList extends XActivity {
         });
     }
 
-    private void generateMessage(final ArrayList<VideoInfo> videoInfos) {
+    private void generateVideo(final ArrayList<VideoInfo> videoInfos) {
         adapter = new VideoListAdapter(this, videoInfos);
         videoList.setAdapter(adapter);
     }
