@@ -96,6 +96,8 @@
     <string name="edit_video">编辑视频</string>
     <string name="record_video_failed">录制视频失败</string>
     <string name="upload_succeed">上传成功</string>
+    <string name="warning_empty_input">输入不能为空</string>
+    <string name="uploading">上传中...</string>
 
     <string-array name="history_type">
         <item>投放额度</item>

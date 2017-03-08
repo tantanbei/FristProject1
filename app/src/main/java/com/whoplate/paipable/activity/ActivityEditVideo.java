@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
+import com.whoplate.paipable.App;
 import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
@@ -56,6 +57,11 @@ public class ActivityEditVideo extends XActivity {
         rigthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (titleEditor.getText().toString().length() == 0 || summaryEditor.getText().toString().length() == 0 || thumbBmp == null || !XFile.Exists(videoPath)) {
+                    XToast.Show(R.string.warning_empty_input);
+                    return;
+                }
+
                 final ArrayList<String> keys = new ArrayList<String>();
                 final ArrayList<byte[]> values = new ArrayList<byte[]>();
                 keys.add("title");
@@ -71,6 +77,9 @@ public class ActivityEditVideo extends XActivity {
 
                 keys.add("video");
                 values.add(XFile.GetBytesFromPath(videoPath));
+
+                rigthBtn.setText(R.string.uploading);
+                rigthBtn.setClickable(false);
 
                 XThread.RunBackground(new Runnable() {
                     @Override
@@ -90,6 +99,14 @@ public class ActivityEditVideo extends XActivity {
 
                         } catch (IOException e) {
                             XDebug.Handle(e);
+                        } finally {
+                            App.Uihandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rigthBtn.setText(R.string.upload);
+                                    rigthBtn.setClickable(true);
+                                }
+                            });
                         }
                     }
                 });
