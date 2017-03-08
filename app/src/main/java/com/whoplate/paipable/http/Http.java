@@ -19,6 +19,7 @@ import com.whoplate.paipable.util.XDebug;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -44,6 +45,8 @@ public class Http {
 
     static {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.writeTimeout(60, TimeUnit.SECONDS);
+        builder.readTimeout(60, TimeUnit.SECONDS);
         client = builder.build();
     }
 
