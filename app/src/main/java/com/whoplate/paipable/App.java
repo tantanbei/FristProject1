@@ -79,4 +79,12 @@ public class App extends Application{
 
         return FileCacheDir;
     }
+
+    /* Checks if external storage is available for read and write */
+    public static synchronized void ResetExternalPaths() {
+        //reset paths and make them recalculate again..
+        AppDbDirectory = null;
+        FileCacheDir = null;
+
+    }
 }

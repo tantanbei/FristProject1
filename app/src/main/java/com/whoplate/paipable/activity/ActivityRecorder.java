@@ -11,6 +11,7 @@ import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.DisplayMetrics;
 import android.view.OrientationEventListener;
@@ -27,8 +28,10 @@ import android.widget.Toast;
 import com.whoplate.paipable.App;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
+import com.whoplate.paipable.interfeet.GrantedPermissionCallback;
 import com.whoplate.paipable.util.XDebug;
 import com.whoplate.paipable.util.XFile;
+import com.whoplate.paipable.util.XPermission;
 
 import java.io.File;
 import java.io.IOException;
@@ -366,14 +369,6 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
 
         if (recorder == null) {
             recorder = new MediaRecorder();
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || camera == null || recorder == null) {
-            camera = null;
-            recorder = null;
-            //还是没权限啊
-            showCameraPermission();
-            return false;
         }
 
         try {

@@ -1,11 +1,13 @@
 package com.whoplate.paipable.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,12 +18,14 @@ import com.whoplate.paipable.Const;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.http.Http;
+import com.whoplate.paipable.interfeet.GrantedPermissionCallback;
 import com.whoplate.paipable.networkpacket.OkPacket2;
 import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.toast.XToast;
 import com.whoplate.paipable.ui.XView;
 import com.whoplate.paipable.util.XDebug;
 import com.whoplate.paipable.util.XFile;
+import com.whoplate.paipable.util.XPermission;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -121,7 +125,17 @@ public class ActivityEditVideo extends XActivity {
         emptyVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(ActivityEditVideo.this, ActivityRecorder.class), REQUEST_RECORDER);
+                XPermission.Want(ActivityEditVideo.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO},
+                        2,
+                        new GrantedPermissionCallback() {
+                            @Override
+                            public void GrantedPermission(boolean success, @NonNull String[] permissions) {
+                                //Start pick image activity with chooser.
+                                if (success) {
+                                    startActivityForResult(new Intent(ActivityEditVideo.this, ActivityRecorder.class), REQUEST_RECORDER);
+                                }
+                            }
+                        });
             }
         });
 
