@@ -29,6 +29,7 @@ import com.whoplate.paipable.App;
 import com.whoplate.paipable.R;
 import com.whoplate.paipable.activity.base.XActivity;
 import com.whoplate.paipable.interfeet.GrantedPermissionCallback;
+import com.whoplate.paipable.ui.XIconDrawable;
 import com.whoplate.paipable.util.XDebug;
 import com.whoplate.paipable.util.XFile;
 import com.whoplate.paipable.util.XPermission;
@@ -46,7 +47,7 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
     public final static int SIZE_2 = 480;
 
     SurfaceView cameraShowView;
-    ImageView videoFlashLight;
+//    ImageView videoFlashLight;
     Chronometer videoTime;
     ImageView switchCamera;
     ImageView recordButton;
@@ -83,18 +84,21 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
         super.onCreate(savedInstanceState);
 
         cameraShowView = (SurfaceView) findViewById(R.id.camera_show_view);
-        videoFlashLight = (ImageView) findViewById(R.id.video_flash_light);
+//        videoFlashLight = (ImageView) findViewById(R.id.video_flash_light);
         videoTime = (Chronometer) findViewById(R.id.video_time);
         switchCamera = (ImageView) findViewById(R.id.switch_camera);
         recordButton = (ImageView) findViewById(R.id.record_button);
+
+        switchCamera.setImageDrawable(XIconDrawable.SWITCH_CAMERA);
+        recordButton.setImageDrawable(XIconDrawable.RECORD_START);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.video_flash_light:
-                        clickFlash();
-                        break;
+//                    case R.id.video_flash_light:
+//                        clickFlash();
+//                        break;
                     case R.id.switch_camera:
                         switchCamera();
                         break;
@@ -107,7 +111,7 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
 
         switchCamera.setOnClickListener(listener);
         recordButton.setOnClickListener(listener);
-        videoFlashLight.setOnClickListener(listener);
+//        videoFlashLight.setOnClickListener(listener);
 
         initView();
     }
@@ -159,7 +163,7 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
         orientationEventListener.disable();
         orientationEventListener = null;
         cameraShowView = null;
-        videoFlashLight = null;
+//        videoFlashLight = null;
         videoTime = null;
         switchCamera = null;
         recordButton = null;
@@ -203,8 +207,8 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
      */
     private void startRecordUI() {
         switchCamera.setVisibility(View.GONE); // 旋转摄像头关闭
-        videoFlashLight.setVisibility(View.GONE); //闪光灯关闭
-        recordButton.setImageResource(R.mipmap.ic_launcher);   //录制按钮变成待停止
+//        videoFlashLight.setVisibility(View.GONE); //闪光灯关闭
+        recordButton.setImageDrawable(XIconDrawable.RECORD_STOP);   //录制按钮变成待停止
     }
 
     /**
@@ -212,8 +216,8 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
      */
     private void endRecordUI() {
         switchCamera.setVisibility(View.VISIBLE); // 旋转摄像头关闭
-        videoFlashLight.setVisibility(View.VISIBLE); //闪光灯关闭
-        recordButton.setImageResource(R.mipmap.ic_launcher);   //录制按钮变成待停止
+//        videoFlashLight.setVisibility(View.VISIBLE); //闪光灯关闭
+        recordButton.setImageDrawable(XIconDrawable.RECORD_START);   //录制按钮变成待停止
     }
 
     /**
@@ -296,7 +300,7 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int currentAngle = (int) animation.getAnimatedValue();
-                videoFlashLight.setRotation(currentAngle);
+//                videoFlashLight.setRotation(currentAngle);
                 videoTime.setRotation(currentAngle);
                 switchCamera.setRotation(currentAngle);
             }
@@ -445,6 +449,7 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
         }
         videoTime.stop();
         videoTime.setBase(SystemClock.elapsedRealtime());
+        endRecordUI();
     }
 
     public void clickFlash() {
@@ -493,18 +498,18 @@ public class ActivityRecorder extends XActivity implements SurfaceHolder.Callbac
                 p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
                 camera.setParameters(p);
             }
-            videoFlashLight.setImageResource(R.mipmap.ic_launcher);
+//            videoFlashLight.setImageResource(R.mipmap.ic_launcher);
         } else {
             if (isOn) {
                 p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
                 camera.setParameters(p);
             }
-            videoFlashLight.setImageResource(R.mipmap.ic_launcher);
+//            videoFlashLight.setImageResource(R.mipmap.ic_launcher);
         }
         if (cameraFlag == 0) {
-            videoFlashLight.setVisibility(View.GONE);
+//            videoFlashLight.setVisibility(View.GONE);
         } else {
-            videoFlashLight.setVisibility(View.VISIBLE);
+//            videoFlashLight.setVisibility(View.VISIBLE);
         }
     }
 
