@@ -19,7 +19,7 @@ public class XToast {
                     currToast.cancel();
                 }
 
-                currToast = Toast.makeText(XStack.GetLastAliveActivityOrAppInstance(), str, Toast.LENGTH_SHORT);
+                currToast = Toast.makeText(App.INSTANCE, str, Toast.LENGTH_SHORT);
                 currToast.show();
             }
         });
@@ -35,7 +35,7 @@ public class XToast {
                     currToast.cancel();
                 }
 
-                currToast = Toast.makeText(XStack.GetLastAliveActivityOrAppInstance(), resId, Toast.LENGTH_SHORT);
+                currToast = Toast.makeText(App.INSTANCE, resId, Toast.LENGTH_SHORT);
                 currToast.show();
             }
         });
@@ -50,7 +50,7 @@ public class XToast {
                     currToast.cancel();
                 }
 
-                currToast = Toast.makeText(XStack.GetLastAliveActivityOrAppInstance(), str, Toast.LENGTH_LONG);
+                currToast = Toast.makeText(App.INSTANCE, str, Toast.LENGTH_LONG);
                 currToast.show();
             }
         });
@@ -64,7 +64,7 @@ public class XToast {
                     currToast.cancel();
                 }
 
-                currToast = Toast.makeText(XStack.GetLastAliveActivityOrAppInstance(), resId, Toast.LENGTH_LONG);
+                currToast = Toast.makeText(App.INSTANCE, resId, Toast.LENGTH_LONG);
                 currToast.show();
             }
         });
