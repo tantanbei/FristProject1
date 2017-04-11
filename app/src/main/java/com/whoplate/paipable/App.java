@@ -19,11 +19,13 @@ import com.whoplate.paipable.thread.XThread;
 import com.whoplate.paipable.util.XFabric;
 import com.whoplate.paipable.util.XFile;
 
+import org.artoolkit.ar.base.assets.AssetHelper;
+
 import javax.net.ssl.SSLSocketFactory;
 
 import io.fabric.sdk.android.Fabric;
 
-public class App extends Application{
+public class App extends Application {
 
     //app resources
     @Nullable
@@ -31,7 +33,7 @@ public class App extends Application{
 
     static public Handler Uihandler = new Handler(Looper.getMainLooper());
 
-    public static App INSTANCE ;
+    public static App INSTANCE;
 
     public static String AppDbDirectory;
     private static String FileCacheDir;
@@ -54,7 +56,7 @@ public class App extends Application{
 
     }
 
-    private void initIconify(){
+    private void initIconify() {
         Iconify.with(new TypiconsModule());
         Iconify.with(new FontAwesomeModule());
         Iconify.with(new EntypoModule());
@@ -85,6 +87,16 @@ public class App extends Application{
         //reset paths and make them recalculate again..
         AppDbDirectory = null;
         FileCacheDir = null;
+    }
 
+    // Here we do one-off initialisation which should apply to all activities
+    // in the application.
+    protected void initializeInstance() {
+
+        // Unpack assets to cache directory so native library can read them.
+        // N.B.: If contents of assets folder changes, be sure to increment the
+        // versionCode integer in the AndroidManifest.xml file.
+        AssetHelper assetHelper = new AssetHelper(getAssets());
+        assetHelper.cacheAssetFolder(INSTANCE, "Data");
     }
 }
