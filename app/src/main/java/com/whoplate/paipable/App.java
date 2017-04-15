@@ -54,6 +54,8 @@ public class App extends Application {
 
         initIconify();
 
+        initializeInstance();
+
     }
 
     private void initIconify() {
