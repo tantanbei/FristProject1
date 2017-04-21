@@ -16,6 +16,8 @@ import com.whoplate.paipable.R;
 import org.artoolkit.ar.jpct.ArJpctActivity;
 import org.artoolkit.ar.jpct.TrackableObject3d;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -41,26 +43,29 @@ public class ActivityArView extends ArJpctActivity {
 
     protected void populateTrackableObjects(List<TrackableObject3d> list) {
         // Note: The NASA logo is really bad for tracking
-        TrackableObject3d tckobj = new TrackableObject3d("nft;Data/NASA;80");
+        TrackableObject3d tckobj = new TrackableObject3d("nft;Data/IMG_2712;80");
 
         Texture texture = new Texture(getResources().getDrawable(R.drawable.astnt1_1));
         TextureManager.getInstance().addTexture("astnt1_1", texture);
         texture = new Texture(getResources().getDrawable(R.drawable.moon_ground));
         TextureManager.getInstance().addTexture("moon_ground", texture);
+        texture = new Texture(getResources().getDrawable(R.drawable.cow));
+        TextureManager.getInstance().addTexture("cow", texture);
 
         try {
-            Object3D[] astronaut = Loader.load3DS(getAssets().open("astronaut1.3ds"), 5);
-            astronaut[0].setOrigin(new SimpleVector(280, 200, 270));
-            astronaut[0].setTexture("astnt1_1");
+            Object3D[] astronaut = Loader.loadOBJ(getAssets().open("cartoon_cow.obj"),getAssets().open("cartoon_cow.mtl"),100);
+//            Object3D[] astronaut = Loader.load3DS(getAssets().open("astronaut1.3ds"), 5);
+            astronaut[0].setOrigin(new SimpleVector(100, 0, 0));
+            astronaut[0].setTexture("cow");
             tckobj.addChild(astronaut[0]);
 
-            // Put a plane to see where it cuts
-            Object3D object3D = Primitives.getPlane(2, 200);
-            // Planes are rotated 180 degrees, so we need to flip them
-            object3D.rotateX((float) Math.PI);
-            object3D.setOrigin(new SimpleVector(125, 125, 0));
-            object3D.setTexture("moon_ground");
-            tckobj.addChild(object3D);
+//            // Put a plane to see where it cuts
+//            Object3D object3D = Primitives.getPlane(2, 200);
+//            // Planes are rotated 180 degrees, so we need to flip them
+//            object3D.rotateX((float) Math.PI);
+//            object3D.setOrigin(new SimpleVector(125, 125, 0));
+//            object3D.setTexture("moon_ground");
+//            tckobj.addChild(object3D);
 
         } catch (IOException e) {
             e.printStackTrace();
